@@ -8,7 +8,9 @@ $(function ()
         function (leagues)
         {
             let leaguesLength = leagues.length;
-
+      
+            sessionStorage.setItem("leagues", JSON.stringify(leagues));
+                   
             for (let i = 0; i < leaguesLength; i++)
             {
                 // Dynamically create hockey divisions (Name and Description)

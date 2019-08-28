@@ -43,37 +43,53 @@
         </div>
     </nav>
 
-    <header class="container-fluid text-center col-12" id="titleContainer">
-        <h1 class="display-2" id="siteHeader">Connecticut Hockey League</h1>
+    <header class="container-fluid text-center col-12" id="pageContainer">
+        <h1 class="display-2" id="pageHeader">Connecticut Hockey League</h1>
     </header>
 
     <main>
 
-        <!-- Image Section -->
+        <!-- Select League Division Section -->
         <section class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <img id="indexpageimage" alt="Ice Hockey Image" class="img-fluid" src="images/imagemain.jpg">
-                    <hr>
-                </div>
-            </div>
-        </section>
-
-        <!-- Hockey Divisions Section (dymanically generated) -->
-        <section class="container-fluid">
-            <div id="hockeyDivisions" class="row text-center mt-2">
-            </div>
-        </section>
-
-        <!-- Links Section -->
-        <section class="container-fluid">
+            <h2 class="col-12 text-center font-weight-bold" id="subtitles">Team Filter</h2>
             <hr>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <a class="col-md-2 btn btn-success btn-lg mb-1 mt-2" href="filterteams.html" role="button">Play
-                        Hockey!!</a>
+            <div class="form-row d-flex justify-content-center">
+                <div class="form-group">
+                    <fieldset id="filterSet">
+                        <legend id="filterLegend" class="w-50 border border-dark mx-auto text-center">Filter by Division
+                            and/or Gender:</legend>
+                        <label id="selectDivLabel" for="selectDivision" class="allLabels mr-3">Select Division:</label>
+                        <select id="selectDivision" autofocus>
+                            <option value="All" selected>All Divisions</option>
+                        </select>
+                        <label id="selectGenLabel" for="selectGender" class="allLabels ml-3 mr-3">Select Team
+                            Gender:</label>
+                        <select id="selectGender">
+                            <option value="All" selected>All Genders</option>
+                            <option value="Male">Male Only</option>
+                            <option value="Female">Female Only</option>
+                            <option value="Any">Coed</option>
+                        </select>
+                    </fieldset>
                 </div>
             </div>
+
+            <!-- Add Team and Back Buttons -->
+            <div class="form-group text-center pt-2">
+                <button type="button" id="addTeamBtn" class="col-sm-2 btn btn-success btn-md mb-1">Add Team</button>
+                <button type="button" id="backBtn" class="col-sm-2 btn btn-primary btn-md mb-1">Back</button>
+            </div>
+            <hr>
+        </section>
+
+        <!-- Display No Teams Message Section -->
+        <section id="noTeamsMessage" class="container-fluid d-flex justify-content-center">
+        </section>
+
+        <!-- Display Teams Table Section -->
+        <section class="container-fluid d-flex justify-content-center">
+            <table id="teams" class="tables table-striped table-bordered col-md-6">
+            </table>
         </section>
 
     </main>
@@ -101,7 +117,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <script src="scripts/index.js"></script>
+    <script src="scripts/filterteams.js"></script>
 
 </body>
 
