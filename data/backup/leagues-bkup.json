@@ -1,0 +1,22 @@
+[
+	{
+		"Name": "Pro-Am League",
+		"Code": "ProAm",
+		"Description": "This league consists of teams with players that have professional or semi-pro playing experience"
+	},
+	{
+		"Name": "Elite League",
+		"Code": "Elite",
+		"Description": "This league consists of teams with players that have college playing experience"
+	},
+	{
+		"Name": "Minor League",
+		"Code": "Minor",
+		"Description": "This league consists of teams with players that have high school playing experience"
+    },
+    {
+		"Name": "Recreational League",
+		"Code": "Recreational",
+		"Description": "This league consists of teams with players that have little playing experience but love the game"
+	}
+]
