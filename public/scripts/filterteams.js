@@ -13,48 +13,33 @@ function performTeamSearch(teams, teamsLength)
 
     $("#teams").append("<tbody>");
 
-    let teamFound = false;
-
     for (let i = 0; i < teamsLength; i++)
     {
-        if (($("#selectDivision option:selected").val() == "All") && ($("#selectGender option:selected").val() == "All"))
+        if (($("#selectDivision option:selected").val() == "All") && (($("#selectGender option:selected").val() == "All")))
         {
             insertRow(teams, i);
-            teamFound = true;
         }
         else
         {
             if (($("#selectDivision option:selected").val() == teams[i].League) && ($("#selectGender option:selected").val() == "All"))
             {
                 insertRow(teams, i);
-                teamFound = true;
             }
             else
             {
                 if (($("#selectGender option:selected").val() == teams[i].TeamGender) && ($("#selectDivision option:selected").val() == "All"))
                 {
                     insertRow(teams, i);
-                    teamFound = true;
                 }
                 else
                 {
                     if (($("#selectDivision option:selected").val() == teams[i].League) && ($("#selectGender option:selected").val() == teams[i].TeamGender))
                     {
                         insertRow(teams, i);
-                        teamFound = true;
-                    }
-                    else
-                    {
-                        teamFound = true;
                     }
                 }
             }
         }
-    }
-
-    if (teamFound = false)
-    {
-        $("#noTeamsMessage").append($("<h3>", { html: "No Teams Fit Filter Criteria" }));
     }
 }
 

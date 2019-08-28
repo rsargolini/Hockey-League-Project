@@ -19,7 +19,7 @@ h2  {
 
 }
 /* Home Page - Main Picture */
-#indexpageimage, {
+#indexpageimage {
     border-radius: 25px;
 }
 
