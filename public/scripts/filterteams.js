@@ -4,15 +4,6 @@
 *
 * @param imgStatus (String) - "block" or "initial"
 */
-function displayCourseCatalog(imgStatus)
-{
-    $("#courseCatalogImg").css("display", imgStatus);
-}
-
-/* This function display or hides Course Catalog image.
-*
-* @param imgStatus (String) - "block" or "initial"
-*/
 function performTeamSearch(teams, teamsLength)
 {
     $("#teams").empty();
@@ -22,36 +13,49 @@ function performTeamSearch(teams, teamsLength)
 
     $("#teams").append("<tbody>");
 
+    let teamFound = false;
+
     for (let i = 0; i < teamsLength; i++)
     {
         if (($("#selectDivision option:selected").val() == "All") && ($("#selectGender option:selected").val() == "All"))
         {
             insertRow(teams, i);
+            teamFound = true;
         }
         else
         {
             if (($("#selectDivision option:selected").val() == teams[i].League) && ($("#selectGender option:selected").val() == "All"))
             {
                 insertRow(teams, i);
+                teamFound = true;
             }
             else
             {
                 if (($("#selectGender option:selected").val() == teams[i].TeamGender) && ($("#selectDivision option:selected").val() == "All"))
                 {
                     insertRow(teams, i);
+                    teamFound = true;
                 }
                 else
                 {
                     if (($("#selectDivision option:selected").val() == teams[i].League) && ($("#selectGender option:selected").val() == teams[i].TeamGender))
                     {
                         insertRow(teams, i);
+                        teamFound = true;
+                    }
+                    else
+                    {
+                        teamFound = true;
                     }
                 }
             }
         }
-        //           displayCourseCatalog("none");
     }
 
+    if (teamFound = false)
+    {
+        $("#noTeamsMessage").append($("<h3>", { html: "No Teams Fit Filter Criteria" }));
+    }
 }
 
 /* 
@@ -80,7 +84,7 @@ function insertRow(teams, i)
     $("#teams tbody tr:last").append($("<td>", { html: teams[i].TeamName }))
         .append($("<td>", { html: teams[i].League }))
         .append($("<td>", { html: teams[i].ManagerName }))
-        .append("<td class='teamsSearchBtn'>");
+        .append("<td class='filterTeamsBtn'>");
 
 
     $("#teams tbody tr:last td:last").append($("<a>", {
@@ -91,7 +95,7 @@ function insertRow(teams, i)
         role: "button"
     }))
 
-    $("#teams tbody tr:last").append("<td class='teamsSearchBtn'>");
+    $("#teams tbody tr:last").append("<td class='filterTeamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
         href: "deleteteam.html",
         id: "deleteBtn" + [i],
@@ -125,6 +129,8 @@ $(function ()
         {
             let teamsLength = teams.length;
 
+            performTeamSearch(teams, teamsLength);
+
             // Select Division Field changed
             $("#selectDivision").on("change", function ()
             {
@@ -139,47 +145,11 @@ $(function ()
 
         })
 
-    // Select Division Field changed
-    /*   $("#selectDivision").on("change", function ()
-       {
-           if ($("#selectDivision").val() == "None")
-           {
-               $("#teams").empty();
-               //        displayCourseCatalog("initial");
-           }
-           else
-           {
-               // Get all data from API Teams by League (Division)
-               $.getJSON("/api/teams/byleague/" + $("#selectDivision").val(),
-                   function (teams)
-                   {
-                       let teamsList = teams;
-                       let teamsLength = teamsList.length;
-     
-                       $("#teams").empty();
-     
-                       // Call Create Table Head Row Function
-                       insertHeadRow()
-     
-                       $("#teams").append("<tbody>");
-     
-                       for (let i = 0; i < teamsLength; i++)
-                       {
-                           insertRow(teamsList, i);
-                       }
-     
-                       //           displayCourseCatalog("none");
-                   })
-           }
-       })*/
-
-
-
     // Show All Button click
     $("#showAllBtn").on("click", function ()
     {
         $("#teams").empty();
-        $("#selectDivision").val("None");
+        $("#selectDivision").val("All");
         //   displayCourseCatalog("none");
 
         // Get all data from API All Teams

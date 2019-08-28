@@ -51,55 +51,45 @@
 
         <!-- Select League Division Section -->
         <section class="container-fluid">
-            <h2 class="col-12 text-center font-weight-bold" id="subtitles">Team Search</h2>
+            <h2 class="col-12 text-center font-weight-bold" id="subtitles">Team Filter</h2>
             <hr>
             <div class="form-row d-flex justify-content-center">
                 <div class="form-group">
-                    <label for="selectDivision" class="allLabels mr-3">Select Division:</label>
-                    <select id="selectDivision" autofocus>
-                        <option value="All" selected>All Divisions</option>
-                    </select>
-                    <label for="selectGender" class="allLabels ml-3 mr-3">Select Team Gender:</label>
-                    <select id="selectGender">
-                        <option value="All" selected>All Genders</option>
-                        <option value="Male">Male Only</option>
-                        <option value="Female">Female Only</option>
-                        <option value="Any">Coed</option>
-                    </select>
+                    <fieldset id="filterSet">
+                        <legend id="filterLegend" class="w-50 border border-dark mx-auto text-center">Filter by Division
+                            and/or Gender:</legend>
+                        <label id="selectDivLabel" for="selectDivision" class="allLabels mr-3">Select Division:</label>
+                        <select id="selectDivision" autofocus>
+                            <option value="All" selected>All Divisions</option>
+                        </select>
+                        <label id="selectGenLabel" for="selectGender" class="allLabels ml-3 mr-3">Select Team
+                            Gender:</label>
+                        <select id="selectGender">
+                            <option value="All" selected>All Genders</option>
+                            <option value="Male">Male Only</option>
+                            <option value="Female">Female Only</option>
+                            <option value="Any">Coed</option>
+                        </select>
+                    </fieldset>
                 </div>
             </div>
 
-            <!-- Seacrh, Show All and Back Buttons -->
+            <!-- Add Team and Back Buttons -->
             <div class="form-group text-center pt-2">
-                <button type="button" id="searchTeamBtn" class="col-sm-2 btn btn-success btn-md mb-1">Search
-                    Teams</button>
-                <button type="button" id="showAllBtn" class="col-sm-2 btn btn-success btn-md mb-1">Show All</button>
+                <button type="button" id="addTeamBtn" class="col-sm-2 btn btn-success btn-md mb-1">Add Team</button>
                 <button type="button" id="backBtn" class="col-sm-2 btn btn-primary btn-md mb-1">Back</button>
             </div>
             <hr>
+        </section>
+
+        <!-- Display No Teams Message Section -->
+        <section id="noTeamsMessage" class="container-fluid d-flex justify-content-center">
         </section>
 
         <!-- Display Teams Table Section -->
         <section class="container-fluid d-flex justify-content-center">
             <table id="teams" class="tables table-striped table-bordered col-md-6">
             </table>
-        </section>
-
-        <!-- Add Team Button Section -->
-        <section class="container-fluid">
-            <div class="form-group text-center pt-2">
-                <button type="button" id="addTeamBtn" class="col-sm-1 btn btn-success btn-md mb-1">Add Team</button>
-            </div>
-        </section>
-
-        <!-- Image Section -->
-        <section class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <img id="courseCatalogImg" alt="Course Catalog Image" class="img-fluid" src="#">
-                    <hr>
-                </div>
-            </div>
         </section>
 
     </main>

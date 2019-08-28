@@ -48,32 +48,45 @@ h2  {
     font-weight: bold;
 }
 
+#filterLegend {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: antiquewhite;
+}
+
+#filterSet {
+    border: thin solid;
+    padding: 1em;
+}
+
 /* All Pages - Horizontal Rule */
 hr { 
     border-width: 3px;
 }
 
-/* Courses Page - All Buttons */
-.teamsSearchBtn {
+/* Filter Teams Page - All Buttons */
+.filterTeamsBtn {
     text-align: center;   
  }
 
 /* Media Queries */ 
 /* All Pages - Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    #siteHeader, #pageHeader {font-size: 20px; margin-top: 7%}
+    #siteHeader, #pageHeader {font-size: 20px; margin-top: 7%;}
     #copyright {font-size: 12px;}
     #imagescredit {font-size: 12px;}
     .tables {font-size: 12px;}
-    #subtitles {font-size: 30px}
-    #subtitles2 {font-size: 30px}
+    #subtitles {font-size: 30px;}
+    #subtitles2 {font-size: 30px;}
     #ProAm, #Elite, #Minor, #Recreational { border-right: none; border-top: solid; border-width: 1px;}
+    #selectDivLabel {margin-left: 55px;}
+    #filterLegend {font-size: 12px;}
 }
 
 /* All Pages - Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    #siteHeader {font-size: 40px; margin-top: 5%}
-    #pageHeader {font-size: 35px; margin-top: 5%}
+    #siteHeader {font-size: 40px; margin-top: 5%;}
+    #pageHeader {font-size: 35px; margin-top: 5%;}
 }
 
 /* All Pages - Small devices (portrait tablets and large phones, 768px and down) */
