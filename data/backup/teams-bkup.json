@@ -1,0 +1,392 @@
+[
+	{
+		"TeamId": 1,
+		"TeamName": "Vipers",
+		"League": "ProAm",
+		"ManagerName": "Tom Wilson",
+		"ManagerPhone": "203-676-8146",
+		"ManagerEmail": "twilson@gmail.com",
+		"MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "aerne@aol.com",
+				"MemberName": "Adam Erne",
+				"ContactName": "Adam Erne",
+				"Age": 25,
+				"Gender": "Male",
+                "Phone": "817-291-8146",
+				"Position": "Forward",
+				"Shoots": "Right"
+			},
+			{
+				"MemberId": 2,
+				"Email": "david.cotton@gmail.com",
+				"MemberName": "David Cotton",
+				"ContactName": "David Cotton",
+				"Age": 23,
+				"Gender": "Male",
+                "Phone": "542-757-7557",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+
+			},
+			{
+				"MemberId": 3,
+				"Email": "JSmith@sbcglobal.net",
+				"MemberName": "Jeremy Smith",
+				"ContactName": "Jeremy Smith",
+				"Age": 23,
+				"Gender": "Male",
+                "Phone": "817-555-5454",
+                "Position": "Goalie"
+			}
+		]
+	},
+	{
+		"TeamId": 2,
+		"TeamName": "Hawks",
+		"League": "Elite",
+		"ManagerName": "Kyle Johnson",
+		"ManagerPhone": "562-554-5226",
+        "ManagerEmail": "kylejohnson@aol.com",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "BritSmith@aol.com",
+				"MemberName": "Britney Smith",
+				"ContactName": "Britney Smith",
+				"Age": 25,
+				"Gender": "Female",
+                "Phone": "444-655-3433",
+				"Position": "Forward",
+				"Shoots": "Left"
+			},
+			{
+				"MemberId": 2,
+				"Email": "epatton@gmail.com",
+				"MemberName": "Eric Patton",
+				"ContactName": "Eric Patton",
+				"Age": 23,
+				"Gender": "Male",
+                "Phone": "203-548-8991",
+				"Position": "Forward",
+				"Shoots": "Right"
+			}
+		]
+    },
+    {
+		"TeamId": 3,
+		"TeamName": "Green Dragons",
+		"League": "Minor",
+		"ManagerName": "Tim Sullivan",
+		"ManagerPhone": "254-452-5415",
+        "ManagerEmail": "TimSully@sbcglobal.net",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "scott.jason@aol.com",
+				"MemberName": "Scott Jason",
+				"ContactName": "Scott Jason",
+				"Age": 28,
+				"Gender": "Male",
+                "Phone": "203-542-4525",
+				"Position": "Defenseman",
+				"Shoots": "Right"
+			},
+			{
+				"MemberId": 2,
+				"Email": "ASmith@sbcglobal.net",
+				"MemberName": "Allie Smith",
+				"ContactName": "Allie Smith",
+				"Age": 24,
+				"Gender": "Female",
+                "Phone": "860-352-4552",
+				"Position": "Forward",
+				"Shoots": "Right"
+			}
+		]
+    },
+    {
+		"TeamId": 4,
+		"TeamName": "Kings",
+		"League": "Recreational",
+		"ManagerName": "Brian Madden",
+		"ManagerPhone": "656-897-8456",
+        "ManagerEmail": "bmadden@gmail.com",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "JFrank@hotmail.com",
+				"MemberName": "John Frank",
+				"ContactName": "John Frank",
+				"Age": 55,
+				"Gender": "Male",
+                "Phone": "203-451-2541",
+                "Position": "Goalie"
+			},
+			{
+				"MemberId": 2,
+				"Email": "george.sheehan@aol.com",
+				"MemberName": "George Sheehan",
+				"ContactName": "George Sheehan",
+				"Age": 42,
+				"Gender": "Male",
+                "Phone": "860-124-4511",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+			}
+		]
+    },
+    {
+		"TeamId": 5,
+		"TeamName": "Purple Knights",
+		"League": "ProAm",
+		"ManagerName": "Steve Smith",
+		"ManagerPhone": "203-575-5757",
+		"ManagerEmail": "steve.smith@gmail.com",
+		"MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "frank101@gmail.com",
+				"MemberName": "Frank Pisano",
+				"ContactName": "Frank Pisano",
+				"Age": 25,
+				"Gender": "Male",
+                "Phone": "262-565-7584",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+			},
+			{
+				"MemberId": 2,
+				"Email": "kpisano@aol.com",
+				"MemberName": "Ken Pisano",
+				"ContactName": "Ken Pisano",
+				"Age": 27,
+				"Gender": "Male",
+                "Phone": "265-656-4848",
+				"Position": "Forward",
+				"Shoots": "Right"
+			},
+			{
+				"MemberId": 3,
+				"Email": "jarikuri@aol.com",
+				"MemberName": "Jari Kuri",
+				"ContactName": "Jari Kuri",
+				"Age": 35,
+				"Gender": "Male",
+                "Phone": "215-541-7848",
+				"Position": "Forward",
+				"Shoots": "Right"
+			}
+		]
+    },
+    {
+		"TeamId": 6,
+		"TeamName": "Warriors",
+		"League": "ProAm",
+		"ManagerName": "Harry Lincoln",
+		"ManagerPhone": "554-455-7557",
+		"ManagerEmail": "hlincoln@gmail.com",
+		"MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "TheGreatOne@gmail.com",
+				"MemberName": "Wayne Gretsky",
+				"ContactName": "Wayne Gretsky",
+				"Age": 42,
+				"Gender": "Male",
+                "Phone": "203-545-8146",
+				"Position": "Forward",
+				"Shoots": "Right"
+			},
+			{
+				"MemberId": 2,
+				"Email": "bradjohnson@sbcglobal.net",
+				"MemberName": "Brad Johnson",
+				"ContactName": "Brad Johnson",
+				"Age": 26,
+				"Gender": "Male",
+                "Phone": "860-125-4578",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+			},
+			{
+				"MemberId": 3,
+				"Email": "Fiore123@hotmail.com",
+				"MemberName": "Joe Fiore",
+				"ContactName": "Joe Fiore",
+				"Age": 23,
+				"Gender": "Male",
+                "Phone": "203-526-9898",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+			}
+		]
+    },
+    {
+		"TeamId": 7,
+		"TeamName": "Blue Jackets",
+		"League": "Elite",
+		"ManagerName": "Paul Johnston",
+		"ManagerPhone": "203-757-7845",
+        "ManagerEmail": "pauljohnston@gmail.com",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "matt.anderson@aol.com",
+				"MemberName": "Matt Anderson",
+				"ContactName": "Matt Anderson",
+				"Age": 28,
+				"Gender": "Male",
+                "Phone": "203-544-5454",
+				"Position": "Forward",
+				"Shoots": "Right"
+			},
+			{
+				"MemberId": 2,
+				"Email": "bwong@hotmail.com",
+				"MemberName": "Brandon Wong",
+				"ContactName": "Brandon Wong",
+				"Age": 26,
+				"Gender": "Male",
+                "Phone": "836-454-5445",
+				"Position": "Forward",
+				"Shoots": "Left"
+			}
+		]
+    },
+    {
+		"TeamId": 8,
+		"TeamName": "Blue Devils",
+		"League": "Minor",
+		"ManagerName": "Todd Hall",
+		"ManagerPhone": "860-858-7445",
+        "ManagerEmail": "Todd.Hall@sbcglobal.net",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "cclarson@aol.com",
+				"MemberName": "Chris Clarkson",
+				"ContactName": "Chris Clarkson",
+				"Age": 23,
+				"Gender": "Male",
+                "Phone": "256-577-5754",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+			},
+			{
+				"MemberId": 2,
+				"Email": "julie.chu@sbcglobal.net",
+				"MemberName": "Julie Chu",
+				"ContactName": "Julie Chu",
+				"Age": 22,
+				"Gender": "Female",
+                "Phone": "205-575-7575",
+				"Position": "Forward",
+				"Shoots": "Right"
+			}
+		]
+    },
+    {
+		"TeamId": 9,
+		"TeamName": "Mighty Ducks",
+		"League": "Recreational",
+		"ManagerName": "Matt McMahon",
+		"ManagerPhone": "203-757-7854",
+        "ManagerEmail": "mattM@aol.com",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "bmiller@aol.com",
+				"MemberName": "Bode Miller",
+				"ContactName": "Bode Miller",
+				"Age": 35,
+				"Gender": "Male",
+				"Phone": "860-255-1202",
+				"Position": "Defenseman",
+				"Shoots": "Right"
+			},
+			{
+				"MemberId": 2,
+				"Email": "brian.jones@gmail.com",
+				"MemberName": "Brian Jones",
+				"ContactName": "Brian Jones",
+				"Age": 45,
+				"Gender": "Male",
+				"Phone": "203-959-5454",
+                "Position": "Goalie"
+			}
+		]
+	},
+	{
+		"TeamId": 10,
+		"TeamName": "Rockies",
+		"League": "Recreational",
+		"ManagerName": "Ned Turner",
+		"ManagerPhone": "203-144-7757",
+        "ManagerEmail": "Ned.Turner@aol.com",
+        "MaxTeamMembers": 12,
+		"MinMemberAge": 18,
+		"MaxMemberAge": 70,
+		"TeamGender": "Any",
+		"Members": [
+			{
+				"MemberId": 1,
+				"Email": "wade.becker@aol.com",
+				"MemberName": "Wade Becker",
+				"ContactName": "Wade Becker",
+				"Age": 41,
+				"Gender": "Male",
+				"Phone": "202-254-1202",
+				"Position": "Defenseman",
+				"Shoots": "Left"
+			},
+			{
+				"MemberId": 2,
+				"Email": "will.evans@gmail.com",
+				"MemberName": "William Evans",
+				"ContactName": "William Evans",
+				"Age": 44,
+				"Gender": "Male",
+				"Phone": "204-514-5454",
+                "Position": "Goalie"
+			}
+		]
+	}
+]
