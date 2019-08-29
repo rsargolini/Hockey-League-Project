@@ -71,23 +71,28 @@ function insertRow(teams, i)
         .append($("<td>", { html: teams[i].ManagerName }))
         .append("<td class='filterTeamsBtn'>");
 
-
     $("#teams tbody tr:last td:last").append($("<a>", {
-        href: "editteamdetails.html",
+        href: "detailsteam.html",
         id: "editBtn" + [i],
-        text: "Edit",
+        //   text: "Edit",
         class: "btn btn-outline-success btn-sm",
         role: "button"
     }))
+
+    $("#teams tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
+        .append($("<span>", { class: "buttontext", text: "Details" }))
 
     $("#teams tbody tr:last").append("<td class='filterTeamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
         href: "deleteteam.html",
         id: "deleteBtn" + [i],
-        text: "Delete",
+       // text: "Delete",
         class: "btn btn-outline-danger btn-sm",
         role: "button"
     }))
+    
+    $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
+    .append($("<span>", { class: "buttontext", text: "Delete" }))
 }
 
 //Connect Events to HTML Elements
