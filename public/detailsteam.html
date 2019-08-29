@@ -68,7 +68,7 @@
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="teamname"
                                 id="teamname">
                             <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
-                            <select id="leaguecode" class="form-control col-md-2 mb-2 ml-2 mr-2 name=" leaguecode">
+                            <select id="leaguecode" class="form-control col-md-2 mb-2 ml-2 mr-2" name="leaguecode">
                             </select>
                             <label for="teamgender" class="allLabels ml-3 mr-3">Gender:</label>
                             <select id="teamgender" name="teamgender" class="form-control col-md-2 mb-2 ml-2 mr-2">
@@ -136,6 +136,21 @@
             <table id="players" class="tables table-striped table-bordered col-md-6">
             </table>
         </section>
+
+        <div class="modal fade container-fluid" id="savedModal" tabindex="-1" role="dialog"
+            aria-labelledby="savedModalText" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="savedModalText" class="modal-body text-center">
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 

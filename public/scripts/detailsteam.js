@@ -1,8 +1,5 @@
 "use strict";
 
-
-
-
 /* 
 * This function inserts a Header Row into the Student Table.
 */
@@ -79,7 +76,7 @@ function validateTeamDetailsForm(objs)
         errorFound = true;
     }
 
-    if ((isNaN(maxteammembers.value)) || (Number(maxteammembers.value <= 9)) || (Number(maxteammembers.value > 18)))
+    if ((isNaN(maxteammembers.value)) || (maxteammembers.value <= 9) || (maxteammembers.value > 18))
     {
         displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
         errorFound = true;
@@ -93,7 +90,7 @@ function validateTeamDetailsForm(objs)
         }
     }
 
-    if ((isNaN(minmemberage.value)) || (Number(minmemberage.value < 18)))
+    if ((isNaN(minmemberage.value)) || (minmemberage.value < 18))
     {
         displayErrorMessage[displayErrorMessage.length] = "Min Age must be greater than 17.";
         errorFound = true;
@@ -107,8 +104,8 @@ function validateTeamDetailsForm(objs)
         }
     }
 
-    if ((isNaN(maxmemberage.value)) || (maxmemberage.value > 70) || 
-    (maxmemberage.value < minmemberage.value))
+    if ((isNaN(maxmemberage.value)) || (maxmemberage.value > 70) ||
+        (maxmemberage.value < minmemberage.value))
     {
         displayErrorMessage[displayErrorMessage.length] = "Max Age must be less than or equal to 70.";
         errorFound = true;
@@ -262,6 +259,17 @@ $(function ()
             $("#managerphone").val(objs.ManagerPhone);
             $("#manageremail").val(objs.ManagerEmail);
 
+            let oldTeamId = objs.TeamId;
+            let oldTeamName = objs.TeamName;
+            let oldLeague = objs.League;
+            let oldTeamGender = objs.TeamGender;
+            let oldMaxTeamMembers = objs.MaxTeamMembers;
+            let oldMinMemberAge = objs.MinMemberAge;
+            let oldMaxMemberAge = objs.MaxMemberAge;
+            let oldManagerName = objs.ManagerName;
+            let oldManagerPhone = objs.ManagerPhone;
+            let oldManagerEmail = objs.ManagerEmail;
+
             let playersLength = objs.Members.length;
 
             if (playersLength >= 1)
@@ -320,7 +328,7 @@ $(function ()
             {
                 // Enable all Team Details Fields except Team ID
                 $("*", "#teamDetailsForm").prop('disabled', false);
-                $("#teamid").prop('disabled', true);
+                $("#teamid").prop('readonly', true);
 
                 $("#editTeamBtn").hide();
                 $("#saveTeamBtn").show();
@@ -342,17 +350,26 @@ $(function ()
                 // Call Hide Error Function (errors.js)
                 hideError($("#invalidData"));
 
-                // Put (Update) Form to API Courses
+                // Put (Update) Form to API Teams
                 $.ajax({
-                    url: "/api/courses",
+                    url: "/api/teams",
                     method: "PUT",
-                    data: $("#editCourseForm").serialize()
+                    data: $("#teamDetailsForm").serialize()
                 })
                     .done(function ()
                     {
-                        $("#savedModalText").html("Course #" + $("#courseid").val() + "<br> " + $("#title").val() + " has been successfully updated.")
+                        $("#savedModalText").html("Team #" + $("#teamid").val() + "<br> " + $("#teamname").val() + " has been successfully updated.")
                             .addClass("text-primary");
                         $("#savedModal").modal("show");
+
+                        // Disable all Team Details Fields except Team ID
+                        $("*", "#teamDetailsForm").prop('disabled', true);
+
+                        $("#editTeamBtn").show();
+                        $("#saveTeamBtn").hide();
+
+                        $("#backBtn").show();
+                        $("#cancelBtn").hide();
                     })
 
                     .fail(function ()
@@ -374,6 +391,17 @@ $(function ()
 
                 $("#backBtn").show();
                 $("#cancelBtn").hide();
+
+                $("#teamid").val(oldTeamId);
+                $("#teamname").val(oldTeamName);
+                $("#leaguecode").val(oldLeague);
+                $("#teamgender").val(oldTeamGender);
+                $("#maxteammembers").val(oldMaxTeamMembers);
+                $("#minmemberage").val(oldMinMemberAge);
+                $("#maxmemberage").val(oldMaxMemberAge);
+                $("#managername").val(oldManagerName);
+                $("#managerphone").val(oldManagerPhone);
+                $("#manageremail").val(oldManagerEmail);
             })
 
             return;
