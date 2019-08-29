@@ -69,10 +69,10 @@ function insertRow(teams, i)
     $("#teams tbody tr:last").append($("<td>", { html: teams[i].TeamName }))
         .append($("<td>", { html: teams[i].League }))
         .append($("<td>", { html: teams[i].ManagerName }))
-        .append("<td class='filterTeamsBtn'>");
+        .append("<td class='teamsBtn'>");
 
     $("#teams tbody tr:last td:last").append($("<a>", {
-        href: "detailsteam.html",
+        href: "detailsteam.html?&id=" + teams[i].TeamId,
         id: "editBtn" + [i],
         //   text: "Edit",
         class: "btn btn-outline-success btn-sm",
@@ -82,17 +82,17 @@ function insertRow(teams, i)
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
         .append($("<span>", { class: "buttontext", text: "Details" }))
 
-    $("#teams tbody tr:last").append("<td class='filterTeamsBtn'>");
+    $("#teams tbody tr:last").append("<td class='teamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
         href: "deleteteam.html",
         id: "deleteBtn" + [i],
-       // text: "Delete",
+        // text: "Delete",
         class: "btn btn-outline-danger btn-sm",
         role: "button"
     }))
-    
+
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-    .append($("<span>", { class: "buttontext", text: "Delete" }))
+        .append($("<span>", { class: "buttontext", text: "Delete" }))
 }
 
 //Connect Events to HTML Elements
