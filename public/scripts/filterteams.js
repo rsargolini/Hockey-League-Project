@@ -69,12 +69,11 @@ function insertRow(teams, i)
     $("#teams tbody tr:last").append($("<td>", { html: teams[i].TeamName }))
         .append($("<td>", { html: teams[i].League }))
         .append($("<td>", { html: teams[i].ManagerName }))
-        .append("<td class='filterTeamsBtn'>");
+        .append("<td class='teamsBtn'>");
 
     $("#teams tbody tr:last td:last").append($("<a>", {
-        href: "detailsteam.html",
+        href: "detailsteam.html?&id=" + teams[i].TeamId,
         id: "editBtn" + [i],
-        //   text: "Edit",
         class: "btn btn-outline-success btn-sm",
         role: "button"
     }))
@@ -82,17 +81,16 @@ function insertRow(teams, i)
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
         .append($("<span>", { class: "buttontext", text: "Details" }))
 
-    $("#teams tbody tr:last").append("<td class='filterTeamsBtn'>");
+    $("#teams tbody tr:last").append("<td class='teamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
-        href: "deleteteam.html",
-        id: "deleteBtn" + [i],
-       // text: "Delete",
+        href: "#",
+        id: "removeBtn" + [i],
         class: "btn btn-outline-danger btn-sm",
         role: "button"
     }))
-    
+
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-    .append($("<span>", { class: "buttontext", text: "Delete" }))
+        .append($("<span>", { class: "buttontext", text: "Remove" }))
 }
 
 //Connect Events to HTML Elements
@@ -133,33 +131,21 @@ $(function ()
                 performTeamSearch(teams, teamsLength);
             })
 
-        })
+            let selectedTeam;
 
-    // Show All Button click
-    $("#showAllBtn").on("click", function ()
-    {
-        $("#teams").empty();
-        $("#selectDivision").val("All");
-        //   displayCourseCatalog("none");
-
-        // Get all data from API All Teams
-        $.getJSON("/api/teams",
-            function (allTeams)
+            for (let i = 0; i < teamsLength; i++)
             {
-                let allTeamsList = allTeams;
-                let allTeamsLength = allTeamsList.length;
-
-                // Call Create Table Head Row Function
-                insertHeadRow()
-
-                $("#teams").append("<tbody>");
-
-                for (let i = 0; i < allTeamsLength; i++)
+                $("#removeBtn" + [i]).on("click", function ()
                 {
-                    insertRow(allTeamsList, i);
-                }
-            })
-    })
+                    $("#modalBody").empty();
+                    $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
+                        .append("<br />")
+                        .append("<b>Team Name: </b>" + teams[i].TeamName);
+                    $("#rmvTeamModal").modal("show");
+                    selectedTeam = [i];
+                })
+            }
+        })
 
     // Add a New Team Button click
     $("#addTeamBtn").on("click", function ()
@@ -171,5 +157,55 @@ $(function ()
     $("#backBtn").on("click", function ()
     {
         location.assign("index.html");
+    })
+
+    // Confirm Remove Button click
+    $("#confirmBtn").on("click", function ()
+    {
+        // Delete Team to API Teams
+        $.ajax({
+            url: "/api/teams/",
+            method: "DELETE",
+            data: teams[selectedTeam]
+        })
+            .done(function ()
+            {
+                $("#savedModalText").html("Team #" + $("#teamid").val() + "<br> " + $("#teamname").val() + " has been successfully updated.")
+                    .addClass("text-primary");
+                $("#savedModal").modal("show");
+
+                // Disable all Team Details Fields except Team ID
+                $("*", "#teamDetailsForm").prop('disabled', true);
+
+                $("#editTeamBtn").show();
+                $("#saveTeamBtn").hide();
+
+                $("#backBtn").show();
+                $("#cancelBtn").hide();
+            })
+
+            .fail(function ()
+            {
+                $("#savedModalText").html("Update has failed, please try again.")
+                    .addClass("text-danger");
+                $("#savedModal").modal("show");
+            })
+
+        $.post("/api/unregister", "courseid=" + objs.CourseId + "&studentname=" + objs.Students[selectedStudent].StudentName + "&email=" + objs.Students[selectedStudent].Email,
+            function (data) { })
+
+            .done(function ()
+            {
+                $("#rmvTeamModal").modal("hide");
+                location.reload();
+            })
+
+            .fail(function ()
+            {
+                $("#rmvTeamModal").modal("hide");
+                $("#savedModalText").html("Deleting this Team has failed, please try again.")
+                    .addClass("text-danger");
+                $("#savedModal").modal("show");
+            })
     })
 })

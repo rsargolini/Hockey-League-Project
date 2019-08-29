@@ -18,7 +18,7 @@
 				"ContactName": "Adam Erne",
 				"Age": 25,
 				"Gender": "Male",
-                "Phone": "817-291-8146",
+				"Phone": "817-291-8146",
 				"Position": "Forward",
 				"Shoots": "Right"
 			},
@@ -29,10 +29,9 @@
 				"ContactName": "David Cotton",
 				"Age": 23,
 				"Gender": "Male",
-                "Phone": "542-757-7557",
+				"Phone": "542-757-7557",
 				"Position": "Defenseman",
 				"Shoots": "Left"
-
 			},
 			{
 				"MemberId": 3,
@@ -41,8 +40,8 @@
 				"ContactName": "Jeremy Smith",
 				"Age": 23,
 				"Gender": "Male",
-                "Phone": "817-555-5454",
-                "Position": "Goalie"
+				"Phone": "817-555-5454",
+				"Position": "Goalie"
 			}
 		]
 	},
@@ -52,8 +51,8 @@
 		"League": "Elite",
 		"ManagerName": "Kyle Johnson",
 		"ManagerPhone": "562-554-5226",
-        "ManagerEmail": "kylejohnson@aol.com",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "kylejohnson@aol.com",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Any",
@@ -65,7 +64,7 @@
 				"ContactName": "Britney Smith",
 				"Age": 25,
 				"Gender": "Female",
-                "Phone": "444-655-3433",
+				"Phone": "444-655-3433",
 				"Position": "Forward",
 				"Shoots": "Left"
 			},
@@ -76,20 +75,20 @@
 				"ContactName": "Eric Patton",
 				"Age": 23,
 				"Gender": "Male",
-                "Phone": "203-548-8991",
+				"Phone": "203-548-8991",
 				"Position": "Forward",
 				"Shoots": "Right"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 3,
 		"TeamName": "Green Dragons",
 		"League": "Minor",
 		"ManagerName": "Tim Sullivan",
 		"ManagerPhone": "254-452-5415",
-        "ManagerEmail": "TimSully@sbcglobal.net",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "TimSully@sbcglobal.net",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Male",
@@ -101,7 +100,7 @@
 				"ContactName": "Scott Jason",
 				"Age": 28,
 				"Gender": "Male",
-                "Phone": "203-542-4525",
+				"Phone": "203-542-4525",
 				"Position": "Defenseman",
 				"Shoots": "Right"
 			},
@@ -112,20 +111,20 @@
 				"ContactName": "Allie Smith",
 				"Age": 24,
 				"Gender": "Female",
-                "Phone": "860-352-4552",
+				"Phone": "860-352-4552",
 				"Position": "Forward",
 				"Shoots": "Right"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 4,
 		"TeamName": "Kings",
 		"League": "Recreational",
 		"ManagerName": "Brian Madden",
 		"ManagerPhone": "656-897-8456",
-        "ManagerEmail": "bmadden@gmail.com",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "bmadden@gmail.com",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Female",
@@ -137,8 +136,8 @@
 				"ContactName": "John Frank",
 				"Age": 55,
 				"Gender": "Male",
-                "Phone": "203-451-2541",
-                "Position": "Goalie"
+				"Phone": "203-451-2541",
+				"Position": "Goalie"
 			},
 			{
 				"MemberId": 9,
@@ -147,13 +146,13 @@
 				"ContactName": "George Sheehan",
 				"Age": 42,
 				"Gender": "Male",
-                "Phone": "860-124-4511",
+				"Phone": "860-124-4511",
 				"Position": "Defenseman",
 				"Shoots": "Left"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 5,
 		"TeamName": "Purple Knights",
 		"League": "ProAm",
@@ -172,7 +171,7 @@
 				"ContactName": "Frank Pisano",
 				"Age": 25,
 				"Gender": "Male",
-                "Phone": "262-565-7584",
+				"Phone": "262-565-7584",
 				"Position": "Defenseman",
 				"Shoots": "Left"
 			},
@@ -183,7 +182,7 @@
 				"ContactName": "Ken Pisano",
 				"Age": 27,
 				"Gender": "Male",
-                "Phone": "265-656-4848",
+				"Phone": "265-656-4848",
 				"Position": "Forward",
 				"Shoots": "Right"
 			},
@@ -194,13 +193,13 @@
 				"ContactName": "Jari Kuri",
 				"Age": 35,
 				"Gender": "Male",
-                "Phone": "215-541-7848",
+				"Phone": "215-541-7848",
 				"Position": "Forward",
 				"Shoots": "Right"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 6,
 		"TeamName": "Warriors",
 		"League": "ProAm",
@@ -219,7 +218,7 @@
 				"ContactName": "Wayne Gretsky",
 				"Age": 42,
 				"Gender": "Male",
-                "Phone": "203-545-8146",
+				"Phone": "203-545-8146",
 				"Position": "Forward",
 				"Shoots": "Right"
 			},
@@ -230,7 +229,7 @@
 				"ContactName": "Brad Johnson",
 				"Age": 26,
 				"Gender": "Male",
-                "Phone": "860-125-4578",
+				"Phone": "860-125-4578",
 				"Position": "Defenseman",
 				"Shoots": "Left"
 			},
@@ -241,20 +240,20 @@
 				"ContactName": "Joe Fiore",
 				"Age": 23,
 				"Gender": "Male",
-                "Phone": "203-526-9898",
+				"Phone": "203-526-9898",
 				"Position": "Defenseman",
 				"Shoots": "Left"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 7,
 		"TeamName": "Blue Jackets",
 		"League": "Elite",
 		"ManagerName": "Paul Johnston",
 		"ManagerPhone": "203-757-7845",
-        "ManagerEmail": "pauljohnston@gmail.com",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "pauljohnston@gmail.com",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Any",
@@ -266,7 +265,7 @@
 				"ContactName": "Matt Anderson",
 				"Age": 28,
 				"Gender": "Male",
-                "Phone": "203-544-5454",
+				"Phone": "203-544-5454",
 				"Position": "Forward",
 				"Shoots": "Right"
 			},
@@ -277,20 +276,20 @@
 				"ContactName": "Brandon Wong",
 				"Age": 26,
 				"Gender": "Male",
-                "Phone": "836-454-5445",
+				"Phone": "836-454-5445",
 				"Position": "Forward",
 				"Shoots": "Left"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 8,
 		"TeamName": "Blue Devils",
 		"League": "Minor",
 		"ManagerName": "Todd Hall",
 		"ManagerPhone": "860-858-7445",
-        "ManagerEmail": "Todd.Hall@sbcglobal.net",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "Todd.Hall@sbcglobal.net",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Female",
@@ -302,7 +301,7 @@
 				"ContactName": "Chris Clarkson",
 				"Age": 23,
 				"Gender": "Male",
-                "Phone": "256-577-5754",
+				"Phone": "256-577-5754",
 				"Position": "Defenseman",
 				"Shoots": "Left"
 			},
@@ -313,20 +312,20 @@
 				"ContactName": "Julie Chu",
 				"Age": 22,
 				"Gender": "Female",
-                "Phone": "205-575-7575",
+				"Phone": "205-575-7575",
 				"Position": "Forward",
 				"Shoots": "Right"
 			}
 		]
-    },
-    {
+	},
+	{
 		"TeamId": 9,
 		"TeamName": "Mighty Ducks",
 		"League": "Recreational",
 		"ManagerName": "Matt McMahon",
 		"ManagerPhone": "203-757-7854",
-        "ManagerEmail": "mattM@aol.com",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "mattM@aol.com",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Any",
@@ -350,7 +349,7 @@
 				"Age": 45,
 				"Gender": "Male",
 				"Phone": "203-959-5454",
-                "Position": "Goalie"
+				"Position": "Goalie"
 			}
 		]
 	},
@@ -360,8 +359,8 @@
 		"League": "Recreational",
 		"ManagerName": "Ned Turner",
 		"ManagerPhone": "203-144-7757",
-        "ManagerEmail": "Ned.Turner@aol.com",
-        "MaxTeamMembers": 12,
+		"ManagerEmail": "Ned.Turner@aol.com",
+		"MaxTeamMembers": 12,
 		"MinMemberAge": 18,
 		"MaxMemberAge": 70,
 		"TeamGender": "Any",
@@ -385,7 +384,7 @@
 				"Age": 44,
 				"Gender": "Male",
 				"Phone": "204-514-5454",
-                "Position": "Goalie"
+				"Position": "Goalie"
 			}
 		]
 	}

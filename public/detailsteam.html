@@ -11,39 +11,104 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
     <!-- Font Awesome: https://fontawesome.com/icons?d=gallery&m=free -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
     <!-- My CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Holtwood+One+SC&display=swap" rel="stylesheet">
 
     <link rel="icon" href="images/professor.png" />
 
     <link rel="stylesheet" type="text/css" href="css/site.css" />
 
-    <title>The University of Learning</title>
+    <title>Connecticut Hockey League</title>
 </head>
 
 <body>
     <!-- Nav Bar Section -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
         <a class="navbar-brand" href="index.html">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navBar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="addteam.html">Add Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="addplayer.html">Add Player</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <header class="container-fluid text-center col-12" id="pageContainer">
-        <h1 class="display-2" id="pageHeader">The University of Learning</h1>
+        <h1 class="display-2" id="pageHeader">Connecticut Hockey League</h1>
     </header>
 
     <main>
 
         <section class="container-fluid">
-            <h2 class="col-12 text-center font-weight-bold" id="subtitles">Course Details</h2>
+            <h2 class="col-12 text-center font-weight-bold" id="subtitles">Team Details</h2>
             <hr>
         </section>
 
-        <!-- Display Course Details Table Section -->
-        <section class="container-fluid d-flex justify-content-center">
-            <table id="courseDetails" class="tables table-striped table-bordered col-md-6">
-            </table>
+        <!-- Team Details Form Section -->
+        <section class="container-fluid">
+            <form id="teamDetailsForm" name="teamDetailsForm" action="#">
+                <div class="d-flex justify-content-center">
+                    <fieldset id="teamInfoSet">
+                        <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team Information
+                        </legend>
+                        <div class="form-row justify-content-center">
+                            <label for="teamid" class="allLabels mr-3">ID:</label>
+                            <input type="text" class="form-control col-md-1 mb-2 ml-2 mr-2" name="teamid" id="teamid">
+                            <label for="teamname" class="allLabels ml-3 mr-3">Name:</label>
+                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="teamname"
+                                id="teamname">
+                            <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
+                            <select id="leaguecode" class="form-control col-md-2 mb-2 ml-2 mr-2" name="leaguecode">
+                            </select>
+                            <label for="teamgender" class="allLabels ml-3 mr-3">Gender:</label>
+                            <select id="teamgender" name="teamgender" class="form-control col-md-2 mb-2 ml-2 mr-2">
+                                <option value="Male">Male Only</option>
+                                <option value="Female">Female Only</option>
+                                <option value="Any">Coed</option>
+                            </select>
+                        </div>
+                        <div class="form-row justify-content-center mt-2">
+                            <label for="maxteammembers" class="allLabels mr-3">Max Players:</label>
+                            <input type="number" class="form-control col-md-1 mb-2 ml-2 mr-2" name="maxteammembers"
+                                id="maxteammembers">
+                            <label for="minmemberage" class="allLabels ml-3 mr-3">Min Age:</label>
+                            <input type="number" class="form-control col-md-1 mb-2 ml-2 mr-2" name="minmemberage"
+                                id="minmemberage">
+                            <label for="maxmemberage" class="allLabels ml-3 mr-3">Max Age:</label>
+                            <input type="number" class="form-control col-md-1 mb-2 ml-2 mr-2" name="maxmemberage"
+                                id="maxmemberage">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <fieldset id="managerInfoSet" class="mt-3">
+                        <legend id="managerInfoLegend" class="w-50 border border-dark mx-auto text-center">Manager
+                            Information
+                        </legend>
+                        <div class="form-row justify-content-center">
+                            <label for="managername" class="allLabels mr-3">Name:</label>
+                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="managername"
+                                id="managername">
+                            <label for="managerphone" class="allLabels ml-3 mr-3">Phone:</label>
+                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="managerphone"
+                                id="managerphone">
+                            <label for="manageremail" class="allLabels ml-3 mr-3">Email:</label>
+                            <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="manageremail"
+                                id="manageremail">
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
         </section>
 
         <!-- Buttons Section-->
@@ -54,18 +119,38 @@
             </div>
         </section>
 
+        <!-- Alert Message Section -->
+        <section class="form-row d-flex justify-content-center">
+            <div class="alert alert-danger hidden col-md-4 ml-2 mr-2 mt-2" role="alert" id="invalidData"></div>
+        </section>
+
         <section class="container-fluid">
             <hr>
-            <div id="studentTitle">
-                <h2 class="col-12 text-center font-weight-bold" id="subtitles2">Students</h2>
+            <div id="playersTitle">
+                <h2 class="col-12 text-center font-weight-bold" id="subtitles2">Players</h2>
             </div>
         </section>
 
-        <!-- Display Students Table Section -->
+        <!-- Display Players Table Section -->
         <section class="container-fluid d-flex justify-content-center">
-            <table id="students" class="tables table-striped table-bordered col-md-6">
+            <table id="players" class="tables table-striped table-bordered col-md-6">
             </table>
         </section>
+
+        <div class="modal fade container-fluid" id="savedModal" tabindex="-1" role="dialog"
+            aria-labelledby="savedModalText" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div id="savedModalText" class="modal-body text-center">
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 
@@ -74,7 +159,7 @@
         <hr>
         <div class="row">
             <div class="col" id="copyright">
-                &copy; The University of Learning, Inc. 1973
+                &copy; Connecticut Hockey League, Inc. 1973
             </div>
         </div>
     </footer>
@@ -89,7 +174,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <script src="scripts/details.js"></script>
+    <script src="scripts/detailsteam.js"></script>
+    <script src="scripts/errors.js"></script>
 
 </body>
 
