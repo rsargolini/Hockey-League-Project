@@ -309,9 +309,16 @@ $(function ()
                 href: "newplayer.html?id=" + teamSelected,
                 id: "addPlayerBtn",
                 text: "Add Player",
-                class: "col-md-1 btn btn-success btn-sm mb-1 mr-1",
+                class: "col-md-1 btn btn-success btn-sm mb-2 mr-1",
                 role: "button"
             }))
+
+            if (Number($("#maxteammembers").val()) == playersLength)
+            {
+                $("#addPlayerBtn").hide();
+                $("#teamFullDiv").append($("<p>", { html: "Team is Full", id: "teamFullMessage" }));
+                $("#teamFullDiv").show();
+            }
 
             $("#buttonsDiv").append($("<a>", {
                 href: "filterteams.html",
@@ -378,6 +385,8 @@ $(function ()
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
+
+                        location.reload();
                     })
 
                     .fail(function ()
@@ -411,7 +420,6 @@ $(function ()
                 $("#managerphone").val(oldManagerPhone);
                 $("#manageremail").val(oldManagerEmail);
             })
-
             return;
         })
 })

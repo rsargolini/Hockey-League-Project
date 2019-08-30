@@ -50,60 +50,66 @@
         <section class="container-fluid">
             <h2 class="col-12 text-center font-weight-bold" id="subtitles">Add Player</h2>
             <hr>
+            <div class="d-flex justify-content-center">
+                <fieldset id="addPlayerTeamInfoSet">
+                    <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team Information
+                    </legend>
+                    <div class="form-row justify-content-center">
+                        <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
+                        <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="leaguecode"
+                            id="leaguecode" readonly>
+                        <label for="teamname" class="allLabels ml-3 mr-3">Team:</label>
+                        <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="teamname" id="teamname"
+                            readonly>
+                    </div>
+                </fieldset>
+            </div>
             <form id="addPlayerForm" name="addPlayerForm" action="#">
-                <div class="d-flex justify-content-center">
-                    <fieldset id="teamInfoSet">
-                        <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team
-                            Information
-                        </legend>
-                        <div class="form-row justify-content-center">
-                            <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
-                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="leaguecode"
-                                id="leaguecode" readonly>
-                            <label for="teamname" class="allLabels ml-3 mr-3">Team:</label>
-                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="teamname"
-                                id="teamname" readonly>
-                        </div>
-                    </fieldset>
-                </div>
                 <div class="d-flex justify-content-center">
                     <fieldset id="playerInfoSet" class="mt-3">
                         <legend id="playerInfoLegend" class="w-50 border border-dark mx-auto text-center">Player
                             Information
                         </legend>
                         <div class="form-row justify-content-center">
-                            <label for="membername" class="allLabels ml-3 mr-3">Name:</label>
+                            <label for="membername" class="allLabels ml-3 mr-2">Name:</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="membername"
                                 id="membername">
-                            <label for="contactname" class="allLabels ml-3 mr-3">Contact Name:</label>
+                            <label for="contactname" class="allLabels ml-3 mr-2">Contact Name:</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="contactname"
                                 id="contactname">
-                            <label for="gender" class="allLabels ml-3 mr-3">Gender:</label>
-                            <select id="gender" name="gender" class="form-control col-md-2 mb-2 ml-2 mr-2">
-                                <option value="None" selected>Select one</option>
-                                <option value="Male">Male Only</option>
-                                <option value="Female">Female Only</option>
-                            </select>
+                            <label for="email" class="allLabels ml-3 mr-3">Email:</label>
+                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="email" id="email">
+                            <label for="gender" class="allLabels ml-3 mr-2">Gender:</label>
+                            <div class="custom-control custom-radio mr-3 mt-1 mb-4">
+                                <input class="custom-control-input" type="radio" name="gender" id="male" value="Male"
+                                    checked>
+                                <label class="custom-control-label allLabels" for="male">Male</label>
+                            </div>
+                            <div class="custom-control custom-radio mt-1 mb-4 mr-2">
+                                <input class="custom-control-input" type="radio" name="gender" id="female"
+                                    value="Female">
+                                <label class="custom-control-label allLabels" for="female">Female</label>
+                            </div>
                         </div>
                         <div class="form-row justify-content-center mt-2">
-                            <label for="age" class="allLabels mr-3">Age:</label>
+                            <label for="age" class="allLabels mr-2">Age:</label>
                             <input type="number" class="form-control col-md-1 mb-2 ml-2 mr-2" name="age" id="age">
-                            <label for="phone" class="allLabels ml-3 mr-3">Phone Number:</label>
+                            <label for="phone" class="allLabels ml-3 mr-2">Phone Number:</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="phone" id="phone">
-                            <label for="position" class="allLabels ml-3 mr-3">Position:</label>
+                            <label for="position" class="allLabels ml-3 mr-2">Position:</label>
                             <select id="position" name="position" class="form-control col-md-2 mb-2 ml-2 mr-2">
                                 <option value="None" selected>Select one</option>
                                 <option value="Forward">Forward</option>
                                 <option value="Defenseman">Defenseman</option>
                                 <option value="Defenseman">Goalie</option>
                             </select>
-                            <label for="shoots" class="allLabels ml-3 mr-3">Shoots:</label>
+                            <label for="shoots" class="allLabels ml-3 mr-2">Shoots:</label>
                             <div class="custom-control custom-radio mr-3 mt-1 mb-4">
                                 <input class="custom-control-input" type="radio" name="shoots" id="left" value="Left"
                                     checked>
                                 <label class="custom-control-label allLabels" for="left">Left</label>
                             </div>
-                            <div class="custom-control custom-radio mt-1 mb-4">
+                            <div class="custom-control custom-radio mt-1 mb-4 mr-2">
                                 <input class="custom-control-input" type="radio" name="shoots" id="right" value="Right">
                                 <label class="custom-control-label allLabels" for="right">Right</label>
                             </div>

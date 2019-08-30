@@ -1,9 +1,9 @@
 "use strict";
 
 /*
-* This function validates all fields on the Team Details Form.
+* This function validates all fields on the Player Details Form.
 */
-function validateTeamDetailsForm(objs)
+function validatePlayerDetailsForm()
 {
     $("#invalidData").empty();
 
@@ -14,81 +14,70 @@ function validateTeamDetailsForm(objs)
 
     let errorFound = false;
 
-    if (teamname.value.trim() == "")
+    if (membername.value.trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
-    if (leaguecode.value == "None")
+    if (contactname.value.trim() == "")
     {
-        displayErrorMessage[displayErrorMessage.length] = "Please select a Division";
+        displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
-    if (teamgender.value == "None")
+    if (email.value.trim() == "")
     {
-        displayErrorMessage[displayErrorMessage.length] = "Please select a Gender";
-        errorFound = true;
-    }
-
-    if ((isNaN(maxteammembers.value)) || (maxteammembers.value <= 9) || (maxteammembers.value > 18))
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
-        errorFound = true;
-    }
-
-    if ((isNaN(minmemberage.value)) || (minmemberage.value < 18))
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Min Age must be greater than 17.";
-        errorFound = true;
-    }
-
-    if ((isNaN(maxmemberage.value)) || (maxmemberage.value > 70) ||
-        (maxmemberage.value < minmemberage.value))
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Max Age must be less than or equal to 70.";
-        errorFound = true;
-    }
-
-    if (managername.value.trim() == "")
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Missing Manager Name";
-        errorFound = true;
-    }
-
-    if (managerphone.value.trim() == "")
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Missing Manager Phone Number";
+        displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
         errorFound = true;
     }
     else
     {
-        if (phoneFormat.test(managerphone.value))
+        if (emailFormat.test(email.value))
         {
         }
         else
         {
-            displayErrorMessage[displayErrorMessage.length] = "Invalid Manager Phone Number (999-999-9999)";
+            displayErrorMessage[displayErrorMessage.length] = "Inavlid Email Address (nnnn@nnn.nnn)";
             errorFound = true;
         }
     }
 
-    if (manageremail.value.trim() == "")
+    if ((isNaN(age.value)) || (age.value < 18) || (age.value > 70))
     {
-        displayErrorMessage[displayErrorMessage.length] = "Missing Manager Email Address";
+        displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team.";
         errorFound = true;
     }
     else
     {
-        if (emailFormat.test(manageremail.value))
+        if (age.value > 70)
+        {
+            displayErrorMessage[displayErrorMessage.length] = "Player is too old for Team.";
+            errorFound = true;
+        }
+    }
+
+    if (phone.value.trim() == "")
+    {
+        displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
+        errorFound = true;
+    }
+    else
+    {
+        if (phoneFormat.test(phone.value))
         {
         }
         else
         {
-            displayErrorMessage[displayErrorMessage.length] = "Inavlid Manager Email Address (nnnn@nnn.nnn)";
+            displayErrorMessage[displayErrorMessage.length] = "Invalid Phone Number (999-999-9999)";
             errorFound = true;
         }
+    }
+
+    if (position.value == "None")
+    {
+        displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
+        errorFound = true;
     }
 
     // Call Display Errors Function (errors.js)
@@ -107,13 +96,28 @@ $(function ()
 
     let teamsLength = teams.length;
 
+    let leagues = JSON.parse(sessionStorage.getItem("leagues"));
+
+    let leaguesLength = leagues.length;
+
+    let leagueCode;
+
     for (let i = 0; i < teamsLength; i++)
     {
         if (teams[i].TeamId == teamSelected)
         {
-            $("#leaguecode").val(teams[i].League);
             $("#teamname").val(teams[i].TeamName);
-            return;
+            leagueCode = (teams[i].League);
+
+            for (let i = 0; i < leaguesLength; i++)
+            {
+                if (leagueCode = leagues[i].Code)
+                {
+                    $("#leaguecode").val(leagues[i].Name);
+                    break;
+                }
+            }
+            break;
         }
     }
 
@@ -126,17 +130,17 @@ $(function ()
     }))
 
     $("#buttonsDiv").append($("<a>", {
-        href: "detailsteam.html",
+        href: "detailsteam.html?id=" + teamSelected,
         id: "cancelBtn",
         text: "Cancel",
         class: "col-md-2 btn btn-danger btn-sm mb-1",
         role: "button"
     }))
 
-    // Save Team Details Button click
+    // Save Player Details Button click
     $("#saveTeamBtn").on("click", function ()
     {
-        let errorFound = validateTeamDetailsForm();
+        let errorFound = validatePlayerDetailsForm();
 
         if (errorFound)
         {
@@ -146,34 +150,30 @@ $(function ()
         // Call Hide Error Function (errors.js)
         hideError($("#invalidData"));
 
-        let postData;
-
-        // Post Add Team Form to API Teams
-        $.post("/api/teams", $("#teamDetailsForm").serialize(),
+        // Post Add Player Form to API Teams
+        $.post("/api/teams/" + teamSelected + "/members/", $("#addPlayerForm").serialize(),
             function (data)
-            {
-                postData = JSON.parse(data);
-            })
+            {})
 
             .done(function ()
             {
-                $("#savedModalText").html("Team has been successfully added.")
+                $("#savedModalText").html("Player has been successfully added.")
                     .addClass("text-primary");
-                $("#modalBody").append("<b>Team Id: </b>" + postData.TeamId)
+                $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
                     .append("<br />")
-                    .append("<b>Team Name: </b>" + $("#teamname").val());
+                    .append("<b>Player Name: </b>" + $("#membername").val());
                 $("#savedModal").modal("show");
 
                 // Ok Button click
                 $("#okBtn").on("click", function ()
                 {
-                    location.href = "detailsteam.html?id=" + postData.TeamId;
+                    location.href = "detailsteam.html?id=" + teamSelected;
                 })
             })
 
             .fail(function ()
             {
-                $("#savedModalText").html("Update has failed, please try again.")
+                $("#savedModalText").html("Failed to Add Player to Team, please try again.")
                     .addClass("text-danger");
                 $("#savedModal").modal("show");
             })

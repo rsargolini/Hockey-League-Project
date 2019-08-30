@@ -28,6 +28,11 @@ h2  {
     font-weight: bold;
 }
 
+#teamFullMessage {
+    font-size: 20px;
+    color: red;
+}
+
 /* New Team Page - Center Success Modal Header */
 #modalHeader {
     margin: 0 auto;
@@ -61,7 +66,13 @@ h2  {
 }
 
 #teamInfoSet, #managerInfoSet, #teamLimitsSet, #playerInfoSet {
-    width: 1000px;
+    width: 1200px;
+    border: thin solid;
+    padding: 1px;
+}
+
+#addPlayerTeamInfoSet {
+    width: 700px;
     border: thin solid;
     padding: 1px;
 }
