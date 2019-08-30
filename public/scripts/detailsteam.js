@@ -305,6 +305,14 @@ $(function ()
 
             $("#saveTeamBtn").hide();
 
+            $("#addPlayerBtnDiv").append($("<a>", {
+                href: "newplayer.html?id=" + teamSelected,
+                id: "addPlayerBtn",
+                text: "Add Player",
+                class: "col-md-1 btn btn-success btn-sm mb-1 mr-1",
+                role: "button"
+            }))
+
             $("#buttonsDiv").append($("<a>", {
                 href: "filterteams.html",
                 id: "backBtn",

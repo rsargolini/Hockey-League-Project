@@ -53,13 +53,14 @@ h2  {
     font-weight: bold;
 }
 
-#filterLegend, #teamInfoLegend, #managerInfoLegend, #teamLimitsLegend {
+#filterLegend, #teamInfoLegend, #managerInfoLegend, #teamLimitsLegend,
+#playerInfoLegend {
     font-size: 15px;
     font-weight: bold;
     background-color: antiquewhite;
 }
 
-#teamInfoSet, #managerInfoSet, #teamLimitsSet {
+#teamInfoSet, #managerInfoSet, #teamLimitsSet, #playerInfoSet {
     width: 1000px;
     border: thin solid;
     padding: 1px;
