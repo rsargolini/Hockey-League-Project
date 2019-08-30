@@ -84,13 +84,13 @@ function insertRow(teams, i)
     $("#teams tbody tr:last").append("<td class='teamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
         href: "#",
-        id: "removeBtn" + [i],
+        id: "deleteBtn" + [i],
         class: "btn btn-outline-danger btn-sm",
         role: "button"
     }))
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-        .append($("<span>", { class: "buttontext", text: "Remove" }))
+        .append($("<span>", { class: "buttontext", text: "Delete" }))
 }
 
 //Connect Events to HTML Elements
@@ -135,16 +135,38 @@ $(function ()
 
             for (let i = 0; i < teamsLength; i++)
             {
-                $("#removeBtn" + [i]).on("click", function ()
+                $("#deleteBtn" + [i]).on("click", function ()
                 {
                     $("#modalBody").empty();
                     $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
                         .append("<br />")
                         .append("<b>Team Name: </b>" + teams[i].TeamName);
-                    $("#rmvTeamModal").modal("show");
+                    $("#deleteTeamModal").modal("show");
                     selectedTeam = [i];
                 })
             }
+
+            // Confirm Delete Button click
+            $("#confirmBtn").on("click", function ()
+            {
+                // Delete Team to API Teams
+                $.ajax({
+                    url: "/api/teams/" + teams[selectedTeam].TeamId,
+                    method: "DELETE"
+                })
+                    .done(function ()
+                    {
+                        $("#deleteTeamModal").modal("hide");
+                        location.reload();
+                    })
+
+                    .fail(function ()
+                    {
+                        $("#savedModalText").html("Deletion has failed, please try again.")
+                            .addClass("text-danger");
+                        $("#savedModal").modal("show");
+                    })
+            })
         })
 
     // Add a New Team Button click
@@ -157,55 +179,5 @@ $(function ()
     $("#backBtn").on("click", function ()
     {
         location.assign("index.html");
-    })
-
-    // Confirm Remove Button click
-    $("#confirmBtn").on("click", function ()
-    {
-        // Delete Team to API Teams
-        $.ajax({
-            url: "/api/teams/",
-            method: "DELETE",
-            data: teams[selectedTeam]
-        })
-            .done(function ()
-            {
-                $("#savedModalText").html("Team #" + $("#teamid").val() + "<br> " + $("#teamname").val() + " has been successfully updated.")
-                    .addClass("text-primary");
-                $("#savedModal").modal("show");
-
-                // Disable all Team Details Fields except Team ID
-                $("*", "#teamDetailsForm").prop('disabled', true);
-
-                $("#editTeamBtn").show();
-                $("#saveTeamBtn").hide();
-
-                $("#backBtn").show();
-                $("#cancelBtn").hide();
-            })
-
-            .fail(function ()
-            {
-                $("#savedModalText").html("Update has failed, please try again.")
-                    .addClass("text-danger");
-                $("#savedModal").modal("show");
-            })
-
-        $.post("/api/unregister", "courseid=" + objs.CourseId + "&studentname=" + objs.Students[selectedStudent].StudentName + "&email=" + objs.Students[selectedStudent].Email,
-            function (data) { })
-
-            .done(function ()
-            {
-                $("#rmvTeamModal").modal("hide");
-                location.reload();
-            })
-
-            .fail(function ()
-            {
-                $("#rmvTeamModal").modal("hide");
-                $("#savedModalText").html("Deleting this Team has failed, please try again.")
-                    .addClass("text-danger");
-                $("#savedModal").modal("show");
-            })
     })
 })
