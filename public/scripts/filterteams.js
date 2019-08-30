@@ -117,6 +117,8 @@ $(function ()
         {
             let teamsLength = teams.length;
 
+            sessionStorage.setItem("teams", JSON.stringify(teams));
+
             performTeamSearch(teams, teamsLength);
 
             // Select Division Field changed

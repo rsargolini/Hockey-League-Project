@@ -27,9 +27,8 @@ function insertPlayerRow(teams, i)
 
 
     $("#players tbody tr:last td:last").append($("<a>", {
-        href: "detailsplayer.html?&id=" + teams.Members[i].MemberId,
+        href: "detailsplayer.html?&playerid=" + teams.Members[i].MemberId,
         id: "editBtn" + [i],
-        //   text: "Edit",
         class: "btn btn-outline-success btn-sm",
         role: "button"
     }))
@@ -229,6 +228,9 @@ $(function ()
 
             let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
+            console.log(details)
+            sessionStorage.setItem("teamData", JSON.stringify(details));
+
             let leaguesLength = leagues.length;
 
             for (let i = 0; i < leaguesLength; i++)
@@ -305,6 +307,21 @@ $(function ()
 
             $("#saveTeamBtn").hide();
 
+            $("#addPlayerBtnDiv").append($("<a>", {
+                href: "newplayer.html?id=" + teamSelected,
+                id: "addPlayerBtn",
+                text: "Add Player",
+                class: "col-md-1 btn btn-success btn-sm mb-2 mr-1",
+                role: "button"
+            }))
+
+            if (Number($("#maxteammembers").val()) == playersLength)
+            {
+                $("#addPlayerBtn").hide();
+                $("#teamFullDiv").append($("<p>", { html: "Team is Full", id: "teamFullMessage" }));
+                $("#teamFullDiv").show();
+            }
+
             $("#buttonsDiv").append($("<a>", {
                 href: "filterteams.html",
                 id: "backBtn",
@@ -370,6 +387,8 @@ $(function ()
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
+
+                        location.reload();
                     })
 
                     .fail(function ()
@@ -403,7 +422,6 @@ $(function ()
                 $("#managerphone").val(oldManagerPhone);
                 $("#manageremail").val(oldManagerEmail);
             })
-
             return;
         })
 })

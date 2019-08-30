@@ -28,6 +28,11 @@ h2  {
     font-weight: bold;
 }
 
+#teamFullMessage {
+    font-size: 20px;
+    color: red;
+}
+
 /* New Team Page - Center Success Modal Header */
 #modalHeader {
     margin: 0 auto;
@@ -53,14 +58,21 @@ h2  {
     font-weight: bold;
 }
 
-#filterLegend, #teamInfoLegend, #managerInfoLegend, #teamLimitsLegend {
+#filterLegend, #teamInfoLegend, #managerInfoLegend, #teamLimitsLegend,
+#playerInfoLegend {
     font-size: 15px;
     font-weight: bold;
     background-color: antiquewhite;
 }
 
-#teamInfoSet, #managerInfoSet, #teamLimitsSet {
-    width: 1000px;
+#teamInfoSet, #managerInfoSet, #teamLimitsSet, #playerInfoSet {
+    width: 1200px;
+    border: thin solid;
+    padding: 1px;
+}
+
+#addPlayerTeamInfoSet {
+    width: 700px;
     border: thin solid;
     padding: 1px;
 }
