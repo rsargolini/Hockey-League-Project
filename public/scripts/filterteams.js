@@ -151,9 +151,8 @@ $(function ()
             {
                 // Delete Team to API Teams
                 $.ajax({
-                    url: "/api/teams/",
-                    method: "DELETE",
-                    data: teams[selectedTeam]
+                    url: "/api/teams/" + teams[selectedTeam].TeamId,
+                    method: "DELETE"
                 })
                     .done(function ()
                     {

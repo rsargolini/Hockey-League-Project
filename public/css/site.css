@@ -28,7 +28,12 @@ h2  {
     font-weight: bold;
 }
 
-/* All Pages - Hide Alert boxes and buttons*/
+/* New Team Page - Center Success Modal Header */
+#modalHeader {
+    margin: 0 auto;
+}
+
+/* All Pages - Hide Alert boxes and buttons */
 .hidden, #playerTitle, #courseCatalogImg {
     display: none;
 }
