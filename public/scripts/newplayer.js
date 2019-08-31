@@ -3,7 +3,7 @@
 /*
 * This function validates all fields on the Player Details Form.
 */
-function validatePlayerDetailsForm(teamGender)
+function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
 {
     $("#invalidData").empty();
 
@@ -14,26 +14,26 @@ function validatePlayerDetailsForm(teamGender)
 
     let errorFound = false;
 
-    if (membername.value.trim() == "")
+    if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
-    if (contactname.value.trim() == "")
+    if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
-    if (email.value.trim() == "")
+    if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
         errorFound = true;
     }
     else
     {
-        if (emailFormat.test(email.value))
+        if (emailFormat.test($("#email").val()))
         {
         }
         else
@@ -53,32 +53,40 @@ function validatePlayerDetailsForm(teamGender)
         if ($("input[name='gender']:checked").val() != teamGender)
         {
             displayErrorMessage[displayErrorMessage.length] = "Player's Gender not allowed on this Team.";
-        errorFound = true;
-        }
-    }
-
-    if ((isNaN(age.value)) || (age.value < 18) || (age.value > 70))
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team.";
-        errorFound = true;
-    }
-    else
-    {
-        if (age.value > 70)
-        {
-            displayErrorMessage[displayErrorMessage.length] = "Player is too old for Team.";
             errorFound = true;
         }
     }
 
-    if (phone.value.trim() == "")
+    if ($("#age").val().trim() == "")
+    {
+        displayErrorMessage[displayErrorMessage.length] = "Missing Age";
+        errorFound = true;
+    }
+    else
+    {
+        if ((isNaN($("#age").val())) || ($("#age").val() < teamMinAge))
+        {
+            displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team. Min Age is " + teamMinAge + ".";
+            errorFound = true;
+        }
+        else
+        {
+            if ($("#age").val() > teamMaxAge)
+            {
+                displayErrorMessage[displayErrorMessage.length] = "Player is too old for Team. Max Age is " + teamMaxAge + ".";
+                errorFound = true;
+            }
+        }
+    }
+
+    if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
         errorFound = true;
     }
     else
     {
-        if (phoneFormat.test(phone.value))
+        if (phoneFormat.test($("#phone").val()))
         {
         }
         else
@@ -88,7 +96,7 @@ function validatePlayerDetailsForm(teamGender)
         }
     }
 
-    if (position.value == "None")
+    if ($("#position").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
         errorFound = true;
@@ -122,14 +130,18 @@ $(function ()
 
     let leagueCode;
     let teamGender;
+    let teamMinAge;
+    let teamMaxAge;
 
     for (let i = 0; i < teamsLength; i++)
     {
         if (teams[i].TeamId == teamSelected)
         {
             $("#teamname").val(teams[i].TeamName);
-            leagueCode = (teams[i].League);
-            teamGender = (teams[i].TeamGender)
+            leagueCode = teams[i].League;
+            teamGender = teams[i].TeamGender;
+            teamMinAge = teams[i].MinMemberAge;
+            teamMaxAge = teams[i].MaxMemberAge;
 
             for (let i = 0; i < leaguesLength; i++)
             {
@@ -162,7 +174,7 @@ $(function ()
     // Save Player Details Button click
     $("#saveTeamBtn").on("click", function ()
     {
-        let errorFound = validatePlayerDetailsForm(teamGender);
+        let errorFound = validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge);
 
         if (errorFound)
         {
@@ -179,7 +191,6 @@ $(function ()
 
             .done(function ()
             {
-                console.log($("#addPlayerForm").serialize())
                 $("#savedModalText").html("Player has been successfully added.")
                     .addClass("text-primary");
                 $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
@@ -196,7 +207,6 @@ $(function ()
 
             .fail(function ()
             {
-                console.log($("#addPlayerForm").serialize())
                 $("#savedModalText").html("Failed to Add Player to Team, please try again.")
                     .addClass("text-danger");
                 $("#savedModal").modal("show");
