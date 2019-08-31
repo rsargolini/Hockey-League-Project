@@ -14,57 +14,57 @@ function validateTeamDetailsForm(objs)
 
     let errorFound = false;
 
-    if (teamname.value.trim() == "")
+    if ($("#teamname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
-    if (leaguecode.value == "None")
+    if ($("#leaguecode").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Please select a Division";
         errorFound = true;
     }
 
-    if (teamgender.value == "None")
+    if ($("#teamgender").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Please select a Gender";
         errorFound = true;
     }
 
-    if ((isNaN(maxteammembers.value)) || (maxteammembers.value <= 9) || (maxteammembers.value > 18))
+    if ((isNaN($("#maxteammembers").val())) || ($("#maxteammembers").val() <= 9) || ($("#maxteammembers").val() > 18))
     {
         displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
         errorFound = true;
     }
 
-    if ((isNaN(minmemberage.value)) || (minmemberage.value < 18))
+    if ((isNaN($("#minmemberage").val())) || ($("#minmemberage").val() < 18))
     {
         displayErrorMessage[displayErrorMessage.length] = "Min Age must be greater than 17.";
         errorFound = true;
     }
 
-    if ((isNaN(maxmemberage.value)) || (maxmemberage.value > 70) ||
-        (maxmemberage.value < minmemberage.value))
+    if ((isNaN($("#maxmemberage").val())) || ($("#maxmemberage").val() > 70) ||
+        ($("#maxmemberage").val() < $("#minmemberage").val()))
     {
         displayErrorMessage[displayErrorMessage.length] = "Max Age must be less than or equal to 70.";
         errorFound = true;
     }
 
-    if (managername.value.trim() == "")
+    if ($("#managername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Name";
         errorFound = true;
     }
 
-    if (managerphone.value.trim() == "")
+    if ($("#managerphone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Phone Number";
         errorFound = true;
     }
     else
     {
-        if (phoneFormat.test(managerphone.value))
+        if (phoneFormat.test($("#managerphone").val()))
         {
         }
         else
@@ -74,14 +74,14 @@ function validateTeamDetailsForm(objs)
         }
     }
 
-    if (manageremail.value.trim() == "")
+    if ($("#manageremail").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Email Address";
         errorFound = true;
     }
     else
     {
-        if (emailFormat.test(manageremail.value))
+        if (emailFormat.test($("#manageremail").val()))
         {
         }
         else

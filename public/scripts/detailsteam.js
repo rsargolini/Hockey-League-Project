@@ -1,5 +1,25 @@
 "use strict";
 
+/*
+* This function validates all fields on the Player Details Form.
+*/
+function saveTeamData()
+{
+    let oldData = {
+        teamid: $("#teamid").val(),
+        teamname: $("#teamname").val(),
+        leaguecode: $("#leaguecode option:selected").val(),
+        teamgender: $("#teamgender option:selected").val(),
+        maxteammembers: $("#maxteammembers").val(),
+        minmemberage: $("#minmemberage").val(),
+        maxmemberage: $("#maxmemberage").val(),
+        managername: $("#managername").val(),
+        managerphone: $("#managerphone").val(),
+        manageremail: $("#manageremail").val()
+    }
+    return oldData;
+}
+
 /* 
 * This function inserts a Header Row into the Student Table.
 */
@@ -57,80 +77,90 @@ function validateTeamDetailsForm(details)
 
     const emailFormat = /^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/;
     const phoneFormat = /^\d{3}-\d{3}-\d{4}$/;
+    const leagueMinPlayers = 10;
+    const leagueMaxPlayers = 18;
+    const leagueMinAge = 18;
+    const leagueMaxAge = 70;
 
     let displayErrorMessage = [];
 
     let errorFound = false;
 
-    if (teamname.value.trim() == "")
+    if ($("#teamname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
-    if (isThereAnyGenderChangeConflicts(teamgender.value, details))
+    if (isThereAnyGenderChangeConflicts($("#teamgender").val(), details))
     {
         displayErrorMessage[displayErrorMessage.length] = "Gender Change Conflict Found";
         errorFound = true;
     }
 
-    if ((isNaN(maxteammembers.value)) || (maxteammembers.value <= 9) || (maxteammembers.value > 18))
+    if ((isNaN($("#maxteammembers").val()) ||
+        ($("#maxteammembers").val() < leagueMinPlayers)) ||
+        ($("#maxteammembers").val() > leagueMaxPlayers))
     {
         displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
         errorFound = true;
     }
     else
     {
-        if (Number(maxteammembers.value) < details.Members.length)
+        if (Number($("#maxteammembers").val()) < details.Members.length)
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Players change not allowed, current Players exceed that number.";
             errorFound = true;
         }
     }
 
-    if ((isNaN(minmemberage.value)) || (minmemberage.value < 18))
+    if ((isNaN($("#minmemberage").val())) || ($("#minmemberage").val() < leagueMinAge))
     {
-        displayErrorMessage[displayErrorMessage.length] = "Min Age must be greater than 17.";
+        displayErrorMessage[displayErrorMessage.length] = "Min Age must be 18 or greater.";
         errorFound = true;
     }
     else
     {
-        if (Number(minmemberage.value) > getMinAgeOfMember(details))
+        if (Number($("#minmemberage").val()) > getMinAgeOfMember(details))
         {
             displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger then that age.";
             errorFound = true;
         }
     }
 
-    if ((isNaN(maxmemberage.value)) || (maxmemberage.value > 70) ||
-        (maxmemberage.value < minmemberage.value))
+    if ((isNaN($("#maxmemberage").val())) || ($("#maxmemberage").val() > leagueMaxAge))
     {
-        displayErrorMessage[displayErrorMessage.length] = "Max Age must be less than or equal to 70.";
+        displayErrorMessage[displayErrorMessage.length] = "Max Age must be 70 or less.";
         errorFound = true;
     }
     else
     {
-        if (Number(maxmemberage.value) < getMaxAgeOfMember(details))
+        if (Number($("#maxmemberage").val()) < getMaxAgeOfMember(details))
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older then that age.";
             errorFound = true;
         }
     }
 
-    if (managername.value.trim() == "")
+    if ($("#maxmemberage").val() < $("#minmemberage").val())
+    {
+        displayErrorMessage[displayErrorMessage.length] = "Max Age must be greater than Min Age.";
+        errorFound = true;
+    }
+    if ($("#managername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Name";
         errorFound = true;
     }
 
-    if (managerphone.value.trim() == "")
+    if ($("#managerphone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Phone Number";
         errorFound = true;
     }
     else
     {
-        if (phoneFormat.test(managerphone.value))
+        if (phoneFormat.test($("#managerphone").val()))
         {
         }
         else
@@ -140,14 +170,14 @@ function validateTeamDetailsForm(details)
         }
     }
 
-    if (manageremail.value.trim() == "")
+    if ($("#manageremail").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Email Address";
         errorFound = true;
     }
     else
     {
-        if (emailFormat.test(manageremail.value))
+        if (emailFormat.test($("#manageremail").val()))
         {
         }
         else
@@ -223,6 +253,8 @@ $(function ()
     $.getJSON("/api/teams/" + teamSelected,
         function (details)
         {
+            let saveData;
+            
             let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
             let leaguesLength = leagues.length;
@@ -254,17 +286,6 @@ $(function ()
             $("#managername").val(details.ManagerName);
             $("#managerphone").val(details.ManagerPhone);
             $("#manageremail").val(details.ManagerEmail);
-
-            let oldTeamId = details.TeamId;
-            let oldTeamName = details.TeamName;
-            let oldLeague = details.League;
-            let oldTeamGender = details.TeamGender;
-            let oldMaxTeamMembers = details.MaxTeamMembers;
-            let oldMinMemberAge = details.MinMemberAge;
-            let oldMaxMemberAge = details.MaxMemberAge;
-            let oldManagerName = details.ManagerName;
-            let oldManagerPhone = details.ManagerPhone;
-            let oldManagerEmail = details.ManagerEmail;
 
             let playersLength = details.Members.length;
 
@@ -374,6 +395,8 @@ $(function ()
             // Edit Team Details Button click
             $("#editTeamBtn").on("click", function ()
             {
+                saveData = saveTeamData();
+
                 // Enable all Team Details Fields except Team ID
                 $("*", "#teamDetailsForm").prop('disabled', false);
                 $("#teamid").prop('readonly', true);
@@ -434,22 +457,25 @@ $(function ()
                 // Disable all Team Details Fields except Team ID
                 $("*", "#teamDetailsForm").prop('disabled', true);
 
+                // Call Hide Error Function (errors.js)
+                hideError($("#invalidData"));
+
                 $("#editTeamBtn").show();
                 $("#saveTeamBtn").hide();
 
                 $("#backBtn").show();
                 $("#cancelBtn").hide();
 
-                $("#teamid").val(oldTeamId);
-                $("#teamname").val(oldTeamName);
-                $("#leaguecode").val(oldLeague);
-                $("#teamgender").val(oldTeamGender);
-                $("#maxteammembers").val(oldMaxTeamMembers);
-                $("#minmemberage").val(oldMinMemberAge);
-                $("#maxmemberage").val(oldMaxMemberAge);
-                $("#managername").val(oldManagerName);
-                $("#managerphone").val(oldManagerPhone);
-                $("#manageremail").val(oldManagerEmail);
+                $("#teamid").val(saveData.teamid);
+                $("#teamname").val(saveData.teamname);
+                $("#leaguecode").val(saveData.leaguecode);
+                $("#teamgender").val(saveData.teamgender);
+                $("#maxteammembers").val(saveData.maxteammembers);
+                $("#minmemberage").val(saveData.minmemberage);
+                $("#maxmemberage").val(saveData.maxmemberage);
+                $("#managername").val(saveData.managername);
+                $("#managerphone").val(saveData.managerphone);
+                $("#manageremail").val(saveData.manageremail);
             })
         })
     return;
