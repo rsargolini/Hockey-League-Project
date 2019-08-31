@@ -143,21 +143,15 @@ $(function ()
             {
                 if (playerSelected == objs.Members[i].MemberId)
                 {
-                    // Team Information Fieldset
+                    // Player Information Fieldset
                     $("#membername").val(objs.Members[i].MemberName);
                     $("#contactname").val(objs.Members[i].ContactName);
                     $("#email").val(objs.Members[i].Email);
-                    $("input[name='gender']").val(objs.Members[i].Gender).prop("checked", true);
+                    $("#" + objs.Members[i].Gender).prop("checked", true);
                     $("#age").val(objs.Members[i].Age);
                     $("#phone").val(objs.Members[i].Phone);
-                    $("#position option").find(function ()
-                    {
-                        return ($(this).val() == objs.Members[i].Position);
-                    }).attr("selected", "selected");
-
-                    // "#Goalie").attr("selected", "selected")
-                    // $("#position").selectmenu('refresh').val(objs.Members[i].Position).attr("selected", "selected");
-                    $("input[name='shoots']").val(objs.Members[i].Shoots).prop("checked", true);
+                    $("#position").val(objs.Members[i].Position);
+                    $("#" + objs.Members[i].Shoots).prop("checked", true);
                     break;
                 }
             }
@@ -225,9 +219,12 @@ $(function ()
                     return
                 }
 
+                console.log($("#membername").val())
+                console.log($("#gender").val())
+
                 // Call Hide Error Function (errors.js)
                 hideError($("#invalidData"));
-
+                
                 // Put (Update) Form to API Teams
                 $.ajax({
                     url: "/api/teams/" + teamSelected + "/members",
@@ -236,6 +233,8 @@ $(function ()
                 })
                     .done(function ()
                     {
+                        console.log("memberid=" + playerSelected + "&" + $("#editPlayerForm").serialize())
+
                         $("#savedModalText").html("Player " + $("#membername").val() + " has been successfully updated.")
                             .addClass("text-primary");
                         $("#savedModal").modal("show");

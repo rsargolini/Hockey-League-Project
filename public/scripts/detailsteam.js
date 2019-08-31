@@ -18,16 +18,16 @@ function insertPlayerHeadRow()
 * @param courses (Array) - The Courses array
 * @param i (index to array) - The Courses arrays index
 */
-function insertPlayerRow(teams, i)
+function insertPlayerRow(details, i)
 {
     $("#players tbody").append("<tr>")
-    $("#players tbody tr:last").append($("<td>", { html: teams.Members[i].MemberName }))
-        .append($("<td>", { html: teams.Members[i].Email }))
+    $("#players tbody tr:last").append($("<td>", { html: details.Members[i].MemberName }))
+        .append($("<td>", { html: details.Members[i].Email }))
         .append("<td class='playersBtn'>");
 
 
     $("#players tbody tr:last td:last").append($("<a>", {
-        href: "detailsplayer.html?&id=" + teams.TeamId  + "&playerid=" + teams.Members[i].MemberId,
+        href: "detailsplayer.html?&id=" + details.TeamId + "&playerid=" + details.Members[i].MemberId,
         id: "editBtn" + [i],
         class: "btn btn-outline-success btn-sm",
         role: "button"
@@ -38,7 +38,7 @@ function insertPlayerRow(teams, i)
 
     $("#players tbody tr:last").append("<td class='playersBtn'>");
     $("#players tbody tr:last td:last").append($("<a>", {
-        href: "deleteteam.html",
+        href: "#",
         id: "deleteBtn" + [i],
         class: "btn btn-outline-danger btn-sm",
         role: "button"
@@ -51,7 +51,7 @@ function insertPlayerRow(teams, i)
 /*
 * This function validates all fields on the Team Details Form.
 */
-function validateTeamDetailsForm(objs)
+function validateTeamDetailsForm(details)
 {
     $("#invalidData").empty();
 
@@ -68,7 +68,7 @@ function validateTeamDetailsForm(objs)
         errorFound = true;
     }
 
-    if (isThereAnyGenderChangeConflicts(teamgender.value, objs))
+    if (isThereAnyGenderChangeConflicts(teamgender.value, details))
     {
         displayErrorMessage[displayErrorMessage.length] = "Gender Change Conflict Found";
         errorFound = true;
@@ -81,7 +81,7 @@ function validateTeamDetailsForm(objs)
     }
     else
     {
-        if (Number(maxteammembers.value) < objs.Members.length)
+        if (Number(maxteammembers.value) < details.Members.length)
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Players change not allowed, current Players exceed that number.";
             errorFound = true;
@@ -95,7 +95,7 @@ function validateTeamDetailsForm(objs)
     }
     else
     {
-        if (Number(minmemberage.value) > getMinAgeOfMember(objs))
+        if (Number(minmemberage.value) > getMinAgeOfMember(details))
         {
             displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger then that age.";
             errorFound = true;
@@ -110,7 +110,7 @@ function validateTeamDetailsForm(objs)
     }
     else
     {
-        if (Number(maxmemberage.value) < getMaxAgeOfMember(objs))
+        if (Number(maxmemberage.value) < getMaxAgeOfMember(details))
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older then that age.";
             errorFound = true;
@@ -163,7 +163,7 @@ function validateTeamDetailsForm(objs)
     return errorFound;
 }
 
-function isThereAnyGenderChangeConflicts(newTeamGender, objs)
+function isThereAnyGenderChangeConflicts(newTeamGender, details)
 {
     if (newTeamGender == "Any")
     {
@@ -173,10 +173,10 @@ function isThereAnyGenderChangeConflicts(newTeamGender, objs)
 
     let conflictGender = newTeamGender == "Male" ? "Female" : "Male";
 
-    for (let i = 0; i < objs.Members.length; i++)
+    for (let i = 0; i < details.Members.length; i++)
     {
         // Look for Player whose gender would conflict with new team gender
-        if (objs.Members[i].Gender == conflictGender) 
+        if (details.Members[i].Gender == conflictGender) 
         {
             return true;  // found a conflict!
         }
@@ -185,29 +185,29 @@ function isThereAnyGenderChangeConflicts(newTeamGender, objs)
     return false; // no conflicts
 }
 
-function getMinAgeOfMember(objs)
+function getMinAgeOfMember(details)
 {
     let minAge = 100000;
 
-    for (let i = 0; i < objs.Members.length; i++)
+    for (let i = 0; i < details.Members.length; i++)
     {
-        if (Number(objs.Members[i].Age) < minAge) 
+        if (Number(details.Members[i].Age) < minAge) 
         {
-            minAge = Number(objs.Members[i].Age);
+            minAge = Number(details.Members[i].Age);
         }
     }
     return minAge;
 }
 
-function getMaxAgeOfMember(objs)
+function getMaxAgeOfMember(details)
 {
     let maxAge = -1;
 
-    for (let i = 0; i < objs.Members.length; i++)
+    for (let i = 0; i < details.Members.length; i++)
     {
-        if (Number(objs.Members[i].Age) > maxAge) 
+        if (Number(details.Members[i].Age) > maxAge) 
         {
-            maxAge = Number(objs.Members[i].Age);
+            maxAge = Number(details.Members[i].Age);
         }
     }
     return maxAge;
@@ -223,8 +223,6 @@ $(function ()
     $.getJSON("/api/teams/" + teamSelected,
         function (details)
         {
-            let objs = details;
-
             let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
             let leaguesLength = leagues.length;
@@ -244,31 +242,31 @@ $(function ()
             $("*", "#teamDetailsForm").prop('disabled', true);
 
             // Team Information Fieldset
-            $("#teamid").val(objs.TeamId);
-            $("#teamname").val(objs.TeamName);
-            $("#leaguecode").val(objs.League);
-            $("#teamgender").val(objs.TeamGender);
-            $("#maxteammembers").val(objs.MaxTeamMembers);
-            $("#minmemberage").val(objs.MinMemberAge);
-            $("#maxmemberage").val(objs.MaxMemberAge);
+            $("#teamid").val(details.TeamId);
+            $("#teamname").val(details.TeamName);
+            $("#leaguecode").val(details.League);
+            $("#teamgender").val(details.TeamGender);
+            $("#maxteammembers").val(details.MaxTeamMembers);
+            $("#minmemberage").val(details.MinMemberAge);
+            $("#maxmemberage").val(details.MaxMemberAge);
 
             // Manager Information Fieldset
-            $("#managername").val(objs.ManagerName);
-            $("#managerphone").val(objs.ManagerPhone);
-            $("#manageremail").val(objs.ManagerEmail);
+            $("#managername").val(details.ManagerName);
+            $("#managerphone").val(details.ManagerPhone);
+            $("#manageremail").val(details.ManagerEmail);
 
-            let oldTeamId = objs.TeamId;
-            let oldTeamName = objs.TeamName;
-            let oldLeague = objs.League;
-            let oldTeamGender = objs.TeamGender;
-            let oldMaxTeamMembers = objs.MaxTeamMembers;
-            let oldMinMemberAge = objs.MinMemberAge;
-            let oldMaxMemberAge = objs.MaxMemberAge;
-            let oldManagerName = objs.ManagerName;
-            let oldManagerPhone = objs.ManagerPhone;
-            let oldManagerEmail = objs.ManagerEmail;
+            let oldTeamId = details.TeamId;
+            let oldTeamName = details.TeamName;
+            let oldLeague = details.League;
+            let oldTeamGender = details.TeamGender;
+            let oldMaxTeamMembers = details.MaxTeamMembers;
+            let oldMinMemberAge = details.MinMemberAge;
+            let oldMaxMemberAge = details.MaxMemberAge;
+            let oldManagerName = details.ManagerName;
+            let oldManagerPhone = details.ManagerPhone;
+            let oldManagerEmail = details.ManagerEmail;
 
-            let playersLength = objs.Members.length;
+            let playersLength = details.Members.length;
 
             if (playersLength >= 1)
             {
@@ -281,9 +279,46 @@ $(function ()
 
                 for (let i = 0; i < playersLength; i++)
                 {
-                    insertPlayerRow(objs, i);
+                    insertPlayerRow(details, i);
                 }
             }
+
+            let selectedPlayer;
+
+            for (let i = 0; i < playersLength; i++)
+            {
+                $("#deleteBtn" + [i]).on("click", function ()
+                {
+                    $("#modalBody").empty();
+                    $("#modalBody").append("<b>Player Id: </b>" + details.Members[i].MemberId)
+                        .append("<br />")
+                        .append("<b>Player Name: </b>" + details.Members[i].MemberName);
+                    $("#deletePlayerModal").modal("show");
+                    selectedPlayer = [i];
+                })
+            }
+
+            // Confirm Delete Button click
+            $("#confirmBtn").on("click", function ()
+            {
+                // Delete Team to API Teams
+                $.ajax({
+                    url: "/api/teams/" + details.TeamId + "/members/" + details.Members[selectedPlayer].MemberId,
+                    method: "DELETE"
+                })
+                    .done(function ()
+                    {
+                        $("#deletePlayerModal").modal("hide");
+                        location.reload();
+                    })
+
+                    .fail(function ()
+                    {
+                        $("#savedModalText").html("Deletion has failed, please try again.")
+                            .addClass("text-danger");
+                        $("#savedModal").modal("show");
+                    })
+            })
 
             $("#buttonsDiv").append($("<a>", {
                 href: "#",
@@ -353,7 +388,7 @@ $(function ()
             // Save Team Details Button click
             $("#saveTeamBtn").on("click", function ()
             {
-                let errorFound = validateTeamDetailsForm(objs);
+                let errorFound = validateTeamDetailsForm(details);
 
                 if (errorFound)
                 {
@@ -383,8 +418,6 @@ $(function ()
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
-
-                        location.reload();
                     })
 
                     .fail(function ()
@@ -418,6 +451,6 @@ $(function ()
                 $("#managerphone").val(oldManagerPhone);
                 $("#manageremail").val(oldManagerEmail);
             })
-            return;
         })
+    return;
 })
