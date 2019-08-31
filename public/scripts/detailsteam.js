@@ -27,7 +27,7 @@ function insertPlayerRow(teams, i)
 
 
     $("#players tbody tr:last td:last").append($("<a>", {
-        href: "detailsplayer.html?&playerid=" + teams.Members[i].MemberId,
+        href: "detailsplayer.html?&id=" + teams.TeamId  + "&playerid=" + teams.Members[i].MemberId,
         id: "editBtn" + [i],
         class: "btn btn-outline-success btn-sm",
         role: "button"
@@ -40,7 +40,6 @@ function insertPlayerRow(teams, i)
     $("#players tbody tr:last td:last").append($("<a>", {
         href: "deleteteam.html",
         id: "deleteBtn" + [i],
-        // text: "Delete",
         class: "btn btn-outline-danger btn-sm",
         role: "button"
     }))
@@ -227,9 +226,6 @@ $(function ()
             let objs = details;
 
             let leagues = JSON.parse(sessionStorage.getItem("leagues"));
-
-            console.log(details)
-            sessionStorage.setItem("teamData", JSON.stringify(details));
 
             let leaguesLength = leagues.length;
 
