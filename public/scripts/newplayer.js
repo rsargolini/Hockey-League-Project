@@ -3,7 +3,7 @@
 /*
 * This function validates all fields on the Player Details Form.
 */
-function validatePlayerDetailsForm()
+function validatePlayerDetailsForm(teamGender)
 {
     $("#invalidData").empty();
 
@@ -40,6 +40,20 @@ function validatePlayerDetailsForm()
         {
             displayErrorMessage[displayErrorMessage.length] = "Inavlid Email Address (nnnn@nnn.nnn)";
             errorFound = true;
+        }
+    }
+
+    if ($("input[name='gender']:checked").val() == null)
+    {
+        displayErrorMessage[displayErrorMessage.length] = "Missing Gender";
+        errorFound = true;
+    }
+    else
+    {
+        if ($("input[name='gender']:checked").val() != teamGender)
+        {
+            displayErrorMessage[displayErrorMessage.length] = "Player's Gender not allowed on this Team.";
+        errorFound = true;
         }
     }
 
@@ -80,6 +94,12 @@ function validatePlayerDetailsForm()
         errorFound = true;
     }
 
+    if ($("input[name='shoots']:checked").val() == null)
+    {
+        displayErrorMessage[displayErrorMessage.length] = "Missing Shoots";
+        errorFound = true;
+    }
+
     // Call Display Errors Function (errors.js)
     displayErrors($("#invalidData"), displayErrorMessage, errorFound);
 
@@ -101,6 +121,7 @@ $(function ()
     let leaguesLength = leagues.length;
 
     let leagueCode;
+    let teamGender;
 
     for (let i = 0; i < teamsLength; i++)
     {
@@ -108,6 +129,7 @@ $(function ()
         {
             $("#teamname").val(teams[i].TeamName);
             leagueCode = (teams[i].League);
+            teamGender = (teams[i].TeamGender)
 
             for (let i = 0; i < leaguesLength; i++)
             {
@@ -140,7 +162,7 @@ $(function ()
     // Save Player Details Button click
     $("#saveTeamBtn").on("click", function ()
     {
-        let errorFound = validatePlayerDetailsForm();
+        let errorFound = validatePlayerDetailsForm(teamGender);
 
         if (errorFound)
         {
@@ -153,10 +175,11 @@ $(function ()
         // Post Add Player Form to API Teams
         $.post("/api/teams/" + teamSelected + "/members/", $("#addPlayerForm").serialize(),
             function (data)
-            {})
+            { })
 
             .done(function ()
             {
+                console.log($("#addPlayerForm").serialize())
                 $("#savedModalText").html("Player has been successfully added.")
                     .addClass("text-primary");
                 $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
@@ -173,6 +196,7 @@ $(function ()
 
             .fail(function ()
             {
+                console.log($("#addPlayerForm").serialize())
                 $("#savedModalText").html("Failed to Add Player to Team, please try again.")
                     .addClass("text-danger");
                 $("#savedModal").modal("show");

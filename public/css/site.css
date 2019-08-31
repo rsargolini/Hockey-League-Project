@@ -39,7 +39,7 @@ h2  {
 }
 
 /* All Pages - Hide Alert boxes and buttons */
-.hidden, #playerTitle, #courseCatalogImg {
+.hidden, #playerTitle {
     display: none;
 }
 
