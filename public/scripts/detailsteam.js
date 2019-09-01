@@ -98,55 +98,87 @@ function validateTeamDetailsForm(details)
         errorFound = true;
     }
 
-    if ((isNaN($("#maxteammembers").val()) ||
-        ($("#maxteammembers").val() < leagueMinPlayers)) ||
-        ($("#maxteammembers").val() > leagueMaxPlayers))
+
+    if ($("#maxteammembers").val().trim() == "")
     {
-        displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
+        displayErrorMessage[displayErrorMessage.length] = "Missing Max Players";
         errorFound = true;
     }
     else
     {
-        if (Number($("#maxteammembers").val()) < details.Members.length)
+        if (($("#maxteammembers").val() < leagueMinPlayers) ||
+            ($("#maxteammembers").val() > leagueMaxPlayers))
         {
-            displayErrorMessage[displayErrorMessage.length] = "Max Players change not allowed, current Players exceed that number.";
+            displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
             errorFound = true;
+        }
+        else
+        {
+            if (Number($("#maxteammembers").val()) < details.Members.length)
+            {
+                displayErrorMessage[displayErrorMessage.length] = "Max Players change not allowed, current Players exceed that number.";
+                errorFound = true;
+            }
         }
     }
 
-    if ((isNaN($("#minmemberage").val())) || ($("#minmemberage").val() < leagueMinAge))
+    if ($("#minmemberage").val().trim() == "")
     {
-        displayErrorMessage[displayErrorMessage.length] = "Min Age must be 18 or greater.";
+        displayErrorMessage[displayErrorMessage.length] = "Missing Min Age";
         errorFound = true;
     }
     else
     {
-        if (Number($("#minmemberage").val()) > getMinAgeOfMember(details))
+        if (($("#minmemberage").val() < leagueMinAge))
         {
-            displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger then that age.";
+            displayErrorMessage[displayErrorMessage.length] = "Min Age must be 18 or greater.";
             errorFound = true;
+        }
+        else
+        {
+            if (Number($("#minmemberage").val()) > getMinAgeOfMember(details))
+            {
+                displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger then that age.";
+                errorFound = true;
+            }
         }
     }
 
-    if ((isNaN($("#maxmemberage").val())) || ($("#maxmemberage").val() > leagueMaxAge))
+    if ($("#maxmemberage").val().trim() == "")
     {
-        displayErrorMessage[displayErrorMessage.length] = "Max Age must be 70 or less.";
+        displayErrorMessage[displayErrorMessage.length] = "Missing Max Age";
         errorFound = true;
     }
     else
     {
-        if (Number($("#maxmemberage").val()) < getMaxAgeOfMember(details))
+        if (($("#maxmemberage").val() > leagueMaxAge) ||
+            ($("#maxmemberage").val() < leagueMinAge))
         {
-            displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older then that age.";
+            displayErrorMessage[displayErrorMessage.length] = "Max Age must be between 18 and 70.";
             errorFound = true;
+        }
+        else
+        {
+            if (Number($("#maxmemberage").val()) < getMaxAgeOfMember(details))
+            {
+                displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older then that age.";
+                errorFound = true;
+            }
+        }
+
+        if ($("#minmemberage").val().trim() == "")
+        {
+        }
+        else
+        {
+            if ($("#maxmemberage").val() < $("#minmemberage").val())
+            {
+                displayErrorMessage[displayErrorMessage.length] = "Max Age must be greater than or equal to Min Age.";
+                errorFound = true;
+            }
         }
     }
 
-    if ($("#maxmemberage").val() < $("#minmemberage").val())
-    {
-        displayErrorMessage[displayErrorMessage.length] = "Max Age must be greater than Min Age.";
-        errorFound = true;
-    }
     if ($("#managername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Name";
@@ -254,7 +286,9 @@ $(function ()
         function (details)
         {
             let saveData;
-            
+
+            sessionStorage.setItem("teams", JSON.stringify(details));
+
             let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
             let leaguesLength = leagues.length;
@@ -370,7 +404,6 @@ $(function ()
             if (Number($("#maxteammembers").val()) == playersLength)
             {
                 $("#addPlayerBtn").hide();
-                $("#teamFullDiv").append($("<p>", { html: "Team is Full", id: "teamFullMessage" }));
                 $("#teamFullDiv").show();
             }
 
@@ -441,6 +474,17 @@ $(function ()
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
+
+                        if (Number($("#maxteammembers").val()) == playersLength)
+                        {
+                            $("#addPlayerBtn").hide();
+                            $("#teamFullDiv").show();
+                        }
+                        else
+                        {
+                            $("#addPlayerBtn").show();
+                            $("#teamFullDiv").hide();
+                        }
                     })
 
                     .fail(function ()

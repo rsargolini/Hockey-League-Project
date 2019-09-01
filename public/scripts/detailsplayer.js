@@ -197,7 +197,7 @@ $(function ()
             {
                 saveData = savePlayerData();
 
-                // Enable all Team Details Fields except Team ID
+                // Enable all Team Details Fields except League Code and Team Name
                 $("*", "#editPlayerForm").prop('disabled', false);
                 $("#leaguecode").prop('readonly', true);
                 $("#teamname").prop('readonly', true);
