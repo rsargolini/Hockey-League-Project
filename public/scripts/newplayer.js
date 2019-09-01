@@ -122,8 +122,6 @@ $(function ()
 
     let teams = JSON.parse(sessionStorage.getItem("teams"));
 
-    let teamsLength = teams.length;
-
     let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
     let leaguesLength = leagues.length;
@@ -133,24 +131,17 @@ $(function ()
     let teamMinAge;
     let teamMaxAge;
 
-    for (let i = 0; i < teamsLength; i++)
-    {
-        if (teams[i].TeamId == teamSelected)
-        {
-            $("#teamname").val(teams[i].TeamName);
-            leagueCode = teams[i].League;
-            teamGender = teams[i].TeamGender;
-            teamMinAge = teams[i].MinMemberAge;
-            teamMaxAge = teams[i].MaxMemberAge;
+    $("#teamname").val(teams.TeamName);
+    leagueCode = teams.League;
+    teamGender = teams.TeamGender;
+    teamMinAge = teams.MinMemberAge;
+    teamMaxAge = teams.MaxMemberAge;
 
-            for (let i = 0; i < leaguesLength; i++)
-            {
-                if (leagueCode = leagues[i].Code)
-                {
-                    $("#leaguecode").val(leagues[i].Name);
-                    break;
-                }
-            }
+    for (let i = 0; i < leaguesLength; i++)
+    {
+        if (leagueCode = leagues[i].Code)
+        {
+            $("#leaguecode").val(leagues[i].Name);
             break;
         }
     }
