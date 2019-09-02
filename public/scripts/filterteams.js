@@ -121,21 +121,47 @@ $(function ()
 
             sessionStorage.setItem("teams", JSON.stringify(teams));
 
+            let selectedTeam;
+
             performTeamSearch(teams, teamsLength);
 
             // Select Division Field changed
             $("#selectDivision").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
+
+                for (let i = 0; i < teamsLength; i++)
+                {
+                    $("#deleteBtn" + [i]).on("click", function ()
+                    {
+                        $("#modalBody").empty();
+                        $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + teams[i].TeamName);
+                        $("#deleteTeamModal").modal("show");
+                        selectedTeam = [i];
+                    })
+                }
             })
 
             // Select Gender Field changed
             $("#selectGender").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
+                
+                for (let i = 0; i < teamsLength; i++)
+                {
+                    $("#deleteBtn" + [i]).on("click", function ()
+                    {
+                        $("#modalBody").empty();
+                        $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + teams[i].TeamName);
+                        $("#deleteTeamModal").modal("show");
+                        selectedTeam = [i];
+                    })
+                }
             })
-
-            let selectedTeam;
 
             for (let i = 0; i < teamsLength; i++)
             {

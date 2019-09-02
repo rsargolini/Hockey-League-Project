@@ -102,7 +102,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
-    if ($("#position").val().trim() == "")
+    if ($("#position").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
         errorFound = true;
@@ -127,7 +127,7 @@ $(function ()
     let teamMinAge;
     let teamMaxAge;
 
-    $("*", "#addPlayerForm").prop('disabled', true);
+    $("*", "#addPlayerForm").prop("disabled", true);
 
     let page = sessionStorage.getItem("page");
 
@@ -152,6 +152,7 @@ $(function ()
             $("*", "#addPlayerForm").prop('disabled', true);
             $("#teamFullDiv").hide();
             $("#teamname").empty();
+            $("#saveTeamBtn").hide();
 
             let option = $("<option>", { val: "None", text: "Select one" })
             $("#teamname").append(option);
@@ -191,6 +192,7 @@ $(function ()
         {
             $("*", "#addPlayerForm").prop('disabled', true);
             $("#teamFullDiv").hide();
+            $("#saveTeamBtn").hide();
         }
         else
         {
@@ -202,11 +204,13 @@ $(function ()
                     {
                         $("*", "#addPlayerForm").prop('disabled', true);
                         $("#teamFullDiv").show();
+                        $("#saveTeamBtn").hide();
                     }
                     else
                     {
                         $("*", "#addPlayerForm").prop('disabled', false);
                         $("#teamFullDiv").hide();
+                        $("#saveTeamBtn").show();
                         teamGender = details.TeamGender;
                         teamMinAge = details.MinMemberAge;
                         teamMaxAge = details.MaxMemberAge;
@@ -222,6 +226,8 @@ $(function ()
         class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
         role: "button"
     }))
+
+    $("#saveTeamBtn").hide();
 
     $("#buttonsDiv").append($("<a>", {
         href: page + ".html",
@@ -253,7 +259,9 @@ $(function ()
             {
                 $("#savedModalText").html("Player has been successfully added.")
                     .addClass("text-primary");
-                $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
+                $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
+                    .append("<br />")
+                    .append("<b>Team Name: </b>" + $("#teamname  option:selected").text())
                     .append("<br />")
                     .append("<b>Player Name: </b>" + $("#membername").val());
                 $("#savedModal").modal("show");

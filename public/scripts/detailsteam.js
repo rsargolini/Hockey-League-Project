@@ -344,8 +344,8 @@ $(function ()
             {
                 $("#deleteBtn" + [i]).on("click", function ()
                 {
-                    $("#modalBody").empty();
-                    $("#modalBody").append("<b>Player Id: </b>" + details.Members[i].MemberId)
+                    $("#deletemodalBody").empty();
+                    $("#deletemodalBody").append("<b>Team Name: </b>" + details.TeamName)
                         .append("<br />")
                         .append("<b>Player Name: </b>" + details.Members[i].MemberName);
                     $("#deletePlayerModal").modal("show");
@@ -467,8 +467,12 @@ $(function ()
                 })
                     .done(function ()
                     {
-                        $("#savedModalText").html("Team #" + $("#teamid").val() + "<br> " + $("#teamname").val() + " has been successfully updated.")
+                        $("#modalBody").empty();
+                        $("#savedModalText").html("Team has been successfully updated.")
                             .addClass("text-primary");
+                        $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + $("#teamname").val());
                         $("#savedModal").modal("show");
 
                         // Disable all Team Details Fields except Team ID

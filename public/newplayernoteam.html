@@ -46,11 +46,12 @@
 
     <main>
 
-        <!-- Add Player Form Section -->
+        <!-- Add Player No Team Form Section -->
         <section class="container-fluid">
             <h2 class="col-12 text-center font-weight-bold" id="subtitles">Add Player</h2>
             <hr>
             <div class="d-flex justify-content-center">
+                <!-- Team Information Fieldset -->
                 <fieldset id="addPlayerTeamInfoSet">
                     <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team Information
                     </legend>
@@ -67,15 +68,14 @@
                 </fieldset>
             </div>
 
-            <!-- Team Full Message Section -->
-            <section class="container-fluid d-flex justify-content-center">
-                <div id="teamFullDiv" class="col-12 text-center font-weight-bold hidden">
-                    <p id="teamFullMessage">Team is Full</p>
-                </div>
-            </section>
+            <div id="teamFullDiv" class="col-12 text-center mt-2 font-weight-bold hidden">
+                <p id="teamFullMessage">Team is Full</p>
+            </div>
 
+            <!-- Add Player Form Section -->
             <form id="addPlayerForm" name="addPlayerForm" action="#">
                 <div class="d-flex justify-content-center">
+                    <!-- Player Information Fieldset -->
                     <fieldset id="playerInfoSet" class="mt-3">
                         <legend id="playerInfoLegend" class="w-50 border border-dark mx-auto text-center">Player
                             Information
@@ -135,18 +135,20 @@
             </div>
         </section>
 
-        <!-- Alert Message for Invalid Data -->
+        <!-- Alert Message for Invalid Data Section -->
         <section class="container-fluid">
             <div class="form-row d-flex justify-content-center">
                 <div class="alert alert-danger hidden col-md-4 mt-2" role="alert" id="invalidData"></div>
             </div>
         </section>
 
+        <!-- Modal Save Player Section -->
         <div class="modal fade container-fluid" id="savedModal" tabindex="-1" role="dialog"
             aria-labelledby="savedModalText" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div id="modalHeader" class="modal-header">
+                        <!-- Modal Header (Dynamically Generated) -->
                         <h5 class="modal-title" id="savedModalText"></h5>
                     </div>
                     <div id="modalBody" class="modal-body text-center">
@@ -157,7 +159,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
     </main>

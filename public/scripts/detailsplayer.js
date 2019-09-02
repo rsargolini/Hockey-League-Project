@@ -230,8 +230,12 @@ $(function ()
                 })
                     .done(function ()
                     {
-                        $("#savedModalText").html("Player " + $("#membername").val() + " has been successfully updated.")
+                        $("#modalBody").empty();
+                        $("#savedModalText").html("Player has been successfully updated.")
                             .addClass("text-primary");
+                        $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
+                            .append("<br />")
+                            .append("<b>Player Name: </b>" + $("#membername").val());
                         $("#savedModal").modal("show");
 
                         // Disable all Team Details Fields except Team ID

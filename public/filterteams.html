@@ -49,16 +49,18 @@
 
     <main>
 
-        <!-- Select League Division Section -->
+        <!-- Division and/or Gender Filter Section -->
         <section class="container-fluid">
             <h2 class="col-12 text-center font-weight-bold" id="subtitles">Team Filter</h2>
             <hr>
             <div class="form-row d-flex justify-content-center">
                 <div class="form-group">
+                    <!-- Division and/or Gender Filter Fieldset -->
                     <fieldset id="filterSet">
                         <legend id="filterLegend" class="w-50 border border-dark mx-auto text-center">Filter by Division
                             and/or Gender</legend>
                         <label id="selectDivLabel" for="selectDivision" class="allLabels mr-3">Select Division:</label>
+                        <!-- Hockey Divisions (dynamically generated) -->
                         <select id="selectDivision" autofocus>
                             <option value="All" selected>All Divisions</option>
                         </select>
@@ -82,17 +84,13 @@
             <hr>
         </section>
 
-        <!-- Display No Teams Message Section -->
-        <section id="noTeamsMessage" class="container-fluid d-flex justify-content-center">
-        </section>
-
         <!-- Display Teams Table Section -->
         <section class="container-fluid d-flex justify-content-center">
             <table id="teams" class="tables table-striped table-bordered col-md-6">
             </table>
         </section>
 
-
+        <!-- Modal Delete Team Section -->
         <div class="modal fade container-fluid" id="deleteTeamModal" tabindex="-1" role="dialog"
             aria-labelledby="deleteTeamModalText" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -116,6 +114,7 @@
             </div>
         </div>
 
+        <!-- Modal Save Section -->
         <div class="modal fade container-fluid" id="savedModal" tabindex="-1" role="dialog"
             aria-labelledby="savedModalText" aria-hidden="true">
             <div class="modal-dialog" role="document">

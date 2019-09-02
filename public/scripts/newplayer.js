@@ -177,7 +177,9 @@ $(function ()
             {
                 $("#savedModalText").html("Player has been successfully added.")
                     .addClass("text-primary");
-                $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
+                $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
+                    .append("<br />")
+                    .append("<b>Team Name: </b>" + $("#teamname").val())
                     .append("<br />")
                     .append("<b>Player Name: </b>" + $("#membername").val());
                 $("#savedModal").modal("show");

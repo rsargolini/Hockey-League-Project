@@ -100,6 +100,10 @@ hr {
     text-align: center;   
  }
 
+ .modal-header {
+     justify-content: center;
+ }
+
 /* Media Queries */ 
 /* All Pages - Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 850px) {
