@@ -96,6 +96,8 @@ function insertRow(teams, i)
 //Connect Events to HTML Elements
 $(function ()
 {
+    sessionStorage.setItem("page", "filterteams");
+
     let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
     let leaguesLength = leagues.length;

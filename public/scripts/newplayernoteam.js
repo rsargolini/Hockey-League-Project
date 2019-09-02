@@ -123,21 +123,97 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
 //Connect Events to HTML Elements
 $(function ()
 {
-    let urlParams = new URLSearchParams(location.search);
-    let teamSelected = urlParams.get("id");
-
-    let teams = JSON.parse(sessionStorage.getItem("teams"));
-
     let teamGender;
     let teamMinAge;
     let teamMaxAge;
 
-    teamGender = teams.TeamGender;
-    teamMinAge = teams.MinMemberAge;
-    teamMaxAge = teams.MaxMemberAge;
+    $("*", "#addPlayerForm").prop('disabled', true);
 
-    $("#leaguecode").val(teams.League);
-    $("#teamname").val(teams.TeamName);
+    let page = sessionStorage.getItem("page");
+
+    let leagues = JSON.parse(sessionStorage.getItem("leagues"));
+
+    let leaguesLength = leagues.length;
+
+    for (let i = 0; i < leaguesLength; i++)
+    {
+        let option = $("<option>",
+            {
+                val: leagues[i].Code,
+                text: leagues[i].Name
+            })
+        $("#leaguecode").append(option);
+    }
+
+    $("#leaguecode").on("change", function ()
+    {
+        if ($("#leaguecode").val() == "None")
+        {
+            $("*", "#addPlayerForm").prop('disabled', true);
+            $("#teamFullDiv").hide();
+            $("#teamname").empty();
+
+            let option = $("<option>", { val: "None", text: "Select one" })
+            $("#teamname").append(option);
+        }
+        else
+        {
+            $("#teamname").empty();
+
+            let option = $("<option>", { val: "None", text: "Select one" })
+            $("#teamname").append(option);
+
+            // Get all data from API All Teams
+            $.getJSON("/api/teams",
+                function (teams)
+                {
+                    let teamsLength = teams.length;
+
+                    for (let i = 0; i < teamsLength; i++)
+                    {
+                        if (teams[i].League == $("#leaguecode").val())
+                        {
+                            let option = $("<option>",
+                                {
+                                    val: teams[i].TeamId,
+                                    text: teams[i].TeamName
+                                })
+                            $("#teamname").append(option);
+                        }
+                    }
+                })
+        }
+    })
+
+    $("#teamname").on("change", function ()
+    {
+        if ($("#teamname").val() == "None")
+        {
+            $("*", "#addPlayerForm").prop('disabled', true);
+            $("#teamFullDiv").hide();
+        }
+        else
+        {
+            // Get all data from Teams by Team Id JSON file
+            $.getJSON("/api/teams/" + $("#teamname").val(),
+                function (details)
+                {
+                    if (details.Members.length == details.MaxTeamMembers)
+                    {
+                        $("*", "#addPlayerForm").prop('disabled', true);
+                        $("#teamFullDiv").show();
+                    }
+                    else
+                    {
+                        $("*", "#addPlayerForm").prop('disabled', false);
+                        $("#teamFullDiv").hide();
+                        teamGender = details.TeamGender;
+                        teamMinAge = details.MinMemberAge;
+                        teamMaxAge = details.MaxMemberAge;
+                    }
+                })
+        }
+    })
 
     $("#buttonsDiv").append($("<a>", {
         href: "#",
@@ -148,7 +224,7 @@ $(function ()
     }))
 
     $("#buttonsDiv").append($("<a>", {
-        href: "detailsteam.html?id=" + teamSelected,
+        href: page + ".html",
         id: "cancelBtn",
         text: "Cancel",
         class: "col-md-2 btn btn-danger btn-sm mb-1",
@@ -169,7 +245,7 @@ $(function ()
         hideError($("#invalidData"));
 
         // Post Add Player Form to API Teams
-        $.post("/api/teams/" + teamSelected + "/members/", $("#addPlayerForm").serialize(),
+        $.post("/api/teams/" + $("#teamname").val() + "/members/", $("#addPlayerForm").serialize(),
             function (data)
             { })
 
@@ -185,7 +261,7 @@ $(function ()
                 // Ok Button click
                 $("#okBtn").on("click", function ()
                 {
-                    location.href = "detailsteam.html?id=" + teamSelected;
+                    location.href = "detailsteam.html?id=" + $("#teamname").val();
                 })
             })
 

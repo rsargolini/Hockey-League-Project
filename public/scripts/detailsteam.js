@@ -138,7 +138,7 @@ function validateTeamDetailsForm(details)
         {
             if (Number($("#minmemberage").val()) > getMinAgeOfMember(details))
             {
-                displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger then that age.";
+                displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger than that age.";
                 errorFound = true;
             }
         }
@@ -161,7 +161,7 @@ function validateTeamDetailsForm(details)
         {
             if (Number($("#maxmemberage").val()) < getMaxAgeOfMember(details))
             {
-                displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older then that age.";
+                displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older than that age.";
                 errorFound = true;
             }
         }
@@ -405,6 +405,11 @@ $(function ()
             {
                 $("#addPlayerBtn").hide();
                 $("#teamFullDiv").show();
+            }
+            else
+            {
+                $("#addPlayerBtn").show();
+                $("#teamFullDiv").hide();
             }
 
             $("#buttonsDiv").append($("<a>", {

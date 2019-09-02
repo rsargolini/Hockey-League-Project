@@ -1,21 +1,21 @@
 [
 	{
-		"Name": "Pro-Am Division",
-		"Code": "ProAm",
+		"Name": "Pro-Am",
+		"Code": "Pro-Am",
 		"Description": "Highest level of hockey with all players having professional or semi-professional experience."
 	},
 	{
-		"Name": "Elite Division",
+		"Name": "Elite",
 		"Code": "Elite",
 		"Description": "Highly competitive level with all players having at least Division I College experience."
 	},
 	{
-		"Name": "Minor Division",
+		"Name": "Minor",
 		"Code": "Minor",
 		"Description": "Moderately competitive level with all players have at Divison II College or High School experience."
     },
     {
-		"Name": "Recreational Division",
+		"Name": "Recreational",
 		"Code": "Recreational",
 		"Description": "Open to all players with little or some experience who are looking to have fun playing hockey."
 	}
