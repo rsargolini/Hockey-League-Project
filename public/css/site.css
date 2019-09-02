@@ -5,10 +5,12 @@
     padding-bottom: .5rem;
 }
 
+/* All Pages - Website Site Header */
 #siteHeader {
     font-size: 50px; 
 }
 
+/* All Pages - Website Page Header */
 #pageHeader {
     font-size: 40px; 
 }
@@ -26,6 +28,7 @@ h2  {
     font-size: 15px;
 }
 
+/* All Pages - Division Titles */
 #Pro-Am, #Elite, #Minor {
     border-right: black solid;
     border-width: 1px;
@@ -36,19 +39,15 @@ h2  {
     border-radius: 25px;
 }
 
-/* Course Details Page */
+/* Team Details Page */
 .titleColumn {
     font-weight: bold;
 }
 
+/* Team Details Page - Full Message */
 #teamFullMessage {
     font-size: 20px;
     color: red;
-}
-
-/* New Team Page - Center Success Modal Header */
-#modalHeader {
-    margin: 0 auto;
 }
 
 /* All Pages - Hide Alert boxes and buttons */
@@ -66,6 +65,7 @@ h2  {
     font-weight: bold;
 }
 
+/* All Pages - Fieldset Legends */
 #filterLegend, #teamInfoLegend, #managerInfoLegend, #teamLimitsLegend,
 #playerInfoLegend {
     font-size: 15px;
@@ -73,18 +73,28 @@ h2  {
     background-color: antiquewhite;
 }
 
-#teamInfoSet, #managerInfoSet, #teamLimitsSet, #playerInfoSet {
+/* All Pages - Fieldset Size */
+#managerInfoSet, #teamLimitsSet, #playerInfoSet {
     width: 1200px;
     border: thin solid;
     padding: 1px;
 }
 
+/* Add Player Page - Fieldset Size */
 #addPlayerTeamInfoSet {
     width: 700px;
     border: thin solid;
     padding: 1px;
 }
 
+/* New Team Page - Fieldsets Size */
+#teamInfoSet, #managerInfoSet {
+    width: 1050px;
+    border: thin solid;
+    padding: 1px;
+}
+
+/* Filter Teams Page - Fieldset */
 #filterSet {
     border: thin solid;
     padding: 1em;
@@ -100,12 +110,15 @@ hr {
     text-align: center;   
  }
 
+ /* All Pages - Modal Headers */
  .modal-header {
      justify-content: center;
+     font-weight: bold;
+     font-size: 20px;
  }
 
 /* Media Queries */ 
-/* All Pages - Extra small devices (phones, 600px and down) */
+/* All Pages - Extra small devices (phones, 850px and down) */
 @media only screen and (max-width: 850px) {
     #siteHeader {font-size: 22px; padding-top: .1rem;}
     #pageHeader {font-size: 20px; padding-top: .1rem;}
@@ -118,17 +131,19 @@ hr {
     #selectDivLabel {margin-left: 55px;}
     #filterLegend {font-size: 14px;}
     #divisionsLine {display: none;}
+    .buttonText {display: none;}
 }
 
-/* All Pages - Small devices (portrait tablets and large phones, 600px to 768px) */
+/* All Pages - Small devices (portrait tablets and large phones, 850px to 1050px) */
 @media only screen and (min-width: 850px) and (max-width: 1050px) {
     #siteHeader {font-size: 35px; padding-top: .1rem;}
     #pageHeader {font-size: 25px; padding-top: .1rem;}
     #copyright {font-size: 12px;}
     #imagescredit {font-size: 12px;}
+    .buttonText {display: none;}
 }
 
-/* All Pages - Large devices (laptops/desktops, 993px and up) */
+/* All Pages - Large devices (laptops/desktops, 1050px to 1255px) */
 @media only screen and (min-width: 1050px) and (max-width: 1255px) {
     #siteHeader {font-size: 45px; padding-top: .5rem;}
     #pageHeader {font-size: 35px; padding-top: .5rem;}

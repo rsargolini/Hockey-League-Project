@@ -56,7 +56,7 @@ function validatePlayerDetailsForm(details)
         }
         else
         {
-            displayErrorMessage[displayErrorMessage.length] = "Inavlid Email Address (nnnn@nnn.nnn)";
+            displayErrorMessage[displayErrorMessage.length] = "Invalid Email Address (nnnn@nnn.nnn)";
             errorFound = true;
         }
     }

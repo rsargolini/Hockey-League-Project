@@ -127,7 +127,7 @@ function validateTeamDetailsForm(objs)
         }
         else
         {
-            displayErrorMessage[displayErrorMessage.length] = "Inavlid Manager Email Address (nnnn@nnn.nnn)";
+            displayErrorMessage[displayErrorMessage.length] = "Invalid Manager Email Address (nnnn@nnn.nnn)";
             errorFound = true;
         }
     }

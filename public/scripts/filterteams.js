@@ -79,7 +79,7 @@ function insertRow(teams, i)
     }))
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
-        .append($("<span>", { class: "buttontext", text: "Details" }))
+        .append($("<span>", { class: "buttonText", text: "Details" }))
 
     $("#teams tbody tr:last").append("<td class='teamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
@@ -90,7 +90,7 @@ function insertRow(teams, i)
     }))
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-        .append($("<span>", { class: "buttontext", text: "Delete" }))
+        .append($("<span>", { class: "buttonText", text: "Delete" }))
 }
 
 //Connect Events to HTML Elements
@@ -134,27 +134,34 @@ $(function ()
                 {
                     $("#deleteBtn" + [i]).on("click", function ()
                     {
-                        $("#modalBody").empty();
-                        $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
+                        $("#deleteModalBody").empty();
+                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
+                            .addClass("text-danger");
+                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
                             .append("<br />")
-                            .append("<b>Team Name: </b>" + teams[i].TeamName);
+                            .append("<b>Team Name: </b>" + teams[i].TeamName)
                         $("#deleteTeamModal").modal("show");
                         selectedTeam = [i];
                     })
                 }
             })
 
+            $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
+                .append("<br />")
+
             // Select Gender Field changed
             $("#selectGender").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
-                
+
                 for (let i = 0; i < teamsLength; i++)
                 {
                     $("#deleteBtn" + [i]).on("click", function ()
                     {
-                        $("#modalBody").empty();
-                        $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
+                        $("#deleteModalBody").empty();
+                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
+                            .addClass("text-danger");
+                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
                             .append("<br />")
                             .append("<b>Team Name: </b>" + teams[i].TeamName);
                         $("#deleteTeamModal").modal("show");
@@ -167,8 +174,10 @@ $(function ()
             {
                 $("#deleteBtn" + [i]).on("click", function ()
                 {
-                    $("#modalBody").empty();
-                    $("#modalBody").append("<b>Team Id: </b>" + teams[i].TeamId)
+                    $("#deleteModalBody").empty();
+                    $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
+                        .addClass("text-danger");
+                    $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
                         .append("<br />")
                         .append("<b>Team Name: </b>" + teams[i].TeamName);
                     $("#deleteTeamModal").modal("show");
