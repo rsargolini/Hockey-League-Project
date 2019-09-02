@@ -1,9 +1,22 @@
+/* All Pages - Website Title Container */
+#titleContainer, #pageContainer {
+    background-color: black;
+    padding-top: 4rem;
+    padding-bottom: .5rem;
+}
+
+#siteHeader {
+    font-size: 50px; 
+}
+
+#pageHeader {
+    font-size: 40px; 
+}
+
 /* All Pages - H1 */
 h1  {
     color: white  ;
     font-family: 'Holtwood One SC', serif;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
 }
 
 /* All Pages - H2 */
@@ -13,7 +26,7 @@ h2  {
     font-size: 15px;
 }
 
-#ProAm, #Elite, #Minor {
+#Pro-Am, #Elite, #Minor {
     border-right: black solid;
     border-width: 1px;
 
@@ -41,11 +54,6 @@ h2  {
 /* All Pages - Hide Alert boxes and buttons */
 .hidden, #playerTitle {
     display: none;
-}
-
-/* All Pages - Website Title Container */
-#titleContainer, #pageContainer {
-    background-color: black;
 }
 
 /* All Pages - Subtitles */
@@ -92,36 +100,36 @@ hr {
     text-align: center;   
  }
 
+ .modal-header {
+     justify-content: center;
+ }
+
 /* Media Queries */ 
 /* All Pages - Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    #siteHeader, #pageHeader {font-size: 20px; margin-top: 7%;}
+@media only screen and (max-width: 850px) {
+    #siteHeader {font-size: 22px; padding-top: .1rem;}
+    #pageHeader {font-size: 20px; padding-top: .1rem;}
     #copyright {font-size: 12px;}
     #imagescredit {font-size: 12px;}
     .tables {font-size: 12px;}
-    #subtitles {font-size: 30px;}
-    #subtitles2 {font-size: 30px;}
-    #ProAm, #Elite, #Minor, #Recreational { border-right: none; border-top: solid; border-width: 1px;}
+    #subtitles {font-size: 20px;}
+    #subtitles2 {font-size: 20px;}
+    #Pro-Am, #Elite, #Minor, #Recreational { border-right: none; border-top: solid; border-width: 1px;}
     #selectDivLabel {margin-left: 55px;}
-    #filterLegend {font-size: 12px;}
+    #filterLegend {font-size: 14px;}
+    #divisionsLine {display: none;}
 }
 
-/* All Pages - Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    #siteHeader {font-size: 40px; margin-top: 5%;}
-    #pageHeader {font-size: 35px; margin-top: 5%;}
-}
-
-/* All Pages - Small devices (portrait tablets and large phones, 768px and down) */
-/* Resize font size for copyright and credits */
-@media only screen and (max-width: 768px) {
+/* All Pages - Small devices (portrait tablets and large phones, 600px to 768px) */
+@media only screen and (min-width: 850px) and (max-width: 1050px) {
+    #siteHeader {font-size: 35px; padding-top: .1rem;}
+    #pageHeader {font-size: 25px; padding-top: .1rem;}
     #copyright {font-size: 12px;}
     #imagescredit {font-size: 12px;}
 }
 
 /* All Pages - Large devices (laptops/desktops, 993px and up) */
-@media only screen and (min-width: 993px) {
-    #siteHeader {font-size: 55px; margin-top: 3%;}
-    #pageHeader {font-size: 40px; margin-top: 4%;}
-    #pageContainer {height: 100px; margin-top: -1%;}
+@media only screen and (min-width: 1050px) and (max-width: 1255px) {
+    #siteHeader {font-size: 45px; padding-top: .5rem;}
+    #pageHeader {font-size: 35px; padding-top: .5rem;}
 } 

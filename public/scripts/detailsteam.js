@@ -138,7 +138,7 @@ function validateTeamDetailsForm(details)
         {
             if (Number($("#minmemberage").val()) > getMinAgeOfMember(details))
             {
-                displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger then that age.";
+                displayErrorMessage[displayErrorMessage.length] = "Min Age change not allowed, current Player(s) younger than that age.";
                 errorFound = true;
             }
         }
@@ -161,7 +161,7 @@ function validateTeamDetailsForm(details)
         {
             if (Number($("#maxmemberage").val()) < getMaxAgeOfMember(details))
             {
-                displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older then that age.";
+                displayErrorMessage[displayErrorMessage.length] = "Max Age change not allowed, current Player(s) older than that age.";
                 errorFound = true;
             }
         }
@@ -344,8 +344,8 @@ $(function ()
             {
                 $("#deleteBtn" + [i]).on("click", function ()
                 {
-                    $("#modalBody").empty();
-                    $("#modalBody").append("<b>Player Id: </b>" + details.Members[i].MemberId)
+                    $("#deletemodalBody").empty();
+                    $("#deletemodalBody").append("<b>Team Name: </b>" + details.TeamName)
                         .append("<br />")
                         .append("<b>Player Name: </b>" + details.Members[i].MemberName);
                     $("#deletePlayerModal").modal("show");
@@ -406,6 +406,11 @@ $(function ()
                 $("#addPlayerBtn").hide();
                 $("#teamFullDiv").show();
             }
+            else
+            {
+                $("#addPlayerBtn").show();
+                $("#teamFullDiv").hide();
+            }
 
             $("#buttonsDiv").append($("<a>", {
                 href: "filterteams.html",
@@ -462,8 +467,12 @@ $(function ()
                 })
                     .done(function ()
                     {
-                        $("#savedModalText").html("Team #" + $("#teamid").val() + "<br> " + $("#teamname").val() + " has been successfully updated.")
+                        $("#modalBody").empty();
+                        $("#savedModalText").html("Team has been successfully updated.")
                             .addClass("text-primary");
+                        $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + $("#teamname").val());
                         $("#savedModal").modal("show");
 
                         // Disable all Team Details Fields except Team ID

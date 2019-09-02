@@ -10,6 +10,8 @@ $(function ()
             let leaguesLength = leagues.length;
       
             sessionStorage.setItem("leagues", JSON.stringify(leagues));
+
+            sessionStorage.setItem("page", "index");
                    
             for (let i = 0; i < leaguesLength; i++)
             {

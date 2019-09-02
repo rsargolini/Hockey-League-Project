@@ -16,7 +16,7 @@
     <!-- My CSS -->
     <link href="https://fonts.googleapis.com/css?family=Holtwood+One+SC&display=swap" rel="stylesheet">
 
-    <link rel="icon" href="images/professor.png" />
+    <link rel="icon" href="images/goalie.png" />
 
     <link rel="stylesheet" type="text/css" href="css/site.css" />
 
@@ -52,6 +52,7 @@
             <hr>
             <form id="teamDetailsForm" name="teamDetailsForm" action="#">
                 <div class="d-flex justify-content-center">
+                    <!-- Team Information Fieldset -->
                     <fieldset id="teamInfoSet">
                         <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team Information
                         </legend>
@@ -85,6 +86,7 @@
                     </fieldset>
                 </div>
                 <div class="d-flex justify-content-center">
+                    <!-- Manager Information Fieldset -->
                     <fieldset id="managerInfoSet" class="mt-3">
                         <legend id="managerInfoLegend" class="w-50 border border-dark mx-auto text-center">Manager
                             Information
@@ -113,11 +115,12 @@
             </div>
         </section>
 
-        <!-- Alert Message Section -->
+        <!-- Alert Message for Invalid Data Section -->
         <section class="form-row d-flex justify-content-center">
             <div class="alert alert-danger hidden col-md-4 ml-2 mr-2 mt-2" role="alert" id="invalidData"></div>
         </section>
 
+        <!-- Players Table Title and Add Button Section -->
         <section class="container-fluid">
             <hr>
             <div id="playersTitle">
@@ -139,17 +142,16 @@
             </table>
         </section>
 
+        <!-- Modal Delete Player Section -->
         <div class="modal fade container-fluid" id="deletePlayerModal" tabindex="-1" role="dialog"
             aria-labelledby="deletePlayerModalText" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deletePlayerModalText">Are you sure you want to delete this Player?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="modal-header text-danger">
+                        <h5 class="modal-title" id="deletePlayerModalText">Are you sure you want to delete this Player?
+                        </h5>
                     </div>
-                    <div id="modalBody" class="modal-body text-center">
+                    <div id="deletemodalBody" class="modal-body text-center">
                     </div>
                     <!-- Modal Delete Player Buttons -->
                     <div class="modal-footer justify-content-center">
@@ -162,16 +164,20 @@
             </div>
         </div>
 
+        <!-- Modal Save Team Details Section -->
         <div class="modal fade container-fluid" id="savedModal" tabindex="-1" role="dialog"
             aria-labelledby="savedModalText" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <div id="savedModalText" class="modal-body text-center">
-                        </div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div id="modalHeader" class="modal-header">
+                        <!-- Modal Header (Dynamically Generated) -->
+                        <h5 class="modal-title" id="savedModalText"></h5>
+                    </div>
+                    <div id="modalBody" class="modal-body text-center">
+                    </div>
+                    <!-- Modal OK Button -->
+                    <div class="modal-footer justify-content-center">
+                        <button id="okBtn" type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
                     </div>
                 </div>
             </div>

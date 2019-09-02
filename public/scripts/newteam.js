@@ -141,6 +141,8 @@ function validateTeamDetailsForm(objs)
 //Connect Events to HTML Elements
 $(function ()
 {
+    sessionStorage.setItem("page", "newteam");
+
     let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
     let leaguesLength = leagues.length;
@@ -198,7 +200,7 @@ $(function ()
             {
                 $("#savedModalText").html("Team has been successfully added.")
                     .addClass("text-primary");
-                $("#modalBody").append("<b>Team Id: </b>" + postData.TeamId)
+                $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
                     .append("<br />")
                     .append("<b>Team Name: </b>" + $("#teamname").val());
                 $("#savedModal").modal("show");

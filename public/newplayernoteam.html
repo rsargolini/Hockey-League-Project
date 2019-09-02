@@ -46,7 +46,7 @@
 
     <main>
 
-        <!-- Add Player Form Section -->
+        <!-- Add Player No Team Form Section -->
         <section class="container-fluid">
             <h2 class="col-12 text-center font-weight-bold" id="subtitles">Add Player</h2>
             <hr>
@@ -57,14 +57,21 @@
                     </legend>
                     <div class="form-row justify-content-center">
                         <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
-                        <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="leaguecode"
-                            id="leaguecode" readonly>
+                        <select id="leaguecode" name="leaguecode" class="form-control col-md-3 mb-2 ml-2 mr-2">
+                            <option value="None" selected>Select one</option>
+                        </select>
                         <label for="teamname" class="allLabels ml-3 mr-3">Team:</label>
-                        <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="teamname" id="teamname"
-                            readonly>
+                        <select id="teamname" name="teamname" class="form-control col-md-3 mb-2 ml-2 mr-2">
+                            <option value="None" selected>Select one</option>
+                        </select>
                     </div>
                 </fieldset>
             </div>
+
+            <div id="teamFullDiv" class="col-12 text-center mt-2 font-weight-bold hidden">
+                <p id="teamFullMessage">Team is Full</p>
+            </div>
+
             <!-- Add Player Form Section -->
             <form id="addPlayerForm" name="addPlayerForm" action="#">
                 <div class="d-flex justify-content-center">
@@ -176,7 +183,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <script src="scripts/newplayer.js"></script>
+    <script src="scripts/newplayernoteam.js"></script>
     <script src="scripts/errors.js"></script>
 
 </body>

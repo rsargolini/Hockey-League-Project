@@ -61,6 +61,18 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    if (details.TeamGender == "Any")
+    {
+    }
+    else
+    {
+        if ($("input[name='gender']:checked").val() != details.TeamGender)
+        {
+            displayErrorMessage[displayErrorMessage.length] = "Player's Gender not allowed on this Team.";
+            errorFound = true;
+        }
+    }
+
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -122,21 +134,9 @@ $(function ()
     $.getJSON("/api/teams/" + teamSelected,
         function (details)
         {
-            let leagues = JSON.parse(sessionStorage.getItem("leagues"));
-
-            let leaguesLength = leagues.length;
-
-            for (let i = 0; i < leaguesLength; i++)
-            {
-                if (details.League = leagues[i].Code)
-                {
-                    $("#leaguecode").val(leagues[i].Name);
-                    break;
-                }
-            }
-
+            $("#leaguecode").val(details.League);
             $("#teamname").val(details.TeamName);
-            
+
             let playersLength = details.Members.length;
 
             for (let i = 0; i < playersLength; i++)
@@ -221,7 +221,7 @@ $(function ()
 
                 // Call Hide Error Function (errors.js)
                 hideError($("#invalidData"));
-                
+
                 // Put (Update) Form to API Teams
                 $.ajax({
                     url: "/api/teams/" + teamSelected + "/members",
@@ -230,8 +230,12 @@ $(function ()
                 })
                     .done(function ()
                     {
-                        $("#savedModalText").html("Player " + $("#membername").val() + " has been successfully updated.")
+                        $("#modalBody").empty();
+                        $("#savedModalText").html("Player has been successfully updated.")
                             .addClass("text-primary");
+                        $("#modalBody").append("<b>Team Name: </b>" + $("#teamname").val())
+                            .append("<br />")
+                            .append("<b>Player Name: </b>" + $("#membername").val());
                         $("#savedModal").modal("show");
 
                         // Disable all Team Details Fields except Team ID
