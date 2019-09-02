@@ -54,7 +54,7 @@ function insertPlayerRow(details, i)
     }))
 
     $("#players tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
-        .append($("<span>", { class: "buttontext", text: "Details" }))
+        .append($("<span>", { class: "buttonText", text: "Details" }))
 
     $("#players tbody tr:last").append("<td class='playersBtn'>");
     $("#players tbody tr:last td:last").append($("<a>", {
@@ -65,7 +65,7 @@ function insertPlayerRow(details, i)
     }))
 
     $("#players tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-        .append($("<span>", { class: "buttontext", text: "Delete" }))
+        .append($("<span>", { class: "buttonText", text: "Delete" }))
 }
 
 /*
@@ -214,7 +214,7 @@ function validateTeamDetailsForm(details)
         }
         else
         {
-            displayErrorMessage[displayErrorMessage.length] = "Inavlid Manager Email Address (nnnn@nnn.nnn)";
+            displayErrorMessage[displayErrorMessage.length] = "Invalid Manager Email Address (nnnn@nnn.nnn)";
             errorFound = true;
         }
     }
@@ -344,8 +344,11 @@ $(function ()
             {
                 $("#deleteBtn" + [i]).on("click", function ()
                 {
-                    $("#deletemodalBody").empty();
-                    $("#deletemodalBody").append("<b>Team Name: </b>" + details.TeamName)
+               
+                    $("#deleteModalBody").empty();
+                    $("#deletePlayerModalText").html("Are you sure you want to delete this Player?")
+                    .addClass("text-danger");
+                    $("#deleteModalBody").append("<b>Team Name: </b>" + details.TeamName)
                         .append("<br />")
                         .append("<b>Player Name: </b>" + details.Members[i].MemberName);
                     $("#deletePlayerModal").modal("show");

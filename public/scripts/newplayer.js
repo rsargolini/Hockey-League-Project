@@ -38,7 +38,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
         else
         {
-            displayErrorMessage[displayErrorMessage.length] = "Inavlid Email Address (nnnn@nnn.nnn)";
+            displayErrorMessage[displayErrorMessage.length] = "Invalid Email Address (nnnn@nnn.nnn)";
             errorFound = true;
         }
     }
@@ -70,7 +70,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
     }
     else
     {
-        if ((isNaN($("#age").val())) || ($("#age").val() < teamMinAge))
+        if (($("#age").val() < teamMinAge))
         {
             displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team. Min Age is " + teamMinAge + ".";
             errorFound = true;
