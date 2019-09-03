@@ -117,6 +117,19 @@ hr {
      font-size: 20px;
  }
 
+#requireNote {
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+}
+
+#requireNoteEdit {
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+
 /* Media Queries */ 
 /* All Pages - Extra small devices (phones, 850px and down) */
 @media only screen and (max-width: 850px) {

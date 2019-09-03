@@ -71,6 +71,34 @@ function insertPlayerRow(details, i)
 /*
 * This function validates all fields on the Team Details Form.
 */
+function addRequiredLabels()
+{
+    $("#nameLabel").text("Name*");
+    $("#maxPlayersLabel").text("Max Players*");
+    $("#minAgeLabel").text("Min Age*");
+    $("#maxAgeLabel").text("Max Age*");
+    $("#mgrNameLabel").text("Name*");
+    $("#mgrPhoneLabel").text("Phone*");
+    $("#mgrEmailLabel").text("Email*");
+}
+
+/*
+* This function validates all fields on the Team Details Form.
+*/
+function removeRequiredLabels()
+{
+    $("#nameLabel").text("Name");
+    $("#maxPlayersLabel").text("Max Players");
+    $("#minAgeLabel").text("Min Age");
+    $("#maxAgeLabel").text("Max Age");
+    $("#mgrNameLabel").text("Name");
+    $("#mgrPhoneLabel").text("Phone");
+    $("#mgrEmailLabel").text("Email");
+}
+
+/*
+* This function validates all fields on the Team Details Form.
+*/
 function validateTeamDetailsForm(details)
 {
     $("#invalidData").empty();
@@ -344,10 +372,10 @@ $(function ()
             {
                 $("#deleteBtn" + [i]).on("click", function ()
                 {
-               
+
                     $("#deleteModalBody").empty();
                     $("#deletePlayerModalText").html("Are you sure you want to delete this Player?")
-                    .addClass("text-danger");
+                        .addClass("text-danger");
                     $("#deleteModalBody").append("<b>Team Name: </b>" + details.TeamName)
                         .append("<br />")
                         .append("<b>Player Name: </b>" + details.Members[i].MemberName);
@@ -441,6 +469,9 @@ $(function ()
                 // Enable all Team Details Fields except Team ID
                 $("*", "#teamDetailsForm").prop('disabled', false);
                 $("#teamid").prop('readonly', true);
+                $("#requireNoteEdit").show();
+
+                addRequiredLabels();
 
                 $("#editTeamBtn").hide();
                 $("#saveTeamBtn").show();
@@ -481,8 +512,11 @@ $(function ()
                         // Disable all Team Details Fields except Team ID
                         $("*", "#teamDetailsForm").prop('disabled', true);
 
+                        removeRequiredLabels();
+
                         $("#editTeamBtn").show();
                         $("#saveTeamBtn").hide();
+                        $("#requireNoteEdit").hide();
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
@@ -516,8 +550,11 @@ $(function ()
                 // Call Hide Error Function (errors.js)
                 hideError($("#invalidData"));
 
+                removeRequiredLabels();
+
                 $("#editTeamBtn").show();
                 $("#saveTeamBtn").hide();
+                $("#requireNoteEdit").hide();
 
                 $("#backBtn").show();
                 $("#cancelBtn").hide();

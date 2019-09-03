@@ -19,6 +19,30 @@ function savePlayerData()
 }
 
 /*
+* This function validates all fields on the Team Details Form.
+*/
+function addRequiredLabels()
+{
+    $("#nameLabel").text("Name*");
+    $("#contactNameLabel").text("Contact Name*");
+    $("#emailLabel").text("Email*");
+    $("#ageLabel").text("Age*");
+    $("#phoneLabel").text("Phone Number*");
+}
+
+/*
+* This function validates all fields on the Team Details Form.
+*/
+function removeRequiredLabels()
+{
+    $("#nameLabel").text("Name");
+    $("#contactNameLabel").text("Contact Name");
+    $("#emailLabel").text("Email");
+    $("#ageLabel").text("Age");
+    $("#phoneLabel").text("Phone Number");
+}
+
+/*
 * This function validates all fields on the Player Details Form.
 */
 function validatePlayerDetailsForm(details)
@@ -201,6 +225,9 @@ $(function ()
                 $("*", "#editPlayerForm").prop('disabled', false);
                 $("#leaguecode").prop('readonly', true);
                 $("#teamname").prop('readonly', true);
+                $("#requireNoteEdit").show();
+
+                addRequiredLabels();
 
                 $("#editPlayerBtn").hide();
                 $("#savePlayerBtn").show();
@@ -240,9 +267,12 @@ $(function ()
 
                         // Disable all Team Details Fields except Team ID
                         $("*", "#editPlayerForm").prop('disabled', true);
+                        
+                        removeRequiredLabels();
 
                         $("#editPlayerBtn").show();
                         $("#savePlayerBtn").hide();
+                        $("#requireNoteEdit").hide();
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
@@ -262,8 +292,14 @@ $(function ()
                 // Disable all Team Details Fields except Team ID
                 $("*", "#editPlayerForm").prop('disabled', true);
 
+                // Call Hide Error Function (errors.js)
+                hideError($("#invalidData"));
+
+                removeRequiredLabels();
+
                 $("#editPlayerBtn").show();
                 $("#savePlayerBtn").hide();
+                $("#requireNoteEdit").hide();
 
                 $("#backBtn").show();
                 $("#cancelBtn").hide();

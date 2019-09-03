@@ -50,17 +50,18 @@
         <section class="container-fluid">
             <h2 class="col-12 text-center font-weight-bold" id="subtitles">Add Player</h2>
             <hr>
+            <p id="requireNote">* required fields</p>
             <div class="d-flex justify-content-center">
                 <!-- Team Information Fieldset -->
                 <fieldset id="addPlayerTeamInfoSet">
                     <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team Information
                     </legend>
                     <div class="form-row justify-content-center">
-                        <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
+                        <label for="leaguecode" class="allLabels ml-3 mr-3">Division*</label>
                         <select id="leaguecode" name="leaguecode" class="form-control col-md-3 mb-2 ml-2 mr-2">
                             <option value="None" selected>Select one</option>
                         </select>
-                        <label for="teamname" class="allLabels ml-3 mr-3">Team:</label>
+                        <label for="teamname" class="allLabels ml-3 mr-3">Team*</label>
                         <select id="teamname" name="teamname" class="form-control col-md-3 mb-2 ml-2 mr-2">
                             <option value="None" selected>Select one</option>
                         </select>
@@ -81,15 +82,15 @@
                             Information
                         </legend>
                         <div class="form-row justify-content-center">
-                            <label for="membername" class="allLabels ml-3 mr-2">Name:</label>
+                            <label for="membername" class="allLabels ml-3 mr-2">Name*</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="membername"
                                 id="membername">
-                            <label for="contactname" class="allLabels ml-3 mr-2">Contact Name:</label>
+                            <label for="contactname" class="allLabels ml-3 mr-2">Contact Name*</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="contactname"
                                 id="contactname">
-                            <label for="email" class="allLabels ml-3 mr-3">Email:</label>
+                            <label for="email" class="allLabels ml-3 mr-3">Email*</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="email" id="email">
-                            <div class="allLabels ml-3 mr-2">Gender:</div>
+                            <div class="allLabels ml-3 mr-2">Gender*</div>
                             <div class="custom-control custom-radio mr-3 mt-1 mb-4">
                                 <input class="custom-control-input" type="radio" name="gender" id="male" value="Male">
                                 <label class="custom-control-label allLabels" for="male">Male</label>
@@ -101,18 +102,18 @@
                             </div>
                         </div>
                         <div class="form-row justify-content-center mt-2">
-                            <label for="age" class="allLabels mr-2">Age:</label>
+                            <label for="age" class="allLabels mr-2">Age*</label>
                             <input type="number" class="form-control col-md-1 mb-2 ml-2 mr-2" name="age" id="age">
-                            <label for="phone" class="allLabels ml-3 mr-2">Phone Number:</label>
+                            <label for="phone" class="allLabels ml-3 mr-2">Phone Number*</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="phone" id="phone">
-                            <label for="position" class="allLabels ml-3 mr-2">Position:</label>
+                            <label for="position" class="allLabels ml-3 mr-2">Position*</label>
                             <select id="position" name="position" class="form-control col-md-2 mb-2 ml-2 mr-2">
                                 <option value="None" selected>Select one</option>
                                 <option value="Forward">Forward</option>
                                 <option value="Defenseman">Defenseman</option>
                                 <option value="Goalie">Goalie</option>
                             </select>
-                            <div class="allLabels ml-3 mr-2">Shoots:</div>
+                            <div class="allLabels ml-3 mr-2">Shoots*</div>
                             <div class="custom-control custom-radio mr-3 mt-1 mb-4">
                                 <input class="custom-control-input" type="radio" name="shoots" id="left" value="Left">
                                 <label class="custom-control-label allLabels" for="left">Left</label>
