@@ -14,18 +14,21 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
 
     let errorFound = false;
 
+    // Player Name Validation
     if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Player Contact Name Validation
     if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
+    // Player Email Validation
     if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
@@ -43,6 +46,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Gender vs Team Gender Validation
     if ($("input[name='gender']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Gender";
@@ -63,6 +67,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Age vs Team Age Validation
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -85,6 +90,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Phone Validation
     if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
@@ -102,12 +108,14 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Position Validation
     if ($("#position").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
         errorFound = true;
     }
 
+    // Player Shoots Validation
     if ($("input[name='shoots']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Shoots";
@@ -146,6 +154,7 @@ $(function ()
         $("#leaguecode").append(option);
     }
 
+    // League Code On Change
     $("#leaguecode").on("change", function ()
     {
         if ($("#leaguecode").val() == "None")
@@ -189,6 +198,7 @@ $(function ()
         }
     })
 
+    // Team Name On Change
     $("#teamname").on("change", function ()
     {
         if ($("#teamname").val() == "None")

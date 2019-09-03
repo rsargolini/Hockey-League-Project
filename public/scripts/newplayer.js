@@ -14,18 +14,21 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
 
     let errorFound = false;
 
+    // Player Name Validation
     if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Player Contact Name Validation
     if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
+    // Player Email Validation
     if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
@@ -43,6 +46,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Gender vs Team Gender Validation
     if ($("input[name='gender']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Gender";
@@ -63,6 +67,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Age vs Team Age Validation
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -85,6 +90,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Phone Validation
     if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
@@ -102,12 +108,14 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Position Validation
     if ($("#position").val().trim() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
         errorFound = true;
     }
 
+    // Player Shoots Validation
     if ($("input[name='shoots']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Shoots";
@@ -153,7 +161,7 @@ $(function ()
 
             $("#buttonsDiv").append($("<a>", {
                 href: "#",
-                id: "saveTeamBtn",
+                id: "savePlayerBtn",
                 text: "Save",
                 class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
                 role: "button"
@@ -168,7 +176,7 @@ $(function ()
             }))
 
             // Save Player Details Button click
-            $("#saveTeamBtn").on("click", function ()
+            $("#savePlayerBtn").on("click", function ()
             {
                 let errorFound = validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge);
 

@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-* This function validates all fields on the Player Details Form.
+* This function saves original data for refresh.
 */
 function savePlayerData()
 {
@@ -19,7 +19,7 @@ function savePlayerData()
 }
 
 /*
-* This function validates all fields on the Team Details Form.
+* This function changes all required labels when edit button clicked.
 */
 function addRequiredLabels()
 {
@@ -31,7 +31,7 @@ function addRequiredLabels()
 }
 
 /*
-* This function validates all fields on the Team Details Form.
+* This function removes asterisk from required labels when not in edit mode.
 */
 function removeRequiredLabels()
 {
@@ -56,18 +56,21 @@ function validatePlayerDetailsForm(details)
 
     let errorFound = false;
 
+    // Player Name Validation
     if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Player Contact Name Validation
     if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
+    // Player Email Validation
     if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
@@ -85,6 +88,7 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    // Player Gender vs Team Gender Validation
     if (details.TeamGender == "Any")
     {
     }
@@ -97,6 +101,7 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    // Player Age vs Team Age Validation
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -119,6 +124,7 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    // Player Phone Validation
     if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
@@ -319,6 +325,7 @@ $(function ()
                 $("#backBtn").show();
                 $("#cancelBtn").hide();
 
+                // Refresh Original Data
                 $("#membername").val(saveData.membername);
                 $("#contactname").val(saveData.contactname);
                 $("#email").val(saveData.email);

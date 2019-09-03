@@ -1,8 +1,7 @@
 "use strict";
 
-/* This function display or hides Course Catalog image.
-*
-* @param imgStatus (String) - "block" or "initial"
+/*
+* This function performs Team search by Division and/or Gender.
 */
 function performTeamSearch(teams, teamsLength)
 {
@@ -44,24 +43,23 @@ function performTeamSearch(teams, teamsLength)
 }
 
 /* 
-* This function inserts a Header Row into the Courses Table.
+* This function inserts a Header Row into the Teams Table.
 */
 function insertHeadRow()
 {
     $("#teams").append("<thead>");
     $("#teams thead").append("<tr>");
-    $("#teams thead tr").append($("<th>", { text: "Teams Name" }))
+    $("#teams thead tr").append($("<th>", { text: "Team Name" }))
         .append($("<th>", { text: "Division" }))
         .append($("<th>", { text: "Manager Name" }))
         .append($("<th>", { colspan: "2", text: "Actions", class: "text-center" }));
 }
 
 /* 
-* This function inserts a new row into the Course Table.
+* This function inserts Data Rows into the Teams Table.
 * 
-* @param courses (Array) - The Courses array
-* @param i (index to array) - The Courses arrays index
-* @param allSelect (String) - Populated if "Select All" button clicked
+* @param details (Array) - Team Details array
+* @param i (index to array) - Team Details array index
 */
 function insertRow(teams, i)
 {

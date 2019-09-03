@@ -55,6 +55,10 @@ thead {
     background-color: antiquewhite;
 }
 
+#invalidData {
+    font-size: 13px;
+}
+
 /* All Pages - Hide Alert boxes and buttons */
 .hidden, #playerTitle {
     display: none;

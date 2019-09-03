@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-* This function validates all fields on the Player Details Form.
+* This function saves original data for refresh.
 */
 function saveTeamData()
 {
@@ -21,7 +21,7 @@ function saveTeamData()
 }
 
 /* 
-* This function inserts a Header Row into the Student Table.
+* This function inserts a Header Row into the Players Table.
 */
 function insertPlayerHeadRow()
 {
@@ -33,10 +33,10 @@ function insertPlayerHeadRow()
 }
 
 /* 
-* This function insert rows into the Student Table.
+* This function inserts Data Rows into the Players Table.
 *
-* @param courses (Array) - The Courses array
-* @param i (index to array) - The Courses arrays index
+* @param details (Array) - Team Details array
+* @param i (index to array) - Team Details array index
 */
 function insertPlayerRow(details, i)
 {
@@ -69,21 +69,21 @@ function insertPlayerRow(details, i)
 }
 
 /*
-* This function validates all fields on the Team Details Form.
+* This function changes all required labels when edit button clicked.
 */
 function addRequiredLabels()
 {
     $("#nameLabel").text("Name*");
-    $("#maxPlayersLabel").text("Max Players*");
-    $("#minAgeLabel").text("Min Age*");
-    $("#maxAgeLabel").text("Max Age*");
+    $("#maxPlayersLabel").text("Max Players* (10-18)");
+    $("#minAgeLabel").text("Min Age* (>17)");
+    $("#maxAgeLabel").text("Max Age* (<71)");
     $("#mgrNameLabel").text("Name*");
     $("#mgrPhoneLabel").text("Phone*");
     $("#mgrEmailLabel").text("Email*");
 }
 
 /*
-* This function validates all fields on the Team Details Form.
+* This function removes asterisk from required labels when not in edit mode.
 */
 function removeRequiredLabels()
 {
@@ -114,19 +114,21 @@ function validateTeamDetailsForm(details)
 
     let errorFound = false;
 
+    // Team Name Validation
     if ($("#teamname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Team Gender vs Existing Player Genders Validation
     if (isThereAnyGenderChangeConflicts($("#teamgender").val(), details))
     {
         displayErrorMessage[displayErrorMessage.length] = "Gender Change Conflict Found";
         errorFound = true;
     }
 
-
+    // Team Maximum Players Validation
     if ($("#maxteammembers").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Max Players";
@@ -150,6 +152,7 @@ function validateTeamDetailsForm(details)
         }
     }
 
+    // Team Minimum Age vs Existing Players Ages Validation
     if ($("#minmemberage").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Min Age";
@@ -172,6 +175,7 @@ function validateTeamDetailsForm(details)
         }
     }
 
+    // Team Maximum Age vs Existing Players Ages Validation
     if ($("#maxmemberage").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Max Age";
@@ -207,12 +211,14 @@ function validateTeamDetailsForm(details)
         }
     }
 
+    // Team Manager Name Validation
     if ($("#managername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Name";
         errorFound = true;
     }
 
+    // Team Manager Phone Validation
     if ($("#managerphone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Phone Number";
@@ -230,6 +236,7 @@ function validateTeamDetailsForm(details)
         }
     }
 
+    // Team Manager Email Validation
     if ($("#manageremail").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Email Address";
@@ -253,11 +260,14 @@ function validateTeamDetailsForm(details)
     return errorFound;
 }
 
+/*
+* This function checks for Gender Change Conflicts.
+*/
 function isThereAnyGenderChangeConflicts(newTeamGender, details)
 {
     if (newTeamGender == "Any")
     {
-        // No conflict with team switching to Coed
+        // No conflict with switching to Coed
         return false;
     }
 
@@ -275,6 +285,9 @@ function isThereAnyGenderChangeConflicts(newTeamGender, details)
     return false; // no conflicts
 }
 
+/*
+* This function gets the Minimum Age of existing players.
+*/
 function getMinAgeOfMember(details)
 {
     let minAge = 100000;
@@ -289,6 +302,9 @@ function getMinAgeOfMember(details)
     return minAge;
 }
 
+/*
+* This function gets the Maximum Age of existing players.
+*/
 function getMaxAgeOfMember(details)
 {
     let maxAge = -1;
@@ -555,6 +571,7 @@ $(function ()
                 $("#backBtn").show();
                 $("#cancelBtn").hide();
 
+                // Refresh Original Data
                 $("#teamid").val(saveData.teamid);
                 $("#teamname").val(saveData.teamname);
                 $("#leaguecode").val(saveData.leaguecode);
