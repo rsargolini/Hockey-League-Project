@@ -161,6 +161,15 @@ $(function ()
             $("#leaguecode").val(details.League);
             $("#teamname").val(details.TeamName);
 
+            let teamMinAge = details.MinMemberAge;
+            let teamMaxAge = details.MaxMemberAge;
+            let teamGender = details.TeamGender;
+
+            if (teamGender == "Any")
+            {
+                teamGender = "Coed"
+            }
+
             let playersLength = details.Members.length;
 
             for (let i = 0; i < playersLength; i++)
@@ -216,6 +225,11 @@ $(function ()
 
             $("#cancelBtn").hide();
 
+            $("#popoverData").popover({
+                content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + teamGender + "</b>",
+                html: true
+            })
+
             // Edit Player Details Button click
             $("#editPlayerBtn").on("click", function ()
             {
@@ -226,6 +240,7 @@ $(function ()
                 $("#leaguecode").prop('readonly', true);
                 $("#teamname").prop('readonly', true);
                 $("#requireNoteEdit").show();
+                $("#membername").focus();
 
                 addRequiredLabels();
 
@@ -267,7 +282,7 @@ $(function ()
 
                         // Disable all Team Details Fields except Team ID
                         $("*", "#editPlayerForm").prop('disabled', true);
-                        
+
                         removeRequiredLabels();
 
                         $("#editPlayerBtn").show();

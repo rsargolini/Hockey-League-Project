@@ -126,6 +126,7 @@ $(function ()
     let teamGender;
     let teamMinAge;
     let teamMaxAge;
+    let popOverGender;
 
     $("*", "#addPlayerForm").prop("disabled", true);
 
@@ -153,6 +154,7 @@ $(function ()
             $("#teamFullDiv").hide();
             $("#teamname").empty();
             $("#saveTeamBtn").hide();
+            $('#popoverData').popover('dispose');
 
             let option = $("<option>", { val: "None", text: "Select one" })
             $("#teamname").append(option);
@@ -160,6 +162,7 @@ $(function ()
         else
         {
             $("#teamname").empty();
+            $('#popoverData').popover('dispose');
 
             let option = $("<option>", { val: "None", text: "Select one" })
             $("#teamname").append(option);
@@ -193,6 +196,10 @@ $(function ()
             $("*", "#addPlayerForm").prop('disabled', true);
             $("#teamFullDiv").hide();
             $("#saveTeamBtn").hide();
+            $("#teamgender").val("");
+            $("#minmemberage").val("");
+            $("#maxmemberage").val("");
+            $('#popoverData').popover('dispose');
         }
         else
         {
@@ -200,20 +207,39 @@ $(function ()
             $.getJSON("/api/teams/" + $("#teamname").val(),
                 function (details)
                 {
+                    teamGender = details.TeamGender
+                    teamMinAge = details.MinMemberAge;
+                    teamMaxAge = details.MaxMemberAge;
+
+                    if (details.TeamGender == "Any")
+                    {
+                        popOverGender = "Coed";
+                    }
+                    
+                    $('#popoverData').popover('dispose');
+
                     if (details.Members.length == details.MaxTeamMembers)
                     {
                         $("*", "#addPlayerForm").prop('disabled', true);
                         $("#teamFullDiv").show();
                         $("#saveTeamBtn").hide();
+
+                        $("#popoverData").popover({
+                            content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + popOverGender + "</b>",
+                            html: true
+                        });
                     }
                     else
                     {
                         $("*", "#addPlayerForm").prop('disabled', false);
                         $("#teamFullDiv").hide();
                         $("#saveTeamBtn").show();
-                        teamGender = details.TeamGender;
-                        teamMinAge = details.MinMemberAge;
-                        teamMaxAge = details.MaxMemberAge;
+                        
+                        $("#popoverData").popover({
+                            content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + popOverGender + "</b>",
+                            html: true
+                        });
+                        
                     }
                 })
         }

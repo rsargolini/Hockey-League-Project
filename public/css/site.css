@@ -50,6 +50,11 @@ h2  {
     color: red;
 }
 
+/* Table Head - Background Color */
+thead {
+    background-color: antiquewhite;
+}
+
 /* All Pages - Hide Alert boxes and buttons */
 .hidden, #playerTitle {
     display: none;
@@ -117,12 +122,14 @@ hr {
      font-size: 20px;
  }
 
+/* All Pages (except Edit Pages) - Required Note */ 
 #requireNote {
     font-size: 13px;
     color: red;
     font-weight: bold;
 }
 
+/* Edit Pages) - Required Note */ 
 #requireNoteEdit {
     font-size: 13px;
     color: red;

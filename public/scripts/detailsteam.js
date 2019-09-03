@@ -315,8 +315,6 @@ $(function ()
         {
             let saveData;
 
-            sessionStorage.setItem("teams", JSON.stringify(details));
-
             let leagues = JSON.parse(sessionStorage.getItem("leagues"));
 
             let leaguesLength = leagues.length;
@@ -353,8 +351,6 @@ $(function ()
 
             if (playersLength >= 1)
             {
-                $("#playersTitle").slideDown();
-
                 // Call Create Table Head Row Function
                 insertPlayerHeadRow();
 
@@ -372,7 +368,6 @@ $(function ()
             {
                 $("#deleteBtn" + [i]).on("click", function ()
                 {
-
                     $("#deleteModalBody").empty();
                     $("#deletePlayerModalText").html("Are you sure you want to delete this Player?")
                         .addClass("text-danger");
@@ -385,9 +380,9 @@ $(function ()
             }
 
             // Confirm Delete Button click
-            $("#confirmBtn").on("click", function ()
+            $("#modalConfirmBtn").on("click", function ()
             {
-                // Delete Team to API Teams
+                // Delete Player to API Teams
                 $.ajax({
                     url: "/api/teams/" + details.TeamId + "/members/" + details.Members[selectedPlayer].MemberId,
                     method: "DELETE"
@@ -470,6 +465,7 @@ $(function ()
                 $("*", "#teamDetailsForm").prop('disabled', false);
                 $("#teamid").prop('readonly', true);
                 $("#requireNoteEdit").show();
+                $("#teamname").focus();
 
                 addRequiredLabels();
 
