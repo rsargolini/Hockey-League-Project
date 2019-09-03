@@ -50,18 +50,21 @@
         <section class="container-fluid">
             <h2 class="col-12 text-center font-weight-bold" id="subtitles">Add Player</h2>
             <hr>
+            <p id="requireNote">* required fields</p>
             <div class="d-flex justify-content-center">
                 <!-- Team Information Fieldset -->
                 <fieldset id="addPlayerTeamInfoSet">
                     <legend id="teamInfoLegend" class="w-50 border border-dark mx-auto text-center">Team Information
                     </legend>
                     <div class="form-row justify-content-center">
-                        <label for="leaguecode" class="allLabels ml-3 mr-3">Division:</label>
+                        <label for="leaguecode" class="allLabels ml-3 mr-3">Division</label>
                         <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="leaguecode"
                             id="leaguecode" readonly>
-                        <label for="teamname" class="allLabels ml-3 mr-3">Team:</label>
+                        <label for="teamname" class="allLabels ml-3 mr-3">Team</label>
                         <input type="text" class="form-control col-md-3 mb-2 ml-2 mr-2" name="teamname" id="teamname"
                             readonly>
+                        <a href="#" id="popoverData" data-toggle="popover"><i
+                                class="fas fa-info-circle ml-2 mt-2 mb-1"></i></a>
                     </div>
                 </fieldset>
             </div>
@@ -74,15 +77,16 @@
                             Information
                         </legend>
                         <div class="form-row justify-content-center">
-                            <label for="membername" class="allLabels ml-3 mr-2">Name:</label>
+                            <label for="membername" class="allLabels ml-3 mr-2">Name*</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="membername"
-                                id="membername">
-                            <label for="contactname" class="allLabels ml-3 mr-2">Contact Name:</label>
+                                id="membername" autofocus>
+                            <label for="contactname" class="allLabels ml-3 mr-2">Contact Name*</label>
                             <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="contactname"
                                 id="contactname">
-                            <label for="email" class="allLabels ml-3 mr-3">Email:</label>
-                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="email" id="email">
-                            <div class="allLabels ml-3 mr-2">Gender:</div>
+                            <label for="email" class="allLabels ml-3 mr-3">Email*</label>
+                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2"
+                                placeholder="Ex. JSmith@aol.com" name="email" id="email">
+                            <div class="allLabels ml-3 mr-2">Gender*</div>
                             <div class="custom-control custom-radio mr-3 mt-1 mb-4">
                                 <input class="custom-control-input" type="radio" name="gender" id="male" value="Male">
                                 <label class="custom-control-label allLabels" for="male">Male</label>
@@ -94,18 +98,19 @@
                             </div>
                         </div>
                         <div class="form-row justify-content-center mt-2">
-                            <label for="age" class="allLabels mr-2">Age:</label>
+                            <label for="age" class="allLabels mr-2">Age*</label>
                             <input type="number" class="form-control col-md-1 mb-2 ml-2 mr-2" name="age" id="age">
-                            <label for="phone" class="allLabels ml-3 mr-2">Phone Number:</label>
-                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2" name="phone" id="phone">
-                            <label for="position" class="allLabels ml-3 mr-2">Position:</label>
+                            <label for="phone" class="allLabels ml-3 mr-2">Phone Number*</label>
+                            <input type="text" class="form-control col-md-2 mb-2 ml-2 mr-2"
+                                placeholder="Ex. 999-999-9999" name="phone" id="phone">
+                            <label for="position" class="allLabels ml-3 mr-2">Position*</label>
                             <select id="position" name="position" class="form-control col-md-2 mb-2 ml-2 mr-2">
                                 <option value="None" selected>Select one</option>
                                 <option value="Forward">Forward</option>
                                 <option value="Defenseman">Defenseman</option>
                                 <option value="Goalie">Goalie</option>
                             </select>
-                            <div class="allLabels ml-3 mr-2">Shoots:</div>
+                            <div class="allLabels ml-3 mr-2">Shoots*</div>
                             <div class="custom-control custom-radio mr-3 mt-1 mb-4">
                                 <input class="custom-control-input" type="radio" name="shoots" id="left" value="Left">
                                 <label class="custom-control-label allLabels" for="left">Left</label>
@@ -120,18 +125,16 @@
             </form>
         </section>
 
+        <!-- Alert Message for Invalid Data Section -->
+        <section class="form-row d-flex justify-content-center">
+            <div class="alert alert-danger hidden col-md-3 mt-2" role="alert" id="invalidData"></div>
+        </section>
+
         <!-- Buttons Section -->
         <section class="container-fluid">
             <div class="row">
-                <div id="buttonsDiv" class="col-md-12 text-center mt-3">
+                <div id="buttonsDiv" class="col-md-12 text-center mt-2">
                 </div>
-            </div>
-        </section>
-
-        <!-- Alert Message for Invalid Data Section -->
-        <section class="container-fluid">
-            <div class="form-row d-flex justify-content-center">
-                <div class="alert alert-danger hidden col-md-4 mt-2" role="alert" id="invalidData"></div>
             </div>
         </section>
 

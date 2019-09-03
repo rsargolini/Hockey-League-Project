@@ -50,6 +50,15 @@ h2  {
     color: red;
 }
 
+/* Table Head - Background Color */
+thead {
+    background-color: antiquewhite;
+}
+
+#invalidData {
+    font-size: 13px;
+}
+
 /* All Pages - Hide Alert boxes and buttons */
 .hidden, #playerTitle {
     display: none;
@@ -116,6 +125,21 @@ hr {
      font-weight: bold;
      font-size: 20px;
  }
+
+/* All Pages (except Edit Pages) - Required Note */ 
+#requireNote {
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+}
+
+/* Edit Pages) - Required Note */ 
+#requireNoteEdit {
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
 
 /* Media Queries */ 
 /* All Pages - Extra small devices (phones, 850px and down) */

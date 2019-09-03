@@ -14,18 +14,21 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
 
     let errorFound = false;
 
+    // Player Name Validation
     if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Player Contact Name Validation
     if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
+    // Player Email Validation
     if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
@@ -43,6 +46,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Gender vs Team Gender Validation
     if ($("input[name='gender']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Gender";
@@ -63,6 +67,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Age vs Team Age Validation
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -85,6 +90,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Phone Validation
     if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
@@ -102,12 +108,14 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
-    if ($("#position").val().trim() == "")
+    // Player Position Validation
+    if ($("#position").val().trim() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
         errorFound = true;
     }
 
+    // Player Shoots Validation
     if ($("input[name='shoots']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Shoots";
@@ -126,78 +134,91 @@ $(function ()
     let urlParams = new URLSearchParams(location.search);
     let teamSelected = urlParams.get("id");
 
-    let teams = JSON.parse(sessionStorage.getItem("teams"));
-
-    let teamGender;
-    let teamMinAge;
-    let teamMaxAge;
-
-    teamGender = teams.TeamGender;
-    teamMinAge = teams.MinMemberAge;
-    teamMaxAge = teams.MaxMemberAge;
-
-    $("#leaguecode").val(teams.League);
-    $("#teamname").val(teams.TeamName);
-
-    $("#buttonsDiv").append($("<a>", {
-        href: "#",
-        id: "saveTeamBtn",
-        text: "Save",
-        class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
-        role: "button"
-    }))
-
-    $("#buttonsDiv").append($("<a>", {
-        href: "detailsteam.html?id=" + teamSelected,
-        id: "cancelBtn",
-        text: "Cancel",
-        class: "col-md-2 btn btn-danger btn-sm mb-1",
-        role: "button"
-    }))
-
-    // Save Player Details Button click
-    $("#saveTeamBtn").on("click", function ()
-    {
-        let errorFound = validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge);
-
-        if (errorFound)
+    // Get all data from Teams by Team Id JSON file
+    $.getJSON("/api/teams/" + teamSelected,
+        function (details)
         {
-            return
-        }
+            let teams = details;
 
-        // Call Hide Error Function (errors.js)
-        hideError($("#invalidData"));
+            let teamGender = teams.TeamGender;
+            let teamMinAge = teams.MinMemberAge;
+            let teamMaxAge = teams.MaxMemberAge;
 
-        // Post Add Player Form to API Teams
-        $.post("/api/teams/" + teamSelected + "/members/", $("#addPlayerForm").serialize(),
-            function (data)
-            { })
+            let popOverGender = teams.TeamGender;
 
-            .done(function ()
+            if (teamGender == "Any")
             {
-                $("#savedModalText").html("Player has been successfully added.")
-                    .addClass("text-primary");
-                $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
-                    .append("<br />")
-                    .append("<b>Team Name: </b>" + $("#teamname").val())
-                    .append("<br />")
-                    .append("<b>Player Name: </b>" + $("#membername").val());
-                $("#savedModal").modal("show");
+                popOverGender = "Coed"
+            }
 
-                // Ok Button click
-                $("#okBtn").on("click", function ()
+            $("#leaguecode").val(teams.League);
+            $("#teamname").val(teams.TeamName);
+
+            $("#popoverData").popover({
+                content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + popOverGender + "</b>",
+                html: true
+            })
+
+            $("#buttonsDiv").append($("<a>", {
+                href: "#",
+                id: "savePlayerBtn",
+                text: "Save",
+                class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
+                role: "button"
+            }))
+
+            $("#buttonsDiv").append($("<a>", {
+                href: "detailsteam.html?id=" + teamSelected,
+                id: "cancelBtn",
+                text: "Cancel",
+                class: "col-md-2 btn btn-danger btn-sm mb-1",
+                role: "button"
+            }))
+
+            // Save Player Details Button click
+            $("#savePlayerBtn").on("click", function ()
+            {
+                let errorFound = validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge);
+
+                if (errorFound)
                 {
-                    location.href = "detailsteam.html?id=" + teamSelected;
-                })
-            })
+                    return
+                }
 
-            .fail(function ()
-            {
-                $("#savedModalText").html("Failed to Add Player to Team, please try again.")
-                    .addClass("text-danger");
-                $("#savedModal").modal("show");
-            })
+                // Call Hide Error Function (errors.js)
+                hideError($("#invalidData"));
 
-        return false;
-    })
+                // Post Add Player Form to API Teams
+                $.post("/api/teams/" + teamSelected + "/members/", $("#addPlayerForm").serialize(),
+                    function (data)
+                    { })
+
+                    .done(function ()
+                    {
+                        $("#savedModalText").html("Player has been successfully added.")
+                            .addClass("text-primary");
+                        $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + $("#teamname").val())
+                            .append("<br />")
+                            .append("<b>Player Name: </b>" + $("#membername").val());
+                        $("#savedModal").modal("show");
+
+                        // Ok Button click
+                        $("#okBtn").on("click", function ()
+                        {
+                            location.href = "detailsteam.html?id=" + teamSelected;
+                        })
+                    })
+
+                    .fail(function ()
+                    {
+                        $("#savedModalText").html("Failed to Add Player to Team, please try again.")
+                            .addClass("text-danger");
+                        $("#savedModal").modal("show");
+                    })
+
+                return false;
+            })
+        })
 })

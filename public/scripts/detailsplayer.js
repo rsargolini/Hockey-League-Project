@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-* This function validates all fields on the Player Details Form.
+* This function saves original data for refresh.
 */
 function savePlayerData()
 {
@@ -19,6 +19,30 @@ function savePlayerData()
 }
 
 /*
+* This function changes all required labels when edit button clicked.
+*/
+function addRequiredLabels()
+{
+    $("#nameLabel").text("Name*");
+    $("#contactNameLabel").text("Contact Name*");
+    $("#emailLabel").text("Email*");
+    $("#ageLabel").text("Age*");
+    $("#phoneLabel").text("Phone Number*");
+}
+
+/*
+* This function removes asterisk from required labels when not in edit mode.
+*/
+function removeRequiredLabels()
+{
+    $("#nameLabel").text("Name");
+    $("#contactNameLabel").text("Contact Name");
+    $("#emailLabel").text("Email");
+    $("#ageLabel").text("Age");
+    $("#phoneLabel").text("Phone Number");
+}
+
+/*
 * This function validates all fields on the Player Details Form.
 */
 function validatePlayerDetailsForm(details)
@@ -32,18 +56,21 @@ function validatePlayerDetailsForm(details)
 
     let errorFound = false;
 
+    // Player Name Validation
     if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Player Contact Name Validation
     if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
+    // Player Email Validation
     if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
@@ -61,6 +88,7 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    // Player Gender vs Team Gender Validation
     if (details.TeamGender == "Any")
     {
     }
@@ -73,6 +101,7 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    // Player Age vs Team Age Validation
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -95,6 +124,7 @@ function validatePlayerDetailsForm(details)
         }
     }
 
+    // Player Phone Validation
     if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
@@ -136,6 +166,15 @@ $(function ()
         {
             $("#leaguecode").val(details.League);
             $("#teamname").val(details.TeamName);
+
+            let teamMinAge = details.MinMemberAge;
+            let teamMaxAge = details.MaxMemberAge;
+            let teamGender = details.TeamGender;
+
+            if (teamGender == "Any")
+            {
+                teamGender = "Coed"
+            }
 
             let playersLength = details.Members.length;
 
@@ -192,6 +231,11 @@ $(function ()
 
             $("#cancelBtn").hide();
 
+            $("#popoverData").popover({
+                content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + teamGender + "</b>",
+                html: true
+            })
+
             // Edit Player Details Button click
             $("#editPlayerBtn").on("click", function ()
             {
@@ -201,6 +245,10 @@ $(function ()
                 $("*", "#editPlayerForm").prop('disabled', false);
                 $("#leaguecode").prop('readonly', true);
                 $("#teamname").prop('readonly', true);
+                $("#requireNoteEdit").show();
+                $("#membername").focus();
+
+                addRequiredLabels();
 
                 $("#editPlayerBtn").hide();
                 $("#savePlayerBtn").show();
@@ -241,8 +289,11 @@ $(function ()
                         // Disable all Team Details Fields except Team ID
                         $("*", "#editPlayerForm").prop('disabled', true);
 
+                        removeRequiredLabels();
+
                         $("#editPlayerBtn").show();
                         $("#savePlayerBtn").hide();
+                        $("#requireNoteEdit").hide();
 
                         $("#backBtn").show();
                         $("#cancelBtn").hide();
@@ -262,12 +313,19 @@ $(function ()
                 // Disable all Team Details Fields except Team ID
                 $("*", "#editPlayerForm").prop('disabled', true);
 
+                // Call Hide Error Function (errors.js)
+                hideError($("#invalidData"));
+
+                removeRequiredLabels();
+
                 $("#editPlayerBtn").show();
                 $("#savePlayerBtn").hide();
+                $("#requireNoteEdit").hide();
 
                 $("#backBtn").show();
                 $("#cancelBtn").hide();
 
+                // Refresh Original Data
                 $("#membername").val(saveData.membername);
                 $("#contactname").val(saveData.contactname);
                 $("#email").val(saveData.email);

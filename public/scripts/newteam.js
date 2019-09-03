@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-* This function validates all fields on the Team Details Form.
+* This function validates all fields on the Add Team Details Form.
 */
 function validateTeamDetailsForm(objs)
 {
@@ -18,24 +18,28 @@ function validateTeamDetailsForm(objs)
 
     let errorFound = false;
 
+    // Team Name Validation
     if ($("#teamname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Team Division Validation
     if ($("#leaguecode").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Please select a Division";
         errorFound = true;
     }
 
+    // Team Gender Validation
     if ($("#teamgender").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Please select a Gender";
         errorFound = true;
     }
 
+    // Team Max Players Validation
     if ($("#maxteammembers").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Max Players";
@@ -51,6 +55,7 @@ function validateTeamDetailsForm(objs)
         }
     }
 
+    // Team Minimum Age Validation
     if ($("#minmemberage").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Min Age";
@@ -65,6 +70,7 @@ function validateTeamDetailsForm(objs)
         }
     }
 
+    // Team Maximum Age Validation
     if ($("#maxmemberage").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Max Age";
@@ -92,12 +98,14 @@ function validateTeamDetailsForm(objs)
         }
     }
 
+    // Team Manager Name Validation
     if ($("#managername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Name";
         errorFound = true;
     }
 
+    // Team Manager Phone Number Validation
     if ($("#managerphone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Phone Number";
@@ -115,6 +123,7 @@ function validateTeamDetailsForm(objs)
         }
     }
 
+    // Team Manager Email Validation
     if ($("#manageremail").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Manager Email Address";

@@ -14,18 +14,21 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
 
     let errorFound = false;
 
+    // Player Name Validation
     if ($("#membername").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Name";
         errorFound = true;
     }
 
+    // Player Contact Name Validation
     if ($("#contactname").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Contact Name";
         errorFound = true;
     }
 
+    // Player Email Validation
     if ($("#email").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Email Address";
@@ -43,6 +46,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Gender vs Team Gender Validation
     if ($("input[name='gender']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Gender";
@@ -63,6 +67,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Age vs Team Age Validation
     if ($("#age").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Age";
@@ -85,6 +90,7 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Phone Validation
     if ($("#phone").val().trim() == "")
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Phone Number";
@@ -102,12 +108,14 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
         }
     }
 
+    // Player Position Validation
     if ($("#position").val() == "None")
     {
         displayErrorMessage[displayErrorMessage.length] = "Must select a Position";
         errorFound = true;
     }
 
+    // Player Shoots Validation
     if ($("input[name='shoots']:checked").val() == null)
     {
         displayErrorMessage[displayErrorMessage.length] = "Missing Shoots";
@@ -126,6 +134,7 @@ $(function ()
     let teamGender;
     let teamMinAge;
     let teamMaxAge;
+    let popOverGender;
 
     $("*", "#addPlayerForm").prop("disabled", true);
 
@@ -145,6 +154,7 @@ $(function ()
         $("#leaguecode").append(option);
     }
 
+    // League Code On Change
     $("#leaguecode").on("change", function ()
     {
         if ($("#leaguecode").val() == "None")
@@ -153,6 +163,7 @@ $(function ()
             $("#teamFullDiv").hide();
             $("#teamname").empty();
             $("#saveTeamBtn").hide();
+            $('#popoverData').popover('dispose');
 
             let option = $("<option>", { val: "None", text: "Select one" })
             $("#teamname").append(option);
@@ -160,6 +171,7 @@ $(function ()
         else
         {
             $("#teamname").empty();
+            $('#popoverData').popover('dispose');
 
             let option = $("<option>", { val: "None", text: "Select one" })
             $("#teamname").append(option);
@@ -186,6 +198,7 @@ $(function ()
         }
     })
 
+    // Team Name On Change
     $("#teamname").on("change", function ()
     {
         if ($("#teamname").val() == "None")
@@ -193,6 +206,10 @@ $(function ()
             $("*", "#addPlayerForm").prop('disabled', true);
             $("#teamFullDiv").hide();
             $("#saveTeamBtn").hide();
+            $("#teamgender").val("");
+            $("#minmemberage").val("");
+            $("#maxmemberage").val("");
+            $('#popoverData').popover('dispose');
         }
         else
         {
@@ -200,20 +217,39 @@ $(function ()
             $.getJSON("/api/teams/" + $("#teamname").val(),
                 function (details)
                 {
+                    teamGender = details.TeamGender
+                    teamMinAge = details.MinMemberAge;
+                    teamMaxAge = details.MaxMemberAge;
+
+                    if (details.TeamGender == "Any")
+                    {
+                        popOverGender = "Coed";
+                    }
+                    
+                    $('#popoverData').popover('dispose');
+
                     if (details.Members.length == details.MaxTeamMembers)
                     {
                         $("*", "#addPlayerForm").prop('disabled', true);
                         $("#teamFullDiv").show();
                         $("#saveTeamBtn").hide();
+
+                        $("#popoverData").popover({
+                            content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + popOverGender + "</b>",
+                            html: true
+                        });
                     }
                     else
                     {
                         $("*", "#addPlayerForm").prop('disabled', false);
                         $("#teamFullDiv").hide();
                         $("#saveTeamBtn").show();
-                        teamGender = details.TeamGender;
-                        teamMinAge = details.MinMemberAge;
-                        teamMaxAge = details.MaxMemberAge;
+                        
+                        $("#popoverData").popover({
+                            content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + popOverGender + "</b>",
+                            html: true
+                        });
+                        
                     }
                 })
         }

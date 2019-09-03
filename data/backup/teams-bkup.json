@@ -42,7 +42,8 @@
 				"Age": 23,
 				"Gender": "Male",
                 "Phone": "817-555-5454",
-                "Position": "Goalie"
+				"Position": "Goalie",
+				"Shoots": "Left"
 			}
 		]
 	},
@@ -138,7 +139,8 @@
 				"Age": 55,
 				"Gender": "Male",
                 "Phone": "203-451-2541",
-                "Position": "Goalie"
+				"Position": "Goalie",
+				"Shoots": "Left"
 			},
 			{
 				"MemberId": 2,
@@ -350,7 +352,8 @@
 				"Age": 45,
 				"Gender": "Male",
 				"Phone": "203-959-5454",
-                "Position": "Goalie"
+				"Position": "Goalie",
+				"Shoots": "Left"
 			}
 		]
 	},
@@ -385,7 +388,8 @@
 				"Age": 44,
 				"Gender": "Male",
 				"Phone": "204-514-5454",
-                "Position": "Goalie"
+				"Position": "Goalie",
+				"Shoots": "Left"
 			}
 		]
 	}
