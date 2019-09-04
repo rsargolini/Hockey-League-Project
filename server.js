@@ -188,14 +188,29 @@ app.get("/filterteams.html", function (req, res)
     res.sendFile(__dirname + "/public/" + "filterteams.html");
 })
 
-app.get("/detailsteams.html", function (req, res)
+app.get("/detailsteam.html", function (req, res)
 {
-    res.sendFile(__dirname + "/public/" + "detailsteams.html");
+    res.sendFile(__dirname + "/public/" + "detailsteam.html");
+})
+
+app.get("/detailsplayer.html", function (req, res)
+{
+    res.sendFile(__dirname + "/public/" + "detailsplayer.html");
 })
 
 app.get("/newteam.html", function (req, res)
 {
     res.sendFile(__dirname + "/public/" + "newteam.html");
+})
+
+app.get("/newplayer.html", function (req, res)
+{
+    res.sendFile(__dirname + "/public/" + "newplayer.html");
+})
+
+app.get("/newplayernoteam.html", function (req, res)
+{
+    res.sendFile(__dirname + "/public/" + "newplayernoteam.html");
 })
 
 // TODO:  YOU WILL NEED TO ADD MORE CALLS TO app.get() FOR EACH PAGE

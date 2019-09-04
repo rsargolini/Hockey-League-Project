@@ -12,6 +12,10 @@ $(function ()
             sessionStorage.setItem("leagues", JSON.stringify(leagues));
 
             sessionStorage.setItem("page", "index");
+
+            // Clear out Search Criteria before Filter Teams page
+            sessionStorage.removeItem("searchDivision");
+            sessionStorage.removeItem("searchGender");
                    
             for (let i = 0; i < leaguesLength; i++)
             {

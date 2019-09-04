@@ -111,6 +111,30 @@ $(function ()
         $("#selectDivision").append(option);
     }
 
+    // Set Search Criteria to previous criteria exists
+    let searchDivision = sessionStorage.getItem("searchDivision");
+    let searchGender = sessionStorage.getItem("searchGender");
+
+    if (searchDivision != null) 
+    {
+        $("#selectDivision").val(searchDivision);
+    }
+    else
+    {
+        $("#selectDivision").val("All");
+    }
+
+    if (searchGender != null) 
+    {
+        $("#selectGender").val(searchGender);
+    }
+    else
+    {
+        $("#selectGender").val("All");
+    }
+
+    let selectedTeam;
+
     // Get all data from API All Teams
     $.getJSON("/api/teams",
         function (teams)
@@ -119,29 +143,15 @@ $(function ()
 
             sessionStorage.setItem("teams", JSON.stringify(teams));
 
-            let selectedTeam;
-
             performTeamSearch(teams, teamsLength);
+            wireTeamDeleteBtn(teams, teamsLength);
 
             // Select Division Field changed
             $("#selectDivision").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
-
-                for (let i = 0; i < teamsLength; i++)
-                {
-                    $("#deleteBtn" + [i]).on("click", function ()
-                    {
-                        $("#deleteModalBody").empty();
-                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
-                            .addClass("text-danger");
-                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
-                            .append("<br />")
-                            .append("<b>Team Name: </b>" + teams[i].TeamName)
-                        $("#deleteTeamModal").modal("show");
-                        selectedTeam = [i];
-                    })
-                }
+                wireTeamDeleteBtn(teams, teamsLength);
+                sessionStorage.setItem("searchDivision", $("#selectDivision option:selected").val());
             })
 
             $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
@@ -151,37 +161,9 @@ $(function ()
             $("#selectGender").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
-
-                for (let i = 0; i < teamsLength; i++)
-                {
-                    $("#deleteBtn" + [i]).on("click", function ()
-                    {
-                        $("#deleteModalBody").empty();
-                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
-                            .addClass("text-danger");
-                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
-                            .append("<br />")
-                            .append("<b>Team Name: </b>" + teams[i].TeamName);
-                        $("#deleteTeamModal").modal("show");
-                        selectedTeam = [i];
-                    })
-                }
+                wireTeamDeleteBtn(teams, teamsLength);
+                sessionStorage.setItem("searchGender", $("#selectGender option:selected").val());
             })
-
-            for (let i = 0; i < teamsLength; i++)
-            {
-                $("#deleteBtn" + [i]).on("click", function ()
-                {
-                    $("#deleteModalBody").empty();
-                    $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
-                        .addClass("text-danger");
-                    $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
-                        .append("<br />")
-                        .append("<b>Team Name: </b>" + teams[i].TeamName);
-                    $("#deleteTeamModal").modal("show");
-                    selectedTeam = [i];
-                })
-            }
 
             // Confirm Delete Button click
             $("#confirmBtn").on("click", function ()
@@ -204,6 +186,24 @@ $(function ()
                         $("#savedModal").modal("show");
                     })
             })
+
+            function wireTeamDeleteBtn(teams, teamsLength)
+            {
+                for (let i = 0; i < teamsLength; i++)
+                {
+                    $("#deleteBtn" + [i]).on("click", function ()
+                    {
+                        $("#deleteModalBody").empty();
+                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
+                            .addClass("text-danger");
+                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + teams[i].TeamName)
+                        $("#deleteTeamModal").modal("show");
+                        selectedTeam = [i];
+                    })
+                }
+            }
         })
 
     // Add a New Team Button click
