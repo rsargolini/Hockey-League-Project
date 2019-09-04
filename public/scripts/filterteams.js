@@ -8,7 +8,7 @@ function performTeamSearch(teams, teamsLength)
     $("#teams").empty();
 
     // Call Create Table Head Row Function
-    insertHeadRow()
+    insertHeadRow();
 
     $("#teams").append("<tbody>");
 
@@ -74,10 +74,10 @@ function insertRow(teams, i)
         id: "editBtn" + [i],
         class: "btn btn-outline-success btn-sm",
         role: "button"
-    }))
+    }));
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
-        .append($("<span>", { class: "buttonText", text: "Details" }))
+        .append($("<span>", { class: "buttonText", text: "Details" }));
 
     $("#teams tbody tr:last").append("<td class='teamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
@@ -85,10 +85,10 @@ function insertRow(teams, i)
         id: "deleteBtn" + [i],
         class: "btn btn-outline-danger btn-sm",
         role: "button"
-    }))
+    }));
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-        .append($("<span>", { class: "buttonText", text: "Delete" }))
+        .append($("<span>", { class: "buttonText", text: "Delete" }));
 }
 
 //Connect Events to HTML Elements
@@ -111,6 +111,30 @@ $(function ()
         $("#selectDivision").append(option);
     }
 
+    // Set Search Criteria to previous criteria exists
+    let searchDivision = sessionStorage.getItem("searchDivision");
+    let searchGender = sessionStorage.getItem("searchGender");
+
+    if (searchDivision != null) 
+    {
+        $("#selectDivision").val(searchDivision);
+    }
+    else
+    {
+        $("#selectDivision").val("All");
+    }
+
+    if (searchGender != null) 
+    {
+        $("#selectGender").val(searchGender);
+    }
+    else
+    {
+        $("#selectGender").val("All");
+    }
+
+    let selectedTeam;
+
     // Get all data from API All Teams
     $.getJSON("/api/teams",
         function (teams)
@@ -119,69 +143,27 @@ $(function ()
 
             sessionStorage.setItem("teams", JSON.stringify(teams));
 
-            let selectedTeam;
-
             performTeamSearch(teams, teamsLength);
+            wireTeamDeleteBtn(teams, teamsLength);
 
             // Select Division Field changed
             $("#selectDivision").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
-
-                for (let i = 0; i < teamsLength; i++)
-                {
-                    $("#deleteBtn" + [i]).on("click", function ()
-                    {
-                        $("#deleteModalBody").empty();
-                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
-                            .addClass("text-danger");
-                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
-                            .append("<br />")
-                            .append("<b>Team Name: </b>" + teams[i].TeamName)
-                        $("#deleteTeamModal").modal("show");
-                        selectedTeam = [i];
-                    })
-                }
+                wireTeamDeleteBtn(teams, teamsLength);
+                sessionStorage.setItem("searchDivision", $("#selectDivision option:selected").val());
             })
 
             $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
-                .append("<br />")
+                .append("<br />");
 
             // Select Gender Field changed
             $("#selectGender").on("change", function ()
             {
                 performTeamSearch(teams, teamsLength);
-
-                for (let i = 0; i < teamsLength; i++)
-                {
-                    $("#deleteBtn" + [i]).on("click", function ()
-                    {
-                        $("#deleteModalBody").empty();
-                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
-                            .addClass("text-danger");
-                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
-                            .append("<br />")
-                            .append("<b>Team Name: </b>" + teams[i].TeamName);
-                        $("#deleteTeamModal").modal("show");
-                        selectedTeam = [i];
-                    })
-                }
+                wireTeamDeleteBtn(teams, teamsLength);
+                sessionStorage.setItem("searchGender", $("#selectGender option:selected").val());
             })
-
-            for (let i = 0; i < teamsLength; i++)
-            {
-                $("#deleteBtn" + [i]).on("click", function ()
-                {
-                    $("#deleteModalBody").empty();
-                    $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
-                        .addClass("text-danger");
-                    $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
-                        .append("<br />")
-                        .append("<b>Team Name: </b>" + teams[i].TeamName);
-                    $("#deleteTeamModal").modal("show");
-                    selectedTeam = [i];
-                })
-            }
 
             // Confirm Delete Button click
             $("#confirmBtn").on("click", function ()
@@ -204,6 +186,24 @@ $(function ()
                         $("#savedModal").modal("show");
                     })
             })
+
+            function wireTeamDeleteBtn(teams, teamsLength)
+            {
+                for (let i = 0; i < teamsLength; i++)
+                {
+                    $("#deleteBtn" + [i]).on("click", function ()
+                    {
+                        $("#deleteModalBody").empty();
+                        $("#deleteTeamModalText").html("Are you sure you want to delete this Team?")
+                            .addClass("text-danger");
+                        $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
+                            .append("<br />")
+                            .append("<b>Team Name: </b>" + teams[i].TeamName);
+                        $("#deleteTeamModal").modal("show");
+                        selectedTeam = [i];
+                    })
+                }
+            }
         })
 
     // Add a New Team Button click

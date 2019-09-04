@@ -75,14 +75,14 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
     }
     else
     {
-        if ((isNaN($("#age").val())) || ($("#age").val() < teamMinAge))
+        if (Number($("#age").val()) < teamMinAge)
         {
             displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team. Min Age is " + teamMinAge + ".";
             errorFound = true;
         }
         else
         {
-            if ($("#age").val() > teamMaxAge)
+            if (Number($("#age").val()) > teamMaxAge)
             {
                 displayErrorMessage[displayErrorMessage.length] = "Player is too old for Team. Max Age is " + teamMaxAge + ".";
                 errorFound = true;
@@ -217,13 +217,17 @@ $(function ()
             $.getJSON("/api/teams/" + $("#teamname").val(),
                 function (details)
                 {
-                    teamGender = details.TeamGender
+                    teamGender = details.TeamGender;
                     teamMinAge = details.MinMemberAge;
                     teamMaxAge = details.MaxMemberAge;
 
-                    if (details.TeamGender == "Any")
+                    if (teamGender == "Any")
                     {
                         popOverGender = "Coed";
+                    }
+                    else
+                    {
+                        popOverGender = teamGender;
                     }
                     
                     $('#popoverData').popover('dispose');
@@ -261,7 +265,7 @@ $(function ()
         text: "Save",
         class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
         role: "button"
-    }))
+    }));
 
     $("#saveTeamBtn").hide();
 
@@ -271,7 +275,7 @@ $(function ()
         text: "Cancel",
         class: "col-md-2 btn btn-danger btn-sm mb-1",
         role: "button"
-    }))
+    }));
 
     // Save Player Details Button click
     $("#saveTeamBtn").on("click", function ()
@@ -280,7 +284,7 @@ $(function ()
 
         if (errorFound)
         {
-            return
+            return;
         }
 
         // Call Hide Error Function (errors.js)

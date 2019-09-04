@@ -109,14 +109,14 @@ function validatePlayerDetailsForm(details)
     }
     else
     {
-        if ((isNaN($("#age").val())) || ($("#age").val() < details.MinMemberAge))
+        if ((Number($("#age").val()) < Number(details.MinMemberAge)))
         {
             displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team. Min Age is " + details.MinMemberAge + ".";
             errorFound = true;
         }
         else
         {
-            if ($("#age").val() > details.MaxMemberAge)
+            if (Number($("#age").val()) > Number(details.MaxMemberAge))
             {
                 displayErrorMessage[displayErrorMessage.length] = "Player is too old for Team. Max Age is " + details.MaxMemberAge + ".";
                 errorFound = true;
@@ -201,7 +201,7 @@ $(function ()
                 text: "Edit",
                 class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
                 role: "button"
-            }))
+            }));
 
             $("#buttonsDiv").append($("<a>", {
                 href: "#",
@@ -209,7 +209,7 @@ $(function ()
                 text: "Save",
                 class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
                 role: "button"
-            }))
+            }));
 
             $("#savePlayerBtn").hide();
 
@@ -219,7 +219,7 @@ $(function ()
                 text: "Back",
                 class: "col-md-2 btn btn-primary btn-sm mb-1",
                 role: "button"
-            }))
+            }));
 
             $("#buttonsDiv").append($("<a>", {
                 href: "#",
@@ -227,14 +227,14 @@ $(function ()
                 text: "Cancel",
                 class: "col-md-2 btn btn-danger btn-sm mb-1",
                 role: "button"
-            }))
+            }));
 
             $("#cancelBtn").hide();
 
             $("#popoverData").popover({
                 content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + teamGender + "</b>",
                 html: true
-            })
+            });
 
             // Edit Player Details Button click
             $("#editPlayerBtn").on("click", function ()
@@ -264,7 +264,7 @@ $(function ()
 
                 if (errorFound)
                 {
-                    return
+                    return;
                 }
 
                 // Call Hide Error Function (errors.js)

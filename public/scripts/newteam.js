@@ -47,8 +47,8 @@ function validateTeamDetailsForm(objs)
     }
     else
     {
-        if (($("#maxteammembers").val() < leagueMinPlayers) ||
-            ($("#maxteammembers").val() > leagueMaxPlayers))
+        if ((Number($("#maxteammembers").val()) < leagueMinPlayers) ||
+            (Number($("#maxteammembers").val()) > leagueMaxPlayers))
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
             errorFound = true;
@@ -63,7 +63,7 @@ function validateTeamDetailsForm(objs)
     }
     else
     {
-        if (($("#minmemberage").val() < leagueMinAge))
+        if (Number($("#minmemberage").val()) < leagueMinAge)
         {
             displayErrorMessage[displayErrorMessage.length] = "Min Age must be 18 or greater.";
             errorFound = true;
@@ -78,8 +78,8 @@ function validateTeamDetailsForm(objs)
     }
     else
     {
-        if (($("#maxmemberage").val() > leagueMaxAge) ||
-            ($("#maxmemberage").val() < leagueMinAge))
+        if ((Number($("#maxmemberage").val()) > leagueMaxAge) ||
+            (Number($("#maxmemberage").val()) < leagueMinAge))
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Age must be between 18 and 70.";
             errorFound = true;
@@ -90,7 +90,7 @@ function validateTeamDetailsForm(objs)
         }
         else
         {
-            if ($("#maxmemberage").val() < $("#minmemberage").val())
+            if (Number($("#maxmemberage").val()) < Number($("#minmemberage").val()))
             {
                 displayErrorMessage[displayErrorMessage.length] = "Max Age must be greater than or equal to Min Age.";
                 errorFound = true;
@@ -173,7 +173,7 @@ $(function ()
         text: "Save",
         class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
         role: "button"
-    }))
+    }));
 
     $("#buttonsDiv").append($("<a>", {
         href: "filterteams.html",
@@ -181,7 +181,7 @@ $(function ()
         text: "Cancel",
         class: "col-md-2 btn btn-danger btn-sm mb-1",
         role: "button"
-    }))
+    }));
 
     // Save Team Details Button click
     $("#saveTeamBtn").on("click", function ()
@@ -190,7 +190,7 @@ $(function ()
 
         if (errorFound)
         {
-            return
+            return;
         }
 
         // Call Hide Error Function (errors.js)
