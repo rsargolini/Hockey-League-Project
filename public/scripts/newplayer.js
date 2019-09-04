@@ -75,14 +75,14 @@ function validatePlayerDetailsForm(teamGender, teamMinAge, teamMaxAge)
     }
     else
     {
-        if (($("#age").val() < teamMinAge))
+        if (Number($("#age").val()) < teamMinAge)
         {
             displayErrorMessage[displayErrorMessage.length] = "Player is too young for Team. Min Age is " + teamMinAge + ".";
             errorFound = true;
         }
         else
         {
-            if ($("#age").val() > teamMaxAge)
+            if (Number($("#age").val()) > teamMaxAge)
             {
                 displayErrorMessage[displayErrorMessage.length] = "Player is too old for Team. Max Age is " + teamMaxAge + ".";
                 errorFound = true;
@@ -148,7 +148,11 @@ $(function ()
 
             if (teamGender == "Any")
             {
-                popOverGender = "Coed"
+                popOverGender = "Coed";
+            }
+            else
+            {
+                popOverGender = teamGender;
             }
 
             $("#leaguecode").val(teams.League);
@@ -157,7 +161,7 @@ $(function ()
             $("#popoverData").popover({
                 content: "<b>Min Age - " + teamMinAge + "<br/>Max Age - " + teamMaxAge + "</br>Gender - " + popOverGender + "</b>",
                 html: true
-            })
+            });
 
             $("#buttonsDiv").append($("<a>", {
                 href: "#",
@@ -165,7 +169,7 @@ $(function ()
                 text: "Save",
                 class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
                 role: "button"
-            }))
+            }));
 
             $("#buttonsDiv").append($("<a>", {
                 href: "detailsteam.html?id=" + teamSelected,
@@ -173,7 +177,7 @@ $(function ()
                 text: "Cancel",
                 class: "col-md-2 btn btn-danger btn-sm mb-1",
                 role: "button"
-            }))
+            }));
 
             // Save Player Details Button click
             $("#savePlayerBtn").on("click", function ()
@@ -182,7 +186,7 @@ $(function ()
 
                 if (errorFound)
                 {
-                    return
+                    return;
                 }
 
                 // Call Hide Error Function (errors.js)

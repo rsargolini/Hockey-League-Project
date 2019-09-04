@@ -136,15 +136,15 @@ function validateTeamDetailsForm(details)
     }
     else
     {
-        if (($("#maxteammembers").val() < leagueMinPlayers) ||
-            ($("#maxteammembers").val() > leagueMaxPlayers))
+        if (Number($("#maxteammembers").val()) < Number(leagueMinPlayers) ||
+            (Number($("#maxteammembers").val()) > Number(leagueMaxPlayers)))
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Players only between 10 and 18 allowed.";
             errorFound = true;
         }
         else
         {
-            if (Number($("#maxteammembers").val()) < details.Members.length)
+            if (Number($("#maxteammembers").val()) < Number(details.Members.length))
             {
                 displayErrorMessage[displayErrorMessage.length] = "Max Players change not allowed, current Players exceed that number.";
                 errorFound = true;
@@ -160,7 +160,7 @@ function validateTeamDetailsForm(details)
     }
     else
     {
-        if (($("#minmemberage").val() < leagueMinAge))
+        if (Number($("#minmemberage").val() < Number(leagueMinAge)))
         {
             displayErrorMessage[displayErrorMessage.length] = "Min Age must be 18 or greater.";
             errorFound = true;
@@ -183,8 +183,8 @@ function validateTeamDetailsForm(details)
     }
     else
     {
-        if (($("#maxmemberage").val() > leagueMaxAge) ||
-            ($("#maxmemberage").val() < leagueMinAge))
+        if (Number($("#maxmemberage").val() > Number(leagueMaxAge)) ||
+            Number($("#maxmemberage").val() < Number(leagueMinAge)))
         {
             displayErrorMessage[displayErrorMessage.length] = "Max Age must be between 18 and 70.";
             errorFound = true;
@@ -203,7 +203,7 @@ function validateTeamDetailsForm(details)
         }
         else
         {
-            if ($("#maxmemberage").val() < $("#minmemberage").val())
+            if (Number($("#maxmemberage").val()) < Number($("#minmemberage").val()))
             {
                 displayErrorMessage[displayErrorMessage.length] = "Max Age must be greater than or equal to Min Age.";
                 errorFound = true;
@@ -431,7 +431,7 @@ $(function ()
                 text: "Save",
                 class: "col-md-2 btn btn-success btn-sm mb-1 mr-1",
                 role: "button"
-            }))
+            }));
 
             $("#saveTeamBtn").hide();
 
@@ -441,7 +441,7 @@ $(function ()
                 text: "Add Player",
                 class: "col-md-1 btn btn-success btn-sm mb-2 mr-1",
                 role: "button"
-            }))
+            }));
 
             if (Number($("#maxteammembers").val()) == playersLength)
             {
@@ -460,7 +460,7 @@ $(function ()
                 text: "Back",
                 class: "col-md-2 btn btn-primary btn-sm mb-1",
                 role: "button"
-            }))
+            }));
 
             $("#buttonsDiv").append($("<a>", {
                 href: "#",
@@ -468,7 +468,7 @@ $(function ()
                 text: "Cancel",
                 class: "col-md-2 btn btn-danger btn-sm mb-1",
                 role: "button"
-            }))
+            }));
 
             $("#cancelBtn").hide();
 
@@ -499,7 +499,7 @@ $(function ()
 
                 if (errorFound)
                 {
-                    return
+                    return;
                 }
 
                 // Call Hide Error Function (errors.js)

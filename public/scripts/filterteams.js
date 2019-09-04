@@ -8,7 +8,7 @@ function performTeamSearch(teams, teamsLength)
     $("#teams").empty();
 
     // Call Create Table Head Row Function
-    insertHeadRow()
+    insertHeadRow();
 
     $("#teams").append("<tbody>");
 
@@ -74,10 +74,10 @@ function insertRow(teams, i)
         id: "editBtn" + [i],
         class: "btn btn-outline-success btn-sm",
         role: "button"
-    }))
+    }));
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "fa fa-edit" }))
-        .append($("<span>", { class: "buttonText", text: "Details" }))
+        .append($("<span>", { class: "buttonText", text: "Details" }));
 
     $("#teams tbody tr:last").append("<td class='teamsBtn'>");
     $("#teams tbody tr:last td:last").append($("<a>", {
@@ -85,10 +85,10 @@ function insertRow(teams, i)
         id: "deleteBtn" + [i],
         class: "btn btn-outline-danger btn-sm",
         role: "button"
-    }))
+    }));
 
     $("#teams tbody tr:last td:last a").append($("<i>", { class: "far fa-trash-alt" }))
-        .append($("<span>", { class: "buttonText", text: "Delete" }))
+        .append($("<span>", { class: "buttonText", text: "Delete" }));
 }
 
 //Connect Events to HTML Elements
@@ -155,7 +155,7 @@ $(function ()
             })
 
             $("#modalBody").append("<b>Division: </b>" + $("#leaguecode").val())
-                .append("<br />")
+                .append("<br />");
 
             // Select Gender Field changed
             $("#selectGender").on("change", function ()
@@ -198,7 +198,7 @@ $(function ()
                             .addClass("text-danger");
                         $("#deleteModalBody").append("<b>Division: </b>" + teams[i].League)
                             .append("<br />")
-                            .append("<b>Team Name: </b>" + teams[i].TeamName)
+                            .append("<b>Team Name: </b>" + teams[i].TeamName);
                         $("#deleteTeamModal").modal("show");
                         selectedTeam = [i];
                     })
